@@ -52,7 +52,7 @@ class CarController extends Controller
             'transmission' => ['required', 'string'],
             'passengers' => ['required', 'integer'],
             'category' => ['required', 'integer'],
-            'promote' => ['required', 'boolean'],
+            'promote' => ['required', 'string'],
             'status' => ['required', 'string'],
             'doors' => ['required', 'integer'],
             'cargo' => ['required', 'integer'],
@@ -71,7 +71,8 @@ class CarController extends Controller
         }
 
         Car::create($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'promote' => $Request->promote == '1'
         ])->all());
 
         return Redirect::back()->with([
@@ -90,7 +91,7 @@ class CarController extends Controller
             'transmission' => ['required', 'string'],
             'passengers' => ['required', 'integer'],
             'category' => ['required', 'integer'],
-            'promote' => ['required', 'boolean'],
+            'promote' => ['required', 'string'],
             'status' => ['required', 'string'],
             'doors' => ['required', 'integer'],
             'cargo' => ['required', 'integer'],
@@ -116,7 +117,8 @@ class CarController extends Controller
         }
 
         $Car->update($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'promote' => $Request->promote == '1'
         ])->all());
 
         if ($Request->hasFile('images')) {

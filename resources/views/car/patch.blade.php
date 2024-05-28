@@ -63,8 +63,8 @@
                     query="{{ $data->Category->{'name_' . Core::lang()} }}"></neo-autocomplete>
                 <neo-select label="{{ __('Promote') }}" name="promote">
                     @foreach (Core::promoteList() as $promote)
-                        <neo-select-item value="{{ $promote }}" {{ $promote == $data->promote ? 'active' : '' }}>
-                            {{ __(ucwords($promote)) }}
+                        <neo-select-item value="{{ $promote[0] }}" {{ $promote[0] == $data->promote ? 'active' : '' }}>
+                            {{ __(ucwords($promote[1])) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>

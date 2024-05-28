@@ -80,7 +80,8 @@ body[close]>#neo-page-cover {
     background: #ffffff;
 }
 
-.bg-x-core {
+.bg-x-core,
+.after\:bg-x-core {
     --tw-gradient-stops: rgb(var(--acent)), rgb(var(--prime));
 }
 
@@ -167,6 +168,44 @@ neo-datavisualizer::part(search-wrapper) {
     text-overflow: ellipsis;
 }
 
+neo-autocomplete.search::part(icon) {
+    display: none;
+}
+
+.menu-dropdown::part(modal) {
+    align-items: center;
+    padding: 3rem;
+}
+
+input[type="range"] {
+    --value: 0%;
+    background: linear-gradient(to right, rgb(var(--prime)) 0%, rgb(var(--prime)) var(--value), rgb(var(--white)) var(--value), rgb(var(--white)) 100%);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: .5rem;
+    height: 1.5rem;
+    margin-top: -7px;
+    background: rgb(var(--white));
+    border: 1px solid rgb(var(--shade));
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    margin: auto;
+    height: 10px;
+    cursor: pointer;
+    background: rgb(var(--white));
+    border: 1px solid rgb(var(--shade));
+    border-radius: 1px;
+}
+
 @media (min-width: 1024px) {
     neo-select::part(content),
     neo-dropdown::part(content),
@@ -178,6 +217,9 @@ neo-datavisualizer::part(search-wrapper) {
     }
     neo-imagetransfer[multiple] {
         grid-template-columns: repeat(4, 1fr);
+    }
+    neo-imagetransfer.video {
+        aspect-ratio: 16/4;
     }
     .full-size::part(wrapper) {
         max-width: 100%;
@@ -192,5 +234,11 @@ neo-datavisualizer::part(search-wrapper) {
     neo-topbar.home-topbar::part(content) {
         padding-bottom: 0;
         padding-top: 0;
+    }
+    neo-timepicker.search::part(modal) {
+        min-width: 14rem;
+    }
+    neo-datepicker.search::part(modal) {
+        min-width: 20rem;
     }
 }

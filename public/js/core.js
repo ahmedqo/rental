@@ -237,6 +237,10 @@ Neo.Locales.sp = {
 
 const Locale = document.documentElement.lang,
     BasePath = window.location.origin + "/storage/IMAGES/",
+    Background = "rgb(" + getComputedStyle(document.documentElement)
+    .getPropertyValue("--prime") + ")",
+    Color = "rgb(" + getComputedStyle(document.documentElement)
+    .getPropertyValue("--white") + ")",
     COLS = {
         users: ({
             Csrf,
@@ -248,7 +252,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(33 150 243)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -262,8 +266,8 @@ const Locale = document.documentElement.lang,
             name: "first_name",
             text: Neo.Helper.trans("First Name"),
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.first_name),
             bodyPdfRender: function(row) {
@@ -276,8 +280,8 @@ const Locale = document.documentElement.lang,
             name: "last_name",
             text: Neo.Helper.trans("Last Name"),
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.last_name),
             bodyPdfRender: function(row) {
@@ -291,8 +295,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans("Gender"),
             visible: false,
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.gender ? Neo.Helper.Str.capitalize(Neo.Helper.trans(row.gender)) : empty(),
             bodyPdfRender: function(row) {
@@ -306,8 +310,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans("Birth Date"),
             visible: false,
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.birth_date ? row.birth_date : empty(),
             bodyPdfRender: function(row) {
@@ -320,23 +324,23 @@ const Locale = document.documentElement.lang,
             name: "email",
             text: Neo.Helper.trans("Email"),
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
         }, {
             name: "phone",
             text: Neo.Helper.trans("Phone"),
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
         }, {
             name: "address",
             text: Neo.Helper.trans("Address"),
             visible: false,
             headPdfStyle: {
-                background: "rgb(33 150 243)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.address ? Neo.Helper.Str.capitalize(row.address) : empty(),
             bodyPdfRender: function(row) {
@@ -354,7 +358,7 @@ const Locale = document.documentElement.lang,
                 return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
             },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(33 150 243)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -372,7 +376,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -388,7 +392,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -405,8 +409,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (en)",
             visible: Locale === "en",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
             bodyPdfRender: function(row) {
@@ -420,8 +424,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (fr)",
             visible: Locale === "fr",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
             bodyPdfRender: function(row) {
@@ -435,8 +439,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (it)",
             visible: Locale === "it",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
             bodyPdfRender: function(row) {
@@ -450,8 +454,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (sp)",
             visible: Locale === "sp",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
@@ -465,8 +469,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (en)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_en ? Neo.Helper.Str.capitalize(row.description_en) : empty(),
             bodyPdfRender: function(row) {
@@ -480,8 +484,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (fr)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_fr ? Neo.Helper.Str.capitalize(row.description_fr) : empty(),
             bodyPdfRender: function(row) {
@@ -495,8 +499,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (it)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_it ? Neo.Helper.Str.capitalize(row.description_it) : empty(),
             bodyPdfRender: function(row) {
@@ -510,8 +514,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (sp)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_sp ? Neo.Helper.Str.capitalize(row.description_sp) : empty(),
             bodyPdfRender: function(row) {
@@ -529,7 +533,7 @@ const Locale = document.documentElement.lang,
                 return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
             },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -547,7 +551,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -563,7 +567,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -580,8 +584,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (en)",
             visible: Locale === "en",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
             bodyPdfRender: function(row) {
@@ -595,8 +599,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (fr)",
             visible: Locale === "fr",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
             bodyPdfRender: function(row) {
@@ -610,8 +614,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (it)",
             visible: Locale === "it",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
             bodyPdfRender: function(row) {
@@ -625,8 +629,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (sp)",
             visible: Locale === "sp",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
@@ -640,8 +644,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (en)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_en ? Neo.Helper.Str.capitalize(row.description_en) : empty(),
             bodyPdfRender: function(row) {
@@ -655,8 +659,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (fr)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_fr ? Neo.Helper.Str.capitalize(row.description_fr) : empty(),
             bodyPdfRender: function(row) {
@@ -670,8 +674,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (it)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_it ? Neo.Helper.Str.capitalize(row.description_it) : empty(),
             bodyPdfRender: function(row) {
@@ -685,8 +689,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Description') + " (sp)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.description_sp ? Neo.Helper.Str.capitalize(row.description_sp) : empty(),
             bodyPdfRender: function(row) {
@@ -704,7 +708,7 @@ const Locale = document.documentElement.lang,
                 return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
             },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -722,7 +726,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -738,7 +742,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -755,8 +759,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (en)",
             visible: Locale === "en",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
             bodyPdfRender: function(row) {
@@ -770,8 +774,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (fr)",
             visible: Locale === "fr",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
             bodyPdfRender: function(row) {
@@ -785,8 +789,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (it)",
             visible: Locale === "it",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
             bodyPdfRender: function(row) {
@@ -800,8 +804,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Name') + " (sp)",
             visible: Locale === "sp",
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
@@ -814,8 +818,8 @@ const Locale = document.documentElement.lang,
             name: "brand",
             text: Neo.Helper.trans('Brand'),
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)",
+                background: Background,
+                color: Color,
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.brand["name_" + Locale]),
             bodyPdfRender: function(row) {
@@ -828,8 +832,8 @@ const Locale = document.documentElement.lang,
             name: "category",
             text: Neo.Helper.trans('Category'),
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)",
+                background: Background,
+                color: Color,
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.category["name_" + Locale]),
             bodyPdfRender: function(row) {
@@ -844,7 +848,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -860,7 +864,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -876,7 +880,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -892,7 +896,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -904,7 +908,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -916,7 +920,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -927,7 +931,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -942,7 +946,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;
@@ -956,8 +960,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Details') + " (en)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.details_en ? Neo.Helper.Str.capitalize(row.details_en) : empty(),
             bodyPdfRender: function(row) {
@@ -971,8 +975,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Details') + " (fr)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.details_fr ? Neo.Helper.Str.capitalize(row.details_fr) : empty(),
             bodyPdfRender: function(row) {
@@ -986,8 +990,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Details') + " (it)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.details_it ? Neo.Helper.Str.capitalize(row.details_it) : empty(),
             bodyPdfRender: function(row) {
@@ -1001,8 +1005,8 @@ const Locale = document.documentElement.lang,
             text: Neo.Helper.trans('Details') + " (sp)",
             visible: false,
             headPdfStyle: {
-                background: "rgb(153 90 69)",
-                color: "rgb(254 254 254)"
+                background: Background,
+                color: Color
             },
             bodyRender: (row) => row.details_sp ? Neo.Helper.Str.capitalize(row.details_sp) : empty(),
             bodyPdfRender: function(row) {
@@ -1020,7 +1024,7 @@ const Locale = document.documentElement.lang,
                 return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
             },
             headPdfStyle: function() {
-                return {...this.headStyle, background: "rgb(153 90 69)", color: "rgb(254 254 254)" };
+                return {...this.headStyle, background: Background, color: Color };
             },
             bodyPdfStyle: function() {
                 return this.bodyStyle;

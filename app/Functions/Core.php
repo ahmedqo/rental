@@ -67,6 +67,6 @@ class Core
 
     public static function promoteList()
     {
-        return ['yes', 'no'];
+        return [[1, 'yes'], [0, 'no']];
     }
 }

@@ -471,7 +471,19 @@
             },
             mounted() {
                 if (this.hasAttribute("value")) {
-                    let value = this.getAttribute("value").split(":").filter(Boolean).map(e => +e);
+                    let value = this.getAttribute("value");
+                      const regex = /#now\s*([+-]?)\s*(\d+:\d+)?/;
+                    const now = new Date();
+                    const match = value.match(regex);
+                    if (match) {
+                        const all = (match[2] || "").trim().split(":");
+                        const hor = parseInt(match[1] + (all[0] || "").trim());
+                        const min = parseInt(match[1] + (all[1] || "").trim());
+                        now.setHours(now.getHours() + (hor || 0));
+                        now.setMinutes(now.getMinutes() + (min || 0));
+                        value = now.getHours() + ":" + now.getMinutes();
+                    }
+                    value = value.split(":").filter(Boolean).map(e => +e);
                     if (value.length === 2) {
                         this.state.date.setHours(value[0]);
                         this.state.date.setMinutes(value[1]);

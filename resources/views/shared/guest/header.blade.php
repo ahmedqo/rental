@@ -1,42 +1,38 @@
 <header>
-    <neo-topbar transparent align="space-between" class="home-topbar">
-        <button aria-label="menu_trigger"
-            class="lg:hidden flex items-center justify-center w-6 h-6 text-x-black outline-none relative isolate before:content-[''] before:rounded-x-thin before:absolute before:block before:w-[130%] before:h-[130%] before:-inset-[15%] before:-z-[1] before:!bg-opacity-40 hover:before:bg-x-shade focus:before:bg-x-shade focus-within:before:bg-x-shade">
-            <svg class="block w-5 h-5 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
-                <path
-                    d="M129-215q-20.75 0-33.375-12.675Q83-240.351 83-261.175 83-280 95.625-293T129-306h458q19.75 0 32.375 13.175 12.625 13.176 12.625 32Q632-240 619.375-227.5 606.75-215 587-215H129Zm0-221q-20.75 0-33.375-13.175Q83-462.351 83-482.175 83-502 95.625-514.5 108.25-527 129-527h339q18.75 0 31.875 12.675Q513-501.649 513-481.825 513-462 499.875-449 486.75-436 468-436H129Zm0-218q-20.75 0-33.375-13.175Q83-680.351 83-700.175 83-720 95.625-733 108.25-746 129-746h458q19.75 0 32.375 13.175 12.625 13.176 12.625 33Q632-680 619.375-667 606.75-654 587-654H129Zm605 173 114 113q13 14 12.5 33T847-304q-15 14-33.5 14T782-304L637-450q-14-13-14-31t14-32l145-146q13-13 31.5-13t33.5 13q13 14 12.5 33T847-594L734-481Z" />
-            </svg>
-        </button>
+    <neo-topbar align="space-between" class="bg-x-white">
+        <neo-dropdown label="{{ __('Menu') }}" class="lg:hidden menu-dropdown" position="center">
+            <button aria-label="menu_trigger" slot="trigger"
+                class="flex items-center justify-center w-6 h-6 text-x-black outline-none relative isolate before:content-[''] before:rounded-x-thin before:absolute before:block before:w-[130%] before:h-[130%] before:-inset-[15%] before:-z-[1] before:!bg-opacity-40 hover:before:bg-x-shade focus:before:bg-x-shade focus-within:before:bg-x-shade">
+                <svg class="block w-5 h-5 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
+                    <path
+                        d="M129-215q-20.75 0-33.375-12.675Q83-240.351 83-261.175 83-280 95.625-293T129-306h458q19.75 0 32.375 13.175 12.625 13.176 12.625 32Q632-240 619.375-227.5 606.75-215 587-215H129Zm0-221q-20.75 0-33.375-13.175Q83-462.351 83-482.175 83-502 95.625-514.5 108.25-527 129-527h339q18.75 0 31.875 12.675Q513-501.649 513-481.825 513-462 499.875-449 486.75-436 468-436H129Zm0-218q-20.75 0-33.375-13.175Q83-680.351 83-700.175 83-720 95.625-733 108.25-746 129-746h458q19.75 0 32.375 13.175 12.625 13.176 12.625 33Q632-680 619.375-667 606.75-654 587-654H129Zm605 173 114 113q13 14 12.5 33T847-304q-15 14-33.5 14T782-304L637-450q-14-13-14-31t14-32l145-146q13-13 31.5-13t33.5 13q13 14 12.5 33T847-594L734-481Z" />
+                </svg>
+            </button>
+            <ul class="w-full flex flex-col p-2 gap-2">
+                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')]] as $url)
+                    <li class="w-full flex items-center justify-center">
+                        <a href="{{ route($url[0]) }}"
+                            class="flex px-10 py-1 w-max h-full items-center font-x-thin text-base relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">
+                            {{ $url[1] }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </neo-dropdown>
         <a href="" class="block w-20">
             <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
                 class="block w-full" width="576" height="465" loading="lazy" />
         </a>
         <nav class="hidden w-max lg:flex items-center ms-auto">
-            <ul class="flex gap-4 w-max h-16 items-center">
-                <li class="w-max h-full">
-                    <a href=""
-                        class="flex px-4 w-max h-full items-center font-x-huge outline-none text-base hover:text-x-prime focus:text-x-prime text-x-prime relative after:content-[''] after:absolute after:w-full after:h-[4px] after:rounded-x-huge after:bg-x-prime after:bottom-0 after:left-0 after:right-0">
-                        {{ __('Home') }}
-                    </a>
-                </li>
-                <li class="w-max h-full">
-                    <a href=""
-                        class="flex px-4 w-max h-full items-center font-x-huge outline-none text-base hover:text-x-prime focus:text-x-prime text-x-black">
-                        {{ __('Brands') }}
-                    </a>
-                </li>
-                <li class="w-max h-full">
-                    <a href=""
-                        class="flex px-4 w-max h-full items-center font-x-huge outline-none text-base hover:text-x-prime focus:text-x-prime text-x-black">
-                        {{ __('Categories') }}
-                    </a>
-                </li>
-                <li class="w-max h-full">
-                    <a href=""
-                        class="flex px-4 w-max h-full items-center font-x-huge outline-none text-base hover:text-x-prime focus:text-x-prime text-x-black">
-                        {{ __('Cars') }}
-                    </a>
-                </li>
+            <ul class="flex gap-4 w-max items-center">
+                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')]] as $url)
+                    <li class="w-max h-full">
+                        <a href="{{ route($url[0]) }}"
+                            class="flex px-4 py-1 w-max h-full items-center font-x-thin text-base relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">
+                            {{ $url[1] }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </nav>
         <neo-dropdown label="{{ __('Languages') }}" position="{{ Core::lang('ar') ? 'start' : 'end' }}">

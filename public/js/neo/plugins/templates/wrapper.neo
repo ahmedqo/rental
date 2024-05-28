@@ -34,6 +34,11 @@
             scroll: 0,
         },
         rules: {
+            resize() {
+                if(!this.state.screen) return;
+                if(matchMedia("(min-width: 1024px)").matches) document.documentElement.style.scrollBehavior = "";
+                else document.documentElement.style.scrollBehavior = "unset";
+            },
             closed() {
                 document.documentElement.style.scrollBehavior = "unset";
                 this.setState({
@@ -44,6 +49,8 @@
                 this.scroll(0, this.state.scroll);
             },
             smonly() {
+                window.addEventListener("resize", this.rules.resize);
+                document.documentElement.style.scrollBehavior = "unset";
                 this.setState({
                     screen: true, 
                     scroll: window.scrollY
@@ -56,6 +63,7 @@
                 this.props.close = false;
                 window.scroll(0, this.state.scroll);
                 document.documentElement.style.scrollBehavior = "";
+                window.removeEventListener("resize", this.rules.resize);
             },
         },
         cycle: {
