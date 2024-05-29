@@ -22,7 +22,7 @@
         </main>
         @include('shared.guest.footer')
     </neo-wrapper>
-    <neo-toaster horisontal="center" vertical="end"></neo-toaster>
+    <neo-toaster horisontal="end" vertical="end"></neo-toaster>
     @include('shared.base.scripts', ['type' => 'guest'])
     @yield('scripts')
 </body>

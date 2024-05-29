@@ -168,9 +168,14 @@ neo-datavisualizer::part(search-wrapper) {
     text-overflow: ellipsis;
 }
 
-neo-autocomplete.reserve::part(icon),
-neo-autocomplete.search::part(icon) {
+neo-select.reserve::part(icon),
+neo-select.search::part(icon) {
     display: none;
+}
+
+neo-select.reserve:focus-within>svg,
+neo-select.search:focus-within>svg {
+    color: rgb(var(--prime));
 }
 
 .menu-dropdown::part(modal) {
