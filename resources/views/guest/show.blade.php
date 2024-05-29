@@ -20,7 +20,8 @@
             <div class="w-full mx-auto container">
                 <ul class="flex flex-wrap px-4 overflow-auto">
                     <li>
-                        <a href="#overview" class="tabs block w-max px-4 py-3 font-x-thin active">
+                        <a href="#overview"
+                            class="tabs block w-max px-4 py-3 font-x-thin text-x-black text-opacity-70 active">
                             {{ __('Overview') }}
                         </a>
                     </li>
