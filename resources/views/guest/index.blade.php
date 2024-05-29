@@ -94,7 +94,7 @@
                             @foreach ($cars as $car)
                                 @for ($i = 0; $i < 5; $i++)
                                     <li class="w-full">
-                                        <a href="{{ route('views.guest.show', $car->slug) }}"
+                                        <a href="{{ route('views.guest.show', $car->slug) }}" draggable="false"
                                             class="w-full flex flex-wrap gap-4 p-4 border border-x-shade rounded-x-huge">
                                             <ul class="w-full col-span-2 flex flex-col gap-2 flex-[2]">
                                                 <li class="w-full">
