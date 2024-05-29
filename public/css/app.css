@@ -168,6 +168,7 @@ neo-datavisualizer::part(search-wrapper) {
     text-overflow: ellipsis;
 }
 
+neo-autocomplete.reserve::part(icon),
 neo-autocomplete.search::part(icon) {
     display: none;
 }
@@ -206,6 +207,11 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-radius: 1px;
 }
 
+.tabs.active {
+    color: rgb(var(--prime));
+    border-bottom: 4px solid rgb(var(--prime));
+}
+
 @media (min-width: 1024px) {
     neo-select::part(content),
     neo-dropdown::part(content),
@@ -235,10 +241,17 @@ input[type="range"]::-webkit-slider-runnable-track {
         padding-bottom: 0;
         padding-top: 0;
     }
+    neo-datepicker.reserve::part(modal),
+    neo-timepicker.reserve::part(modal),
+    neo-datepicker.search::part(modal),
     neo-timepicker.search::part(modal) {
-        min-width: 14rem;
+        min-width: 18rem;
     }
-    neo-datepicker.search::part(modal) {
-        min-width: 20rem;
+    neo-datepicker.reserve::part(modal),
+    neo-timepicker.reserve::part(modal),
+    neo-datepicker.search::part(modal),
+    neo-timepicker.search::part(modal) {
+        left: 50%;
+        translate: -50% 0;
     }
 }

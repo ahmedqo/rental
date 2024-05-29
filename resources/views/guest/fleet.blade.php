@@ -20,9 +20,10 @@
                     class="w-full peer-checked:hidden lg:hidden text-base font-x-thin underline underline-offset-2 text-x-prime">
                     {{ __('Show Search Fields') }}
                 </label>
-                <form class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
+                <form id="se-form"
+                    class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
                     <neo-autocomplete label="{{ __('Location') }}" value="{{ request('location') ?? '' }}"
-                        query="{{ request('location') ?? '' }}"
+                        query="{{ request('location') ?? '' }}" name="location"
                         class="bg-transparent border-x-black lg:flex-[2.5] col-span-2 search">
                         <svg slot="end" class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
                             viewBox="0 -960 960 960" fill="currentColor">
@@ -31,16 +32,16 @@
                         </svg>
                     </neo-autocomplete>
                     <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                        class="bg-transparent border-x-black lg:flex-[1] search"
+                        class="bg-transparent border-x-black lg:flex-[1] search" name="pick-up-date"
                         value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
                     <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                        class="bg-transparent border-x-black lg:flex-[1] search"
-                        value="{{ request('drop-off-date') ?? '#now + 1' }}" format="mmm dd"></neo-datepicker>
+                        class="bg-transparent border-x-black lg:flex-[1] search" name="drop-off-date"
+                        value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
                     <neo-timepicker label="{{ __('Pick-up Time') }}"
-                        class="bg-transparent border-x-black lg:flex-[1] search"
+                        class="bg-transparent border-x-black lg:flex-[1] search" name="pick-up-time"
                         value="{{ request('pick-up-time') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
                     <neo-timepicker label="{{ __('Drop-off Time') }}"
-                        class="bg-transparent border-x-black lg:flex-[1] search"
+                        class="bg-transparent border-x-black lg:flex-[1] search" name="drop-off-time"
                         value="{{ request('drop-off-time') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
                     <neo-button
                         class="w-full col-span-2 lg:w-max px-10 text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
@@ -65,9 +66,9 @@
                                     </h6>
                                     <div class="flex gap-4">
                                         <neo-textbox type="number" placeholder="{{ __('Min') }}" name="min"
-                                            class="bg-x-white flex-[1]"></neo-textbox>
+                                            class="bg-x-white flex-[1]" value="{{ request('min') }}"></neo-textbox>
                                         <neo-textbox type="number" placeholder="{{ __('Max') }}" name="max"
-                                            class="bg-x-white flex-[1]"></neo-textbox>
+                                            class="bg-x-white flex-[1]" value="{{ request('max') }}"></neo-textbox>
                                     </div>
                                 </li>
                                 <li class="flex flex-col gap-2">
@@ -84,8 +85,9 @@
                                             <li class="text-x-black text-opacity-60 font-x-thin text-base">7</li>
                                             <li class="text-x-black text-opacity-60 font-x-thin text-base">8</li>
                                         </ul>
-                                        <input type="range" min="2" value="2" max="8" step="1"
-                                            name="passengers" class="outline-x-prime outline-offset-" />
+                                        <input type="range" min="2" value="{{ request('passengers') ?? 2 }}"
+                                            max="8" step="1" name="passengers"
+                                            class="outline-x-prime outline-offset-" />
                                     </div>
                                 </li>
                                 <li class="flex flex-col gap-2">
@@ -102,8 +104,9 @@
                                             <li class="text-x-black text-opacity-60 font-x-thin text-base">7</li>
                                             <li class="text-x-black text-opacity-60 font-x-thin text-base">8</li>
                                         </ul>
-                                        <input type="range" min="2" value="2" max="8" step="1"
-                                            name="cargo" class="outline-x-prime outline-offset-" />
+                                        <input type="range" min="2" value="{{ request('cargo') ?? 2 }}"
+                                            max="8" step="1" name="cargo"
+                                            class="outline-x-prime outline-offset-" />
                                     </div>
                                 </li>
                                 <li class="w-full">
@@ -119,6 +122,7 @@
                                                             class="w-auto flex flex-wrap gap-2 items-center">
                                                             <input id="fuel_{{ $loop->index }}" name="fuel[]"
                                                                 type="checkbox" value="{{ $fuel }}"
+                                                                {{ in_array($fuel, request('fuel') ?? []) ? 'checked' : '' }}
                                                                 class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                             <span
                                                                 class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
@@ -141,6 +145,7 @@
                                                             <input id="transmission_{{ $loop->index }}"
                                                                 name="transmission[]" type="checkbox"
                                                                 value="{{ $transmission }}"
+                                                                {{ in_array($transmission, request('transmission') ?? []) ? 'checked' : '' }}
                                                                 class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                             <span
                                                                 class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
@@ -163,11 +168,12 @@
                                                 <label for="type_{{ $loop->index }}"
                                                     class="w-auto flex flex-wrap gap-2 items-center">
                                                     <input id="type_{{ $loop->index }}" name="type[]" type="checkbox"
-                                                        value="{{ $type }}"
+                                                        value="{{ $type['id'] }}"
+                                                        {{ in_array($type['id'], request('type') ?? []) ? 'checked' : '' }}
                                                         class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                     <span
                                                         class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
-                                                        {{ __(ucwords($type)) }}
+                                                        {{ __(ucwords($type['name'])) }}
                                                     </span>
                                                 </label>
                                             </li>
@@ -194,9 +200,9 @@
                                 </h6>
                                 <div class="flex gap-4">
                                     <neo-textbox type="number" placeholder="{{ __('Min') }}" name="min"
-                                        class="bg-x-white flex-[1]"></neo-textbox>
+                                        class="bg-x-white flex-[1]" value="{{ request('min') }}"></neo-textbox>
                                     <neo-textbox type="number" placeholder="{{ __('Max') }}" name="max"
-                                        class="bg-x-white flex-[1]"></neo-textbox>
+                                        class="bg-x-white flex-[1]" value="{{ request('max') }}"></neo-textbox>
                                 </div>
                             </li>
                             <li class="flex flex-col gap-2">
@@ -213,8 +219,9 @@
                                         <li class="text-x-black text-opacity-60 font-x-thin text-base">7</li>
                                         <li class="text-x-black text-opacity-60 font-x-thin text-base">8</li>
                                     </ul>
-                                    <input type="range" min="2" value="2" max="8" step="1"
-                                        name="passengers" class="outline-x-prime outline-offset-" />
+                                    <input type="range" min="2" value="{{ request('passengers') ?? 2 }}"
+                                        max="8" step="1" name="passengers"
+                                        class="outline-x-prime outline-offset-" />
                                 </div>
                             </li>
                             <li class="flex flex-col gap-2">
@@ -231,8 +238,9 @@
                                         <li class="text-x-black text-opacity-60 font-x-thin text-base">7</li>
                                         <li class="text-x-black text-opacity-60 font-x-thin text-base">8</li>
                                     </ul>
-                                    <input type="range" min="2" value="2" max="8" step="1"
-                                        name="cargo" class="outline-x-prime outline-offset-" />
+                                    <input type="range" min="2" value="{{ request('cargo') ?? 2 }}"
+                                        max="8" step="1" name="cargo"
+                                        class="outline-x-prime outline-offset-" />
                                 </div>
                             </li>
                             <li class="w-full">
@@ -248,6 +256,7 @@
                                                         class="w-auto flex flex-wrap gap-2 items-center">
                                                         <input id="fuel_{{ $loop->index }}" name="fuel[]"
                                                             type="checkbox" value="{{ $fuel }}"
+                                                            {{ in_array($fuel, request('fuel') ?? []) ? 'checked' : '' }}
                                                             class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                         <span
                                                             class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
@@ -270,6 +279,7 @@
                                                         <input id="transmission_{{ $loop->index }}"
                                                             name="transmission[]" type="checkbox"
                                                             value="{{ $transmission }}"
+                                                            {{ in_array($transmission, request('transmission') ?? []) ? 'checked' : '' }}
                                                             class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                         <span
                                                             class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
@@ -292,10 +302,11 @@
                                             <label for="type_{{ $loop->index }}"
                                                 class="w-auto flex flex-wrap gap-2 items-center">
                                                 <input id="type_{{ $loop->index }}" name="type[]" type="checkbox"
-                                                    value="{{ $type }}"
+                                                    value="{{ $type['id'] }}"
+                                                    {{ in_array($type['id'], request('type') ?? []) ? 'checked' : '' }}
                                                     class="w-5 h-5 block rounded-x-thin outline-x-prime outline-offset-2 border border-x-black">
                                                 <span class="flex-[1] text-x-black text-opacity-60 font-x-thin text-base">
-                                                    {{ __(ucwords($type)) }}
+                                                    {{ __(ucwords($type['name'])) }}
                                                 </span>
                                             </label>
                                         </li>
@@ -313,7 +324,7 @@
                             @foreach ($cars as $car)
                                 @for ($i = 0; $i < 5; $i++)
                                     <li
-                                        class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 bg-x-white shadow-x-core rounded-x-huge">
+                                        class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 bg-x-white shadow-x-core rounded-x-thin">
                                         <img src="{{ $car->Images[0]->Link }}" alt="{{ ucwords($car->name) }} Image"
                                             loading="lazy"
                                             class="hidden lg:block w-1/5 aspect-square object-contain object-center" />
@@ -390,29 +401,29 @@
                                                     class="block w-full aspect-square object-contain object-center" />
                                             </li>
                                             <li class="hidden lg:block text-2xl text-x-black font-x-huge mt-2">
-                                                {{ $car->price }}$
+                                                ${{ $car->price }}
                                             </li>
                                             <li class="hidden lg:block text-xs lg:text-base text-x-black font-normal">
                                                 {{ __('Per Day') }}
                                             </li>
                                             <li class="hidden lg:block">
-                                                <a href=""
-                                                    class="block w-max px-6 py-2 bg-x-prime text-x-white font-x-huge outline-none hover:bg-opacity-60 focus:bg-opacity-60 mt-4">
+                                                <a href="{{ route('views.guest.show', $car->slug) }}"
+                                                    class="link block w-max px-6 py-2 bg-x-prime text-x-white font-x-huge outline-none hover:bg-opacity-60 focus:bg-opacity-60 mt-4">
                                                     {{ __('Reserve') }}
                                                 </a>
                                             </li>
                                         </ul>
                                         <ul class="w-full flex items-center justify-between gap-4 lg:hidden">
                                             <li>
-                                                <a href=""
-                                                    class="block w-max px-6 py-2 bg-x-prime text-x-white font-x-huge outline-none hover:bg-opacity-60 focus:bg-opacity-60">
+                                                <a href="{{ route('views.guest.show', $car->slug) }}"
+                                                    class="link block w-max px-6 py-2 bg-x-prime text-x-white font-x-huge outline-none hover:bg-opacity-60 focus:bg-opacity-60">
                                                     {{ __('Reserve') }}
                                                 </a>
                                             </li>
                                             <li>
                                                 <ul class="w-full flex flex-col items-end">
                                                     <li class=" text-2xl text-x-black font-x-huge">
-                                                        {{ $car->price }}$
+                                                        ${{ $car->price }}
                                                     </li>
                                                     <li class=" text-xs lg:text-base text-x-black font-normal">
                                                         {{ __('Per Day') }}
@@ -434,6 +445,21 @@
 
 @section('scripts')
     <script>
+        const seForm = document.querySelector("#se-form");
+        const smForm = document.querySelector("#sm-form");
+        const lgForm = document.querySelector("#lg-form");
+
+        document.querySelectorAll(".link").forEach(l => {
+            l.addEventListener("click", e => {
+                e.preventDefault();
+                var str = [];
+                Array.from(seForm.elements).forEach(el => {
+                    if (el.value && el.value.trim() && el.name) str.push(el.name + "=" + el.value);
+                });
+                location.href = e.target.href + "?" + str.join("&");
+            });
+        });
+
         function syncValues(sourceForm, targetForm) {
             const sourceElements = sourceForm.elements;
             const targetElements = targetForm.elements;
@@ -442,7 +468,7 @@
                 const sourceElement = sourceElements[i];
                 const targetElement = targetElements[i];
                 if (targetElement) {
-                    if (sourceElement.type === 'checkbox' || sourceElement.type === 'radio') {
+                    if (sourceElement.type === "checkbox" || sourceElement.type === "radio") {
                         targetElement.checked = sourceElement.checked;
                     } else {
                         targetElement.value = sourceElement.value;
@@ -451,15 +477,42 @@
             }
         }
 
-        // Get forms
-        const smForm = document.querySelector('#sm-form');
-        const lgForm = document.querySelector('#lg-form');
+        smForm.addEventListener("input", () => {
+            syncValues(smForm, lgForm)
+        });
 
-        // Add event listeners to sync changes
-        smForm.addEventListener('input', () => syncValues(smForm, lgForm));
-        lgForm.addEventListener('input', () => syncValues(lgForm, smForm));
+        lgForm.addEventListener("input", () => {
+            syncValues(lgForm, smForm)
+        });
 
-        smForm.addEventListener('change', () => syncValues(smForm, lgForm));
-        lgForm.addEventListener('change', () => syncValues(lgForm, smForm));
+        smForm.addEventListener("change", () => {
+            syncValues(smForm, lgForm)
+        });
+
+        lgForm.addEventListener("change", () => {
+            syncValues(lgForm, smForm)
+        });
+
+        [seForm, smForm, lgForm].forEach(form => {
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const url = new URL(location.href);
+                Array.from(form.elements).forEach(el => {
+                    if (!el.name) return;
+                    if (el.type === "checkbox" || el.type === "radio") {
+                        let set = [...new Set(url.searchParams.getAll(el.name))];
+                        url.searchParams.delete(el.name);
+                        if (el.checked) !set.includes(el.value) && set.push(el.value)
+                        else set = set.filter(e => e !== el.value);
+                        set.forEach(e => url.searchParams.append(el.name, e))
+                    } else {
+                        if (el.value.trim()) url.searchParams.set(el.name, el.value);
+                        else url.searchParams.delete(el.name);
+                    }
+                });
+
+                location.href = url.href;
+            });
+        });
     </script>
 @endsection
