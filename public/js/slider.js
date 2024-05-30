@@ -38,6 +38,7 @@ function Slider({
         _cols_ = opts.cols,
         _gaps_ = opts.gaps,
         _maps_ = [],
+        rtl = document.documentElement.dir === "rtl",
         startScrollLeft;
 
     var sm = {},
@@ -51,10 +52,10 @@ function Slider({
 
     const nextItem = () => {
         while (_maps_ && _maps_.length) clearTimeout(_maps_.shift());
-        if (carousel.scrollWidth - carousel.scrollLeft - carousel.clientWidth < 1) {
+        if (carousel.scrollWidth - (carousel.scrollLeft * (rtl ? -1 : 1)) - carousel.clientWidth < 1) {
             carousel.scrollLeft = 0;
         } else {
-            carousel.scrollLeft += itemSize() * _move_;
+            carousel.scrollLeft += itemSize() * _move_ * (rtl ? -1 : 1);
         }
         if (_maps_) requestAnimationFrame(autoPlay);
     };
@@ -62,9 +63,9 @@ function Slider({
     const prevItem = () => {
         while (_maps_ && _maps_.length) clearTimeout(_maps_.shift());
         if (carousel.scrollLeft === 0) {
-            carousel.scrollLeft = itemSize() * children.length;
+            carousel.scrollLeft = itemSize() * children.length * (rtl ? -1 : 1);
         } else {
-            carousel.scrollLeft -= itemSize() * _move_;
+            carousel.scrollLeft -= itemSize() * _move_ * (rtl ? -1 : 1);
         }
         if (_maps_) requestAnimationFrame(autoPlay);
     };
@@ -163,7 +164,7 @@ function Slider({
     setTimeout(() => {
         exec();
         carousel.style.scrollBehavior = "unset";
-        carousel.scrollLeft = opts.flip ? itemSize() * children.length : 0;
+        carousel.scrollLeft = (opts.flip ? itemSize() * children.length : 0) * (rtl ? -1 : 1);
         carousel.style.scrollBehavior = "";
     }, 0);
 
@@ -191,7 +192,7 @@ function Slider({
         },
         move: function(pos) {
             while (_maps_ && _maps_.length) clearTimeout(_maps_.shift());
-            carousel.scrollLeft = itemSize() * ((_flip_ ? (children.length) : -1) - pos);
+            carousel.scrollLeft = itemSize() * ((_flip_ ? (children.length) : -1) - pos) * (rtl ? -1 : 1);
             if (_maps_) requestAnimationFrame(autoPlay);
             return this;
         },
@@ -204,10 +205,10 @@ function Slider({
             return this;
         },
         hasPrev: function() {
-            return carousel.scrollLeft > 0;
+            return rtl ? carousel.scrollLeft < 0 : carousel.scrollLeft > 0;
         },
         hasNext: function() {
-            return carousel.scrollWidth - carousel.scrollLeft - carousel.clientWidth > 1;
+            return carousel.scrollWidth - (carousel.scrollLeft * (rtl ? -1 : 1)) - carousel.clientWidth > 1;
         }
     };
 }

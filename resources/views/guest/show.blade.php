@@ -140,6 +140,11 @@
                                 <h3 class="text-x-black font-x-huge text-xl">
                                     {{ __('Details') }}
                                 </h3>
+                                <div class="flex flex-col gap-2">
+                                    @foreach ($car->detailsArray as $detail)
+                                        <p class="text-x-black text-sm text-x-thin">{{ $detail }} </p>
+                                    @endforeach
+                                </div>
                             </div>
                         @endif
                         <div block id="policies"
@@ -192,6 +197,7 @@
                                 <h3 class="text-x-black font-x-huge text-xl">
                                     {{ __('Description') }}
                                 </h3>
+                                <div class="w-full revert"></div>
                             </div>
                         @endif
                     </div>
@@ -226,7 +232,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="w-full flex flex-col gap-4 p-4 bg-x-white shadow-x-core rounded-x-thin">
+                        <div id="reservation"
+                            class="w-full flex flex-col gap-4 p-4 bg-x-white shadow-x-core rounded-x-thin">
                             <h3 class="text-x-black font-x-huge text-xl">
                                 {{ __('Reservation') }}
                             </h3>
@@ -278,6 +285,19 @@
                 </div>
             </div>
         </section>
+        <ul id="sm-reserve"
+            class="w-full translate-y-full transition-transform duration-200 lg:hidden flex items-center justify-between gap-4 p-4 bg-x-white shadow-2xl shadow-x-black fixed left-0 right-0 bottom-0">
+            <li class="text-x-black font-x-huge text-2xl">
+                <span>$</span>
+                <span id="sm-total">{{ $car->price }}</span>
+            </li>
+            <li>
+                <a href="#reservation"
+                    class="tabs block w-max px-6 py-2 bg-x-prime text-x-white font-x-huge outline-none hover:bg-opacity-60 focus:bg-opacity-60">
+                    {{ __('Reserve') }}
+                </a>
+            </li>
+        </ul>
     </div>
 @endsection
 

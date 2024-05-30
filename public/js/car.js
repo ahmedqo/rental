@@ -12,7 +12,10 @@ const slider = Slider({
     price = +document.querySelector("#price").textContent,
     days = document.querySelector("#days"),
     total = document.querySelector("#total"),
-    booking = document.querySelector("#book");
+    smtotal = document.querySelector("#sm-total"),
+    booking = document.querySelector("#book"),
+    reservation = document.querySelector("#reservation"),
+    smreserve = document.querySelector("#sm-reserve");
 
 tabs.forEach(t => {
     t.addEventListener("click", e => {
@@ -64,6 +67,7 @@ function calcPrice() {
 
     days.innerHTML = nbrDays;
     total.innerHTML = nbrDays * price;
+    smtotal.innerHTML = nbrDays * price;
 }
 
 function intersect() {
@@ -134,6 +138,12 @@ function reserve(e) {
 
     if (!errors.includes(true)) booking.requestSubmit();
 }
+
+(new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        smreserve.classList[entry.isIntersecting ? "add" : "remove"]("translate-y-full");
+    });
+})).observe(reservation);
 
 booking.addEventListener("change", calcPrice);
 booking.addEventListener("input", calcPrice);

@@ -217,6 +217,12 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-bottom: 4px solid rgb(var(--prime));
 }
 
+.revert *,
+.revert *::after,
+.revert *::before {
+    all: revert;
+}
+
 @media (min-width: 1024px) {
     neo-select::part(content),
     neo-dropdown::part(content),

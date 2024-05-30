@@ -122,6 +122,11 @@ class Car extends Model implements Sitemapable
         return $this->{'description_' . Core::lang()};
     }
 
+    public function getDetailsArrayAttribute()
+    {
+        return $this->details ? preg_split("/\n\r|\n/", $this->details) : null;
+    }
+
     public function Brand()
     {
         return $this->belongsTo(Brand::class, 'brand');
