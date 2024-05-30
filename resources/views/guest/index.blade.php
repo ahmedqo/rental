@@ -44,7 +44,7 @@
                             {{ __('Find Your Car') }}
                         </h2>
                         <neo-select label="{{ __('Location') }}" name="location"
-                            class="bg-transparent border-x-black py-3 px-5 col-span-2 search">
+                            class="bg-transparent py-3 px-5 col-span-2 search">
                             <neo-select-item value="airport">
                                 {{ __(ucwords('Airport')) }}
                             </neo-select-item>
@@ -58,12 +58,12 @@
                             </svg>
                         </neo-select>
                         <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}" name="pick-up-date"
-                            class="bg-transparent border-x-black py-3 px-5" value="#now" format="mmm dd"></neo-datepicker>
+                            class="bg-transparent py-3 px-5" value="#now" format="mmm dd"></neo-datepicker>
                         <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}" name="drop-off-date"
-                            class="bg-transparent border-x-black py-3 px-5" value="#now+1" format="mmm dd"></neo-datepicker>
-                        <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent border-x-black py-3 px-5"
+                            class="bg-transparent py-3 px-5" value="#now+1" format="mmm dd"></neo-datepicker>
+                        <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent py-3 px-5"
                             name="pick-up-time" value="#now" format="HH:MM AA"></neo-timepicker>
-                        <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent border-x-black py-3 px-5"
+                        <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent py-3 px-5"
                             name="drop-off-time" value="#now" format="HH:MM AA"></neo-timepicker>
                         <div class="w-full flex col-span-2">
                             <neo-button
