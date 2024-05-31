@@ -23,7 +23,7 @@
                 <form id="se-form"
                     class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
                     <neo-select label="{{ __('Location') }}" name="location"
-                        class="bg-transparent lg:flex-[2.5] col-span-2 search">
+                        class="bg-transparent lg:flex-[2.5] col-span-2 custom">
                         <neo-select-item value="airport" {{ request('location') == 'airport' ? 'active' : '' }}>
                             {{ __(ucwords('Airport')) }}
                         </neo-select-item>
@@ -37,15 +37,15 @@
                         </svg>
                     </neo-select>
                     <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                        class="bg-transparent lg:flex-[1] search" name="pick-up-date"
+                        class="bg-transparent lg:flex-[1] custom center" name="pick-up-date"
                         value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
                     <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                        class="bg-transparent lg:flex-[1] search" name="drop-off-date"
+                        class="bg-transparent lg:flex-[1] custom center" name="drop-off-date"
                         value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                    <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent lg:flex-[1] search"
+                    <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent lg:flex-[1] custom center"
                         name="pick-up-time" value="{{ request('pick-up-time') ?? '#now' }}"
                         format="HH:MM AA"></neo-timepicker>
-                    <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent lg:flex-[1] search"
+                    <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent lg:flex-[1] custom center"
                         name="drop-off-time" value="{{ request('drop-off-time') ?? '#now' }}"
                         format="HH:MM AA"></neo-timepicker>
                     <neo-button
@@ -449,6 +449,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @if (!Core::lang('en'))
+        <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
     <script src="{{ asset('js/fleet.min.js') }}?v={{ env('APP_VERSION') }}"></script>
 @endsection

@@ -6,12 +6,17 @@
         <h1 class="text-center lg:text-start text-xl lg:text-2xl text-x-black font-x-thin">
             {{ __('Edit Category') . ' #' . $data->id }}
         </h1>
-        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-4">
+        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-6">
             <form action="{{ route('actions.categories.patch', $data->id) }}" method="POST" enctype="multipart/form-data"
-                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4">
+                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
-                <neo-imagetransfer name="image" class="lg:col-span-2 video"></neo-imagetransfer>
+                <div class="flex flex-col lg:col-span-2">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Image') }}
+                    </label>
+                    <neo-imagetransfer name="image" class="video"></neo-imagetransfer>
+                </div>
                 <neo-textbox label="{{ __('Name') . ' (en)' }}" name="name_en" value="{{ $data->name_en }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (fr)' }}" name="name_fr" value="{{ $data->name_fr }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (it)' }}" name="name_it" value="{{ $data->name_it }}"></neo-textbox>

@@ -1,21 +1,24 @@
-const slider = Slider({
-        root: document.querySelector("#ui-carousel"),
-        prev: document.querySelector("#ui-prev"),
-        next: document.querySelector("#ui-next"),
-        opts: {
-            drag: true,
-            gaps: 0,
-        }
-    }),
+const
     tabs = document.querySelectorAll(".tabs"),
     blocks = document.querySelectorAll("[block]"),
     price = +document.querySelector("#price").textContent,
     days = document.querySelector("#days"),
     total = document.querySelector("#total"),
     smtotal = document.querySelector("#sm-total"),
+    smdays = document.querySelector("#sm-days"),
     booking = document.querySelector("#book"),
     reservation = document.querySelector("#reservation"),
     smreserve = document.querySelector("#sm-reserve");
+
+if (document.querySelector("#ui-carousel")) Slider({
+    root: document.querySelector("#ui-carousel"),
+    prev: document.querySelector("#ui-prev"),
+    next: document.querySelector("#ui-next"),
+    opts: {
+        drag: true,
+        gaps: 0,
+    }
+})
 
 tabs.forEach(t => {
     t.addEventListener("click", e => {
@@ -68,6 +71,7 @@ function calcPrice() {
     days.innerHTML = nbrDays;
     total.innerHTML = nbrDays * price;
     smtotal.innerHTML = nbrDays * price;
+    smdays.innerHTML = Neo.Helper.trans("Per") + " " + nbrDays + " " + Neo.Helper.trans("Days");
 }
 
 function intersect() {

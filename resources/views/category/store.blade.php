@@ -6,11 +6,16 @@
         <h1 class="text-center lg:text-start text-xl lg:text-2xl text-x-black font-x-thin">
             {{ __('New Category') }}
         </h1>
-        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-4">
+        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-6">
             <form action="{{ route('actions.categories.store') }}" method="POST" enctype="multipart/form-data"
-                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4">
+                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
-                <neo-imagetransfer name="image" class="lg:col-span-2 video"></neo-imagetransfer>
+                <div class="flex flex-col lg:col-span-2">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Image') }}
+                    </label>
+                    <neo-imagetransfer name="image" class="video"></neo-imagetransfer>
+                </div>
                 <neo-textbox label="{{ __('Name') . ' (en)' }}" name="name_en" value="{{ old('name_en') }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (fr)' }}" name="name_fr" value="{{ old('name_fr') }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (it)' }}" name="name_it" value="{{ old('name_it') }}"></neo-textbox>

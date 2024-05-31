@@ -9,16 +9,15 @@
         <h1 class="text-center lg:text-start text-xl lg:text-2xl text-x-black font-x-thin">
             {{ __('Edit Car') . ' #' . $data->id }}
         </h1>
-        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-4">
+        <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-6">
             <form action="{{ route('actions.cars.patch', $data->id) }}" method="POST" enctype="multipart/form-data"
-                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4">
+                class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
                 <neo-textbox label="{{ __('Name') . ' (en)' }}" name="name_en" value="{{ $data->name_en }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (fr)' }}" name="name_fr" value="{{ $data->name_fr }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (it)' }}" name="name_it" value="{{ $data->name_it }}"></neo-textbox>
                 <neo-textbox label="{{ __('Name') . ' (sp)' }}" name="name_sp" value="{{ $data->name_sp }}"></neo-textbox>
-                <div class="lg:col-span-2"></div>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (en)' }}" name="details_en"
                     value="{{ $data->details_en }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (fr)' }}" name="details_fr"
@@ -27,11 +26,8 @@
                     value="{{ $data->details_it }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (sp)' }}" name="details_sp"
                     value="{{ $data->details_sp }}" rows="4"></neo-textarea>
-                <div class="lg:col-span-2"></div>
-                <neo-imagetransfer name="images[]" class="lg:col-span-2" multiple></neo-imagetransfer>
-                <div class="lg:col-span-2"></div>
-                <neo-textbox type="number" label="{{ __('Price') }}" name="price"
-                    value="{{ $data->price }}"></neo-textbox>
+                <neo-textbox type="number" label="{{ __('Price') }}" name="price" value="{{ $data->price }}"
+                    class="lg:col-span-2"></neo-textbox>
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-4 lg:col-span-2">
                     <neo-textbox type="number" label="{{ __('Passengers') }}" name="passengers"
                         value="{{ $data->passengers }}"></neo-textbox>
@@ -75,11 +71,36 @@
                         </neo-select-item>
                     @endforeach
                 </neo-select>
-                <div class="lg:col-span-2"></div>
-                <textarea id="description_en" name="description_en" placeholder="{{ __('Description') }}  (en)" rows="3">{{ $data->description_en }}</textarea>
-                <textarea id="description_fr" name="description_ar" placeholder="{{ __('Description') }}  (fr)" rows="3">{{ $data->description_fr }}</textarea>
-                <textarea id="description_it" name="description_en" placeholder="{{ __('Description') }}  (it)" rows="3">{{ $data->description_it }}</textarea>
-                <textarea id="description_sp" name="description_ar" placeholder="{{ __('Description') }}  (sp)" rows="3">{{ $data->description_sp }}</textarea>
+                <div class="flex flex-col lg:col-span-2">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Images') }}
+                    </label>
+                    <neo-imagetransfer name="images[]" multiple></neo-imagetransfer>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Description') }} (en)
+                    </label>
+                    <textarea id="description_en" name="description_en" placeholder="{{ __('Description') }}  (en)" rows="3">{{ trim($data->description_en) }}</textarea>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Description') }} (fr)
+                    </label>
+                    <textarea id="description_fr" name="description_fr" placeholder="{{ __('Description') }}  (fr)" rows="3">{{ trim($data->description_fr) }}</textarea>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Description') }} (it)
+                    </label>
+                    <textarea id="description_it" name="description_it" placeholder="{{ __('Description') }}  (it)" rows="3">{{ trim($data->description_it) }}</textarea>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm text-x-black font-x-thin">
+                        {{ __('Description') }} (sp)
+                    </label>
+                    <textarea id="description_sp" name="description_sp" placeholder="{{ __('Description') }}  (sp)" rows="3">{{ trim($data->description_sp) }}</textarea>
+                </div>
                 <div class="w-full flex lg:col-span-2">
                     <neo-button
                         class="w-full lg:w-max lg:px-20 lg:ms-auto px-4 py-2 text-base lg:text-lg font-x-huge text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">

@@ -10,14 +10,30 @@
                     <h1 class="font-x-huge text-x-prime text-4xl lg:text-6xl !leading-[2.6rem] lg:!leading-[4.3rem]">
                         {{ __('Fast And Easy Way To Rent A Car.') }}
                     </h1>
-                    <ul class="w-full flex flex-col gap-2 mt-4">
+                    <ul class="w-full grid grid-rows-1 grid-cols-1 gap-4 mt-8">
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
                                 viewBox="0 -960 960 960">
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('Free Cancelation') }}</span>
+                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('Free Replacement') }}</span>
+                        </li>
+                        <li class="w-full flex flex-wrap items-center gap-2">
+                            <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
+                                viewBox="0 -960 960 960">
+                                <path
+                                    d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
+                            </svg>
+                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('Free Cancellation') }}</span>
+                        </li>
+                        <li class="w-full flex flex-wrap items-center gap-2">
+                            <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
+                                viewBox="0 -960 960 960">
+                                <path
+                                    d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
+                            </svg>
+                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('All-Risk Coverage') }}</span>
                         </li>
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
@@ -44,7 +60,7 @@
                             {{ __('Find Your Car') }}
                         </h2>
                         <neo-select label="{{ __('Location') }}" name="location"
-                            class="bg-transparent py-3 px-5 col-span-2 search">
+                            class="bg-transparent py-3 px-5 col-span-2 custom">
                             <neo-select-item value="airport">
                                 {{ __(ucwords('Airport')) }}
                             </neo-select-item>
@@ -58,17 +74,17 @@
                             </svg>
                         </neo-select>
                         <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}" name="pick-up-date"
-                            class="bg-transparent py-3 px-5" value="#now" format="mmm dd"></neo-datepicker>
+                            class="bg-transparent py-3 px-5 custom start" value="#now" format="mmm dd"></neo-datepicker>
                         <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}" name="drop-off-date"
-                            class="bg-transparent py-3 px-5" value="#now+1" format="mmm dd"></neo-datepicker>
-                        <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent py-3 px-5"
+                            class="bg-transparent py-3 px-5 custom end" value="#now+1" format="mmm dd"></neo-datepicker>
+                        <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent py-3 px-5 custom start"
                             name="pick-up-time" value="#now" format="HH:MM AA"></neo-timepicker>
-                        <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent py-3 px-5"
+                        <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent py-3 px-5 custom end"
                             name="drop-off-time" value="#now" format="HH:MM AA"></neo-timepicker>
                         <div class="w-full flex col-span-2">
                             <neo-button
                                 class="w-full lg:w-max lg:px-20 py-[.95rem] px-5 text-lg font-x-huge text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
-                                <span>{{ __('Search') }}</span>
+                                <span>{{ __('custom') }}</span>
                             </neo-button>
                         </div>
                     </form>
@@ -215,11 +231,84 @@
             </div>
         </div>
     </section>
+    <section class="my-8 lg:my-10 bg-x-light">
+        <div class="w-full mx-auto container p-4 my-6 lg:my-10">
+            <div class="flex flex-col gap-6 lg:gap-10">
+                <div class="flex flex-col">
+                    {{-- <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
+                        {{ __('EXPLORE AWSOME CARS') }}
+                    </h2> --}}
+                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                        {{ __('WHY CHOOSE US') }}
+                    </h3>
+                </div>
+                <ul class="w-full grid grid-rows-1 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                    @php
+                        $array = [
+                            [
+                                'title' => __('Free Replacement'),
+                                'desc' => __('Need a different car? We\'ll replace it at no extra cost.'),
+                            ],
+                            [
+                                'title' => __('Free Cancellation'),
+                                'desc' => __('Plans changed? Cancel anytime without any charges.'),
+                            ],
+                            [
+                                'title' => __('All-Risk Coverage'),
+                                'desc' => __('Enjoy peace of mind with our all-risk coverage.'),
+                            ],
+                            [
+                                'title' => __('No Hidden Fees'),
+                                'desc' => __('No surprises, transparent pricing. What you see is what you pay.'),
+                            ],
+                            [
+                                'title' => __('24/7 Support'),
+                                'desc' => __('We\'re here for you, day and night, whenever you need us.'),
+                            ],
+                            [
+                                'title' => __('Easy Transportation'),
+                                'desc' => __('Convenient pick-up and drop-off locations for hassle-free travel.'),
+                            ],
+                            [
+                                'title' => __('Affordable Pricing'),
+                                'desc' => __('Competitive rates that fit your budget.'),
+                            ],
+                            [
+                                'title' => __('Reliable Cars'),
+                                'desc' => __('Well-maintained and dependable vehicles.'),
+                            ],
+                        ];
+                    @endphp
+                    @foreach ($array as $arr)
+                        <li class="w-full flex flex-col items-center md:items-start gap-1 p-4 rounded-x-thin bg-x-white bg-center bg-cover bg-no-repeat"
+                            style="background-image: url({{ asset('img/pattern.png') }}?v={{ env('APP_VERSION') }})">
+                            <span
+                                class="w-14 h-14 flex items-center justify-center rounded-x-thin bg-x-acent bg-opacity-30">
+                                <svg slot="end" class="block w-8 h-8 pointer-events-none text-x-prime"
+                                    viewBox="0 -960 960 960" fill="currentColor">
+                                    <path
+                                        d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                </svg>
+                            </span>
+                            <h4 class="text-xl text-center md:text-start text-x-black font-x-huge mt-2">
+                                {{ $arr['title'] }}
+                            </h4>
+                            <p class="text-base text-center md:text-start text-x-black text-opacity-80 font-x-thin">
+                                {{ $arr['desc'] }}
+                            </p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
-    <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @if (!Core::lang('en'))
+        <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
     <script>
         const slider = Slider({
             root: document.querySelector("#ui-carousel"),

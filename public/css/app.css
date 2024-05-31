@@ -168,13 +168,11 @@ neo-datavisualizer::part(search-wrapper) {
     text-overflow: ellipsis;
 }
 
-neo-select.reserve::part(icon),
-neo-select.search::part(icon) {
+neo-select.custom::part(icon) {
     display: none;
 }
 
-neo-select.reserve:focus-within>svg,
-neo-select.search:focus-within>svg {
+neo-select.custom:focus-within>svg {
     color: rgb(var(--prime));
 }
 
@@ -252,17 +250,22 @@ input[type="range"]::-webkit-slider-runnable-track {
         padding-bottom: 0;
         padding-top: 0;
     }
-    neo-datepicker.reserve::part(modal),
-    neo-timepicker.reserve::part(modal),
-    neo-datepicker.search::part(modal),
-    neo-timepicker.search::part(modal) {
-        min-width: 18rem;
+    neo-datepicker.custom::part(modal),
+    neo-timepicker.custom::part(modal) {
+        min-width: 22rem;
     }
-    neo-datepicker.reserve::part(modal),
-    neo-timepicker.reserve::part(modal),
-    neo-datepicker.search::part(modal),
-    neo-timepicker.search::part(modal) {
+    neo-datepicker.custom.center::part(modal),
+    neo-timepicker.custom.center::part(modal) {
         left: 50%;
         translate: -50% 0;
+    }
+    neo-datepicker.custom.end::part(modal),
+    neo-timepicker.custom.end::part(modal) {
+        left: unset;
+        right: 0;
+    }
+    neo-datepicker.custom.start::part(modal),
+    neo-timepicker.custom.start::part(modal) {
+        left: 0;
     }
 }

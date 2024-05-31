@@ -197,36 +197,38 @@
                                 <h3 class="text-x-black font-x-huge text-xl">
                                     {{ __('Description') }}
                                 </h3>
-                                <div class="w-full revert"></div>
+                                <div class="w-full revert">
+                                    {!! $car->description !!}
+                                </div>
                             </div>
                         @endif
                     </div>
                     <div class="w-full flex flex-col gap-6">
                         <div class="w-full flex flex-col gap-2 p-4 bg-x-white shadow-x-core rounded-x-thin">
                             <ul class="w-full flex items-end justify-between col-span-2">
-                                <li class="text-x-black font-x-thin text-base">
+                                <li class="text-x-black font-x-thin text-sm">
                                     {{ __('Per Day') }}
                                 </li>
-                                <li class="text-x-black font-x-huge text-xl">
+                                <li class="text-x-black font-x-huge text-base">
                                     <span>$</span>
                                     <span id="price">{{ $car->price }}</span>
                                 </li>
                             </ul>
                             <ul class="w-full flex items-end justify-between col-span-2">
-                                <li class="text-x-black font-x-thin text-base">
+                                <li class="text-x-black font-x-thin text-sm">
                                     {{ __('Days Count') }}
                                 </li>
-                                <li class="text-x-black font-x-huge text-xl">
+                                <li class="text-x-black font-x-huge text-base">
                                     <span id="days">1</span>
-                                    <span class="text-base">{{ __('Days') }}</span>
+                                    <span class="text-sm">{{ __('Days') }}</span>
                                 </li>
                             </ul>
                             <hr class="border-t border-t-x-shade my-2">
                             <ul class="w-full flex items-end justify-between col-span-2">
-                                <li class="text-x-black font-x-huge text-lg">
+                                <li class="text-x-black font-x-huge text-base">
                                     {{ __('Total') }}
                                 </li>
-                                <li class="text-x-black font-x-huge text-2xl">
+                                <li class="text-x-black font-x-huge text-lg">
                                     <span>$</span>
                                     <span id="total">{{ $car->price }}</span>
                                 </li>
@@ -239,15 +241,15 @@
                             </h3>
                             <form id="book" class="grid grid-rows-1 grid-cols-2 gap-4">
                                 <neo-textbox label="{{ __('Name') }}" value="{{ old('name') ?? '' }}" name="name"
-                                    class="bg-transparent col-span-2 reserve"></neo-textbox>
+                                    class="bg-transparent col-span-2"></neo-textbox>
                                 <neo-textbox type="email" label="{{ __('Email') }}"
                                     value="{{ old('email') ?? '' }}" name="email"
-                                    class="bg-transparent col-span-2 reserve"></neo-textbox>
+                                    class="bg-transparent col-span-2"></neo-textbox>
                                 <neo-textbox type="tel" label="{{ __('Phone') }}"
                                     value="{{ old('phone') ?? '' }}" name="phone"
-                                    class="bg-transparent col-span-2 reserve"></neo-textbox>
+                                    class="bg-transparent col-span-2"></neo-textbox>
                                 <neo-select label="{{ __('Location') }}" name="location"
-                                    class="bg-transparent col-span-2 reserve">
+                                    class="bg-transparent col-span-2 custom">
                                     <neo-select-item value="airport"
                                         {{ request('location') == 'airport' ? 'active' : '' }}>
                                         {{ __(ucwords('Airport')) }}
@@ -264,15 +266,15 @@
                                     </svg>
                                 </neo-select>
                                 <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                                    class="bg-transparent reserve" name="pick-up-date"
+                                    class="bg-transparent custom start" name="pick-up-date"
                                     value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
                                 <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                                    class="bg-transparent reserve" name="drop-off-date"
+                                    class="bg-transparent custom end" name="drop-off-date"
                                     value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                                <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent reserve"
+                                <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent custom start"
                                     name="pick-up-time" value="{{ request('pick-up-time') ?? '#now' }}"
                                     format="HH:MM AA"></neo-timepicker>
-                                <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent reserve"
+                                <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent custom end"
                                     name="drop-off-time" value="{{ request('drop-off-time') ?? '#now' }}"
                                     format="HH:MM AA"></neo-timepicker>
                                 <neo-button
@@ -290,6 +292,7 @@
             <li class="text-x-black font-x-huge text-2xl">
                 <span>$</span>
                 <span id="sm-total">{{ $car->price }}</span>
+                <span id="sm-days" class="font-x-thin text-lg"></span>
             </li>
             <li>
                 <a href="#reservation"
@@ -302,7 +305,11 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
-    <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @if ($car->Images->count() > 1)
+        <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
+    @if (!Core::lang('en'))
+        <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
     <script src="{{ asset('js/car.min.js') }}?v={{ env('APP_VERSION') }}"></script>
 @endsection
