@@ -61,11 +61,11 @@ function ucWords(str) {
 
 function calcPrice() {
     const sourceElements = booking.elements;
-    if (!sourceElements["pick-up-date"].value.trim() || !sourceElements["drop-off-date"].value.trim()) return;
+    if (!sourceElements["from_date"].value.trim() || !sourceElements["to_date"].value.trim()) return;
 
     const nbrDays = Math.round(betweenDates(
-        sourceElements["pick-up-date"].value + " " + sourceElements["pick-up-time"].value,
-        sourceElements["drop-off-date"].value + " " + sourceElements["drop-off-time"].value,
+        sourceElements["from_date"].value + " " + sourceElements["from_time"].value,
+        sourceElements["to_date"].value + " " + sourceElements["to_time"].value,
     ));
 
     days.innerHTML = nbrDays;
@@ -115,32 +115,32 @@ function reserve(e) {
         }
     }
 
-    if (sourceElements["pick-up-date"].value.trim()) {
+    if (sourceElements["from_date"].value.trim()) {
         if (betweenDates(Neo.Helper.Str.moment(new Date().toDateString()), sourceElements[
-                "pick-up-date"].value) < 0) {
-            sourceElements["pick-up-date"].classList.add("outline", "outline-2", "outline-red-400",
+                "from_date"].value) < 0) {
+            sourceElements["from_date"].classList.add("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
             Neo.Toaster.toast(Neo.Helper.trans("Pick-up Date Must Be Today Or After"), "error");
         } else {
-            sourceElements["pick-up-date"].classList.remove("outline", "outline-2", "outline-red-400",
+            sourceElements["from_date"].classList.remove("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
         }
-        errors.push(!sourceElements["pick-up-date"].value.trim());
+        errors.push(!sourceElements["from_date"].value.trim());
     }
 
-    if (sourceElements["pick-up-date"].value.trim() && sourceElements["drop-off-date"].value.trim()) {
-        if (betweenDates(sourceElements["pick-up-date"].value, sourceElements["drop-off-date"].value) < 1) {
-            sourceElements["drop-off-date"].classList.add("outline", "outline-2", "outline-red-400",
+    if (sourceElements["from_date"].value.trim() && sourceElements["to_date"].value.trim()) {
+        if (betweenDates(sourceElements["from_date"].value, sourceElements["to_date"].value) < 1) {
+            sourceElements["to_date"].classList.add("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
             Neo.Toaster.toast(Neo.Helper.trans("Drop-off Date Must Be After Pick-up Date"), "error");
         } else {
-            sourceElements["drop-off-date"].classList.remove("outline", "outline-2", "outline-red-400",
+            sourceElements["to_date"].classList.remove("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
         }
-        errors.push(!sourceElements["drop-off-date"].value.trim());
+        errors.push(!sourceElements["to_date"].value.trim());
     }
 
-    if (!errors.includes(true)) booking.requestSubmit();
+    if (!errors.includes(true)) booking.submit();
 }
 
 (new IntersectionObserver((entries) => {

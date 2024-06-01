@@ -239,7 +239,10 @@
                             <h3 class="text-x-black font-x-huge text-xl">
                                 {{ __('Reservation') }}
                             </h3>
-                            <form id="book" class="grid grid-rows-1 grid-cols-2 gap-4">
+                            <form id="book" action="{{ route('actions.guest.order') }}" method="POST"
+                                class="grid grid-rows-1 grid-cols-2 gap-4">
+                                @csrf
+                                <input type="hidden" name="car" value="{{ $car->id }}" />
                                 <neo-textbox label="{{ __('Name') }}" value="{{ old('name') ?? '' }}" name="name"
                                     class="bg-transparent col-span-2"></neo-textbox>
                                 <neo-textbox type="email" label="{{ __('Email') }}"
@@ -266,16 +269,16 @@
                                     </svg>
                                 </neo-select>
                                 <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                                    class="bg-transparent custom start" name="pick-up-date"
+                                    class="bg-transparent custom start" name="from_date"
                                     value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
                                 <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                                    class="bg-transparent custom end" name="drop-off-date"
+                                    class="bg-transparent custom end" name="to_date"
                                     value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
                                 <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent custom start"
-                                    name="pick-up-time" value="{{ request('pick-up-time') ?? '#now' }}"
+                                    name="from_time" value="{{ request('pick-up-time') ?? '#now' }}"
                                     format="HH:MM AA"></neo-timepicker>
                                 <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent custom end"
-                                    name="drop-off-time" value="{{ request('drop-off-time') ?? '#now' }}"
+                                    name="to_time" value="{{ request('drop-off-time') ?? '#now' }}"
                                     format="HH:MM AA"></neo-timepicker>
                                 <neo-button
                                     class="w-full col-span-2 px-10 text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">

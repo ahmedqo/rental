@@ -182,7 +182,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Core' => \App\Functions\Core::class
+        'Core' => \App\Functions\Core::class,
+        'Carbon' => \Carbon\Carbon::class
     ])->toArray(),
 
 ];

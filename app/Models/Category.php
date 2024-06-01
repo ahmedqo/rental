@@ -66,7 +66,7 @@ class Category extends Model
 
     public function Products()
     {
-        return $this->hasMany(Product::class, 'category');
+        return $this->hasMany(Car::class, 'category');
     }
 
     public function Image(): MorphOne

@@ -8,6 +8,10 @@ use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class GuestController extends Controller
 {
@@ -78,5 +82,46 @@ class GuestController extends Controller
         $blog = Blog::with('Image')->where('slug', $slug)->limit(1)->first();
         if (!$blog) abort(404);
         return view('guest.blog', compact('blog'));
+    }
+
+    public function order_action(Request $Request)
+    {
+        $validator = Validator::make($Request->all(), [
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'from_date' => ['required', 'date', 'after_or_equal:today'],
+            'to_date' => ['required', 'date', 'after:from_date'],
+            'from_time' => ['required', 'string'],
+            'to_time' => ['required', 'string'],
+            'car' => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->with([
+                'message' => $validator->errors()->all(),
+                'type' => 'error'
+            ]);
+        }
+
+        $Car = Car::findorfail($Request->car);
+        $from = Carbon::parse($Request->from_date . ' ' . $Request->from_time);
+        $to = Carbon::parse($Request->to_date . ' ' . $Request->to_time);
+        $period = (int) ceil($from->diffInHours($to) / 24);
+        $total = $period * $Car->price;
+
+        Order::create($Request->merge([
+            'from' => $from,
+            'to' => $to,
+            'period' => $period,
+            'total' => $total,
+            'status' => 'pendding'
+        ])->all());
+
+        return Redirect::back()->with([
+            'message' => __('Created successfully'),
+            'type' => 'success'
+        ]);
     }
 }

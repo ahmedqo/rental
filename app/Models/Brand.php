@@ -64,9 +64,9 @@ class Brand extends Model
         return $this->{'description_' . Core::lang()};
     }
 
-    public function Products()
+    public function Cars()
     {
-        return $this->hasMany(Product::class, 'brand');
+        return $this->hasMany(Car::class, 'brand');
     }
 
     public function Image(): MorphOne

@@ -55,6 +55,11 @@ class Core
         return ['available', 'not available'];
     }
 
+    public static function orderList()
+    {
+        return  ['canceled', 'pendding', 'confirmed', 'completed'];
+    }
+
     public static function transmissionList()
     {
         return ['manual', 'automatic', 'semi automatic'];
