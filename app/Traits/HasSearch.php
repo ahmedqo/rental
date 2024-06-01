@@ -14,15 +14,21 @@ trait HasSearch
         if (!$this->searchable) {
             throw new Exception("Please define the searchable property . ");
         }
-        foreach ($this->searchable as $searchable) {
-            if (Str::contains($searchable, '.')) {
-                $relation = Str::beforeLast($searchable, '.');
-                $column = Str::afterLast($searchable, '.');
-                $builder->orWhereRelation($relation, $column, 'like', "%$term%");
-                continue;
+
+        $builder->where(function ($query) use ($term) {
+            foreach ($this->searchable as $searchable) {
+                if (Str::contains($searchable, '.')) {
+                    $relation = Str::beforeLast($searchable, '.');
+                    $column = Str::afterLast($searchable, '.');
+                    $query->orWhereHas($relation, function ($subQuery) use ($column, $term) {
+                        $subQuery->where($column, 'like', "%$term%");
+                    });
+                } else {
+                    $query->orWhere($searchable, 'like', "%$term%");
+                }
             }
-            $builder->orWhere($searchable, 'like', "%$term%");
-        }
+        });
+
         return $builder;
     }
 }

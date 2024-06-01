@@ -63,6 +63,24 @@
         <li class="w-full">
             <ul class="w-full flex flex-col">
                 <li class="w-full">
+                    <h3 class="font-x-thin text-x-black text-sm mx-2">{{ __('Content') }}</h3>
+                    <hr class="border-x-shade">
+                </li>
+                <li class="w-full">
+                    <a href="{{ route('views.blogs.index') }}"
+                        class="w-full flex flex-wrap gap-2 p-2 text-start text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::matchRoute('blogs') ? '!bg-x-black' : '' }}">
+                        <svg class="block w-6 h-6 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
+                            <path
+                                d="M170-73q-57.12 0-96.56-39.44Q34-151.88 34-209v-541q0-57.13 39.44-96.56Q112.88-886 170-886h620q57.13 0 96.56 39.44Q926-807.13 926-750v541q0 57.12-39.44 96.56Q847.13-73 790-73H170Zm67-204h486v-90H237v90Zm0-158h167v-247H237v247Zm234 0h252v-90H471v90Zm0-157h252v-90H471v90Z" />
+                        </svg>
+                        <span class="block flex-1 text-base">{{ __('Blogs') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="w-full">
+            <ul class="w-full flex flex-col">
+                <li class="w-full">
                     <h3 class="font-x-thin text-x-black text-sm mx-2">{{ __('System') }}</h3>
                     <hr class="border-x-shade">
                 </li>

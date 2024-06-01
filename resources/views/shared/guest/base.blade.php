@@ -15,7 +15,7 @@
         <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
             class="block w-36" width="916" height="516" />
     </section>
-    <neo-wrapper class="bg-[#fcfcfc]">
+    <neo-wrapper class="bg-w-white">
         @include('shared.guest.header')
         <main class="w-full flex flex-col">
             @yield('content')

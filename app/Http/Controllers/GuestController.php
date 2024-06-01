@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Functions\Core;
+use App\Models\Blog;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -23,7 +24,9 @@ class GuestController extends Controller
             }
         )->get();
 
-        return view('guest.index', compact('cars'));
+        $blogs = Blog::latest()->inRandomOrder()->limit(4)->get();
+
+        return view('guest.index', compact('cars', 'blogs'));
     }
 
     public function fleet_view(Request $Request)
@@ -57,10 +60,23 @@ class GuestController extends Controller
         return view('guest.fleet', compact('cars', 'types'));
     }
 
+    public function blogs_view()
+    {
+        $blogs = Blog::with('Image')->cursorPaginate(50);
+        return view('guest.blogs', compact('blogs'));
+    }
+
     public function show_view($slug)
     {
         $car = Car::with('Category', 'Brand', 'Images')->where('slug', $slug)->limit(1)->first();
         if (!$car) abort(404);
         return view('guest.show', compact('car'));
+    }
+
+    public function blog_view($slug)
+    {
+        $blog = Blog::with('Image')->where('slug', $slug)->limit(1)->first();
+        if (!$blog) abort(404);
+        return view('guest.blog', compact('blog'));
     }
 }

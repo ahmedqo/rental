@@ -18,7 +18,7 @@ function Slider({
         const style = document.createElement("style");
         style.id = "ui-carousel-style";
         style.textContent =
-            ".ui-carousel>ul{margin:0;padding:0;display:grid;overflow-x:auto;align-items:start;scrollbar-width:none;grid-auto-flow:column;scroll-behavior:smooth;scroll-snap-type:x mandatory;}.ui-carousel>ul::-webkit-scrollbar{display:none;}.ui-carousel>ul.dragging{scroll-behavior:auto;scroll-snap-type:none;}.ui-carousel>ul.dragging>li{cursor:grab;user-select:none;}.ui-carousel>ul>li{scroll-snap-align:start;list-style: none;}";
+            ".ui-hide{display:none!important}.ui-carousel>ul{margin:0;padding:0;display:grid;overflow-x:auto;align-items:start;scrollbar-width:none;grid-auto-flow:column;scroll-behavior:smooth;scroll-snap-type:x mandatory;}.ui-carousel>ul::-webkit-scrollbar{display:none;}.ui-carousel>ul.dragging{scroll-behavior:auto;scroll-snap-type:none;}.ui-carousel>ul.dragging>li{cursor:grab;user-select:none;}.ui-carousel>ul>li{scroll-snap-align:start;list-style: none;}";
         document.head.appendChild(style);
     }
 
@@ -26,7 +26,7 @@ function Slider({
     const carousel = root.querySelector("ul");
     const children = [...carousel.children];
 
-    root.querySelectorAll("ul>li img").forEach((img) => {
+    root.querySelectorAll("ul>li img,ul>li a").forEach((img) => {
         img.draggable = false;
     });
 

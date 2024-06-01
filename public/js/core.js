@@ -93,6 +93,8 @@ Neo.Locales.fr = {
     "Electric": "Électrique",
     "Hybrid": "Hybride",
     "Hydrogen": "Hydrogène",
+
+    "Title": "Titre",
 }
 
 Neo.Locales.it = {
@@ -163,6 +165,8 @@ Neo.Locales.it = {
     "Electric": "Elettrico",
     "Hybrid": "Ibrido",
     "Hydrogen": "Idrogeno",
+
+    "Title": "Titolo",
 }
 
 Neo.Locales.sp = {
@@ -233,6 +237,8 @@ Neo.Locales.sp = {
     "Electric": "Eléctrico",
     "Hybrid": "Híbrido",
     "Hydrogen": "Hidrógeno",
+
+    "Title": "Título",
 }
 
 const Locale = document.documentElement.lang,
@@ -1032,6 +1038,181 @@ const Locale = document.documentElement.lang,
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
         }],
+        blogs: ({
+            Csrf,
+            Patch,
+            Clear
+        }) => [{
+            name: "id",
+            text: Neo.Helper.trans("Id"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) =>
+                `<span style="font-weight: 500; text-align: center; display: block;">#${row.id}</span>`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "image",
+            text: Neo.Helper.trans('Image'),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => `<img part="image" style="display: block;width: 4rem;aspect-ratio: 1/1;object-fit: contain;object-position: center;background: rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return BasePath + row.image.storage;
+            },
+        }, {
+            name: "title_en",
+            text: Neo.Helper.trans('Title') + " (en)",
+            visible: Locale === "en",
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.title_en),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "title_fr",
+            text: Neo.Helper.trans('Title') + " (fr)",
+            visible: Locale === "fr",
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.title_fr),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "title_it",
+            text: Neo.Helper.trans('Title') + " (it)",
+            visible: Locale === "it",
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.title_it),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "title_sp",
+            text: Neo.Helper.trans('Title') + " (sp)",
+            visible: Locale === "sp",
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.title_sp),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "details_en",
+            text: Neo.Helper.trans('Details') + " (en)",
+            visible: false,
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => row.details_en ? Neo.Helper.Str.capitalize(row.details_en) : empty(),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "details_fr",
+            text: Neo.Helper.trans('Details') + " (fr)",
+            visible: false,
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => row.details_fr ? Neo.Helper.Str.capitalize(row.details_fr) : empty(),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "details_it",
+            text: Neo.Helper.trans('Details') + " (it)",
+            visible: false,
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => row.details_it ? Neo.Helper.Str.capitalize(row.details_it) : empty(),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "details_sp",
+            text: Neo.Helper.trans('Details') + " (sp)",
+            visible: false,
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => row.details_sp ? Neo.Helper.Str.capitalize(row.details_sp) : empty(),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "action",
+            text: Neo.Helper.trans("Actions"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            bodyRender: (row) => {
+                return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
+            },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyPdfRender: () => empty(),
+            bodyCsvRender: () => empty(),
+        }],
     }
 
 Neo.load(function() {
@@ -1173,4 +1354,29 @@ function CarInitializer(List = [], imageTransfer) {
             });
         });
     });
+}
+
+function BlogInitializer(data) {
+    ["#content_en", "#content_fr", "#content_it", "#content_sp"].forEach(editor => {
+        new RichTextEditor(editor);
+    });
+
+    document.querySelectorAll("[rte-cmd-name=fullscreenenter]").forEach(el => {
+        el.addEventListener("click", e => {
+            Neo.Wrapper.rules.closed();
+        })
+    });
+
+    document.querySelectorAll("[rte-cmd-name=fullscreenexit]").forEach(el => {
+        el.addEventListener("click", e => {
+            Neo.Wrapper.rules.opened();
+        })
+    });
+
+    if (data) {
+        const imageTransfer = document.querySelector("neo-imagetransfer");
+        imageTransfer.default = [{
+            src: data
+        }];
+    }
 }

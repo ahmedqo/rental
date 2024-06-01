@@ -4,15 +4,12 @@ namespace App\Models;
 
 use App\Functions\Core;
 use App\Traits\HasSearch;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Sitemap\Contracts\Sitemapable;
-use Spatie\Sitemap\Tags\Url;
 
-class Category extends Model implements Sitemapable
+class Category extends Model
 {
     use HasFactory, HasSearch;
 
@@ -55,14 +52,6 @@ class Category extends Model implements Sitemapable
             Storage::disk('public')->delete(implode('/', [Image::$STORAGE, $Self->Image->storage]));
             $Self->Image->delete();
         });
-    }
-
-    public function toSitemapTag(): Url | string | array
-    {
-        return Url::create(url(route('views.guest.product', ['category' => $this->slug]), [], true))
-            ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
-            ->setPriority(0.1);
     }
 
     public function getNameAttribute()

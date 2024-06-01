@@ -149,7 +149,7 @@ neo-datavisualizer::part(search-wrapper) {
 
 .ui-grid {
     scroll-snap-type: x mandatory;
-    grid-auto-columns: 80%;
+    grid-auto-columns: 70%;
     grid-auto-flow: column;
     overflow-x: auto;
 }
@@ -178,7 +178,7 @@ neo-select.custom:focus-within>svg {
 
 .menu-dropdown::part(modal) {
     align-items: center;
-    padding: 3rem;
+    padding: 4rem;
 }
 
 input[type="range"] {
@@ -219,6 +219,19 @@ input[type="range"]::-webkit-slider-runnable-track {
 .revert *::after,
 .revert *::before {
     all: revert;
+    max-width: 100%;
+}
+
+@media (min-width:640px) {
+    .ui-grid {
+        grid-auto-columns: 60%;
+    }
+}
+
+@media (min-width:768px) {
+    .ui-grid {
+        grid-auto-columns: 40%;
+    }
 }
 
 @media (min-width: 1024px) {
