@@ -125,25 +125,19 @@
             </h3>
             <ul class="w-full flex flex-col gap-2 items-start">
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="" aria-label="{{ env('APP_NAME') }} terms and conditions"
+                    <a href="{{ route('views.guest.terms') }}" aria-label="{{ env('APP_NAME') }} terms and conditions"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('Terms And Conditions') }}
                     </a>
                 </li>
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="" aria-label="{{ env('APP_NAME') }} privacy policy"
+                    <a href="{{ route('views.guest.privacy') }}" aria-label="{{ env('APP_NAME') }} privacy policy"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('Privacy Policy') }}
                     </a>
                 </li>
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="" aria-label="{{ env('APP_NAME') }} return policy"
-                        class="flex-1 text-x-white text-sm font-x-thin text-start">
-                        {{ __('Return Policy') }}
-                    </a>
-                </li>
-                <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="" aria-label="{{ env('APP_NAME') }} faqs"
+                    <a href="{{ route('views.guest.faqs') }}" aria-label="{{ env('APP_NAME') }} faqs"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('FAQs') }}
                     </a>

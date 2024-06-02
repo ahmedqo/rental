@@ -109,7 +109,24 @@ class GuestController extends Controller
         $data = [
             'title' => __('Privacy Policy'),
             'link' => route('views.guest.privacy'),
-            'tabs' => []
+            'tabs' => [
+                [
+                    'title' => __('Personal Identification Information'),
+                    'content' => __('This may include your name, email address, phone number, postal address, and other similar information.')
+                ], [
+                    'title' => __('Payment Information'),
+                    'content' => __('If you make a reservation or payment through our website, we may collect payment information such as credit card details, billing address, and other financial information necessary to process your transaction securely.')
+                ], [
+                    'title' => __('Vehicle Preferences and Rental History'),
+                    'content' => __('We may collect information about your vehicle preferences, rental history, and other details related to your interactions with our services.')
+                ], [
+                    'title' => __('Data Security'),
+                    'content' => __('We take the security of your personal information seriously and employ appropriate technical and organizational measures to protect it against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.')
+                ], [
+                    'title' => __('Updates to Privacy Policy'),
+                    'content' => __('We reserve the right to update this Privacy Policy at any time to reflect changes in our practices or legal requirements. We encourage you to review this Privacy Policy periodically for any updates. Your continued use of our website or services after any changes indicates your acceptance of the updated Privacy Policy.')
+                ],
+            ]
         ];
         return view('guest.info', compact('data'));
     }
