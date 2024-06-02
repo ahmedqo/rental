@@ -325,7 +325,7 @@
                         </neo-button>
                     </form>
                     <div class="lg:col-span-3">
-                        <ul class="w-full grid grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
+                        <ul class="w-full grid grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
                             @foreach ($cars as $car)
                                 @for ($i = 0; $i < 5; $i++)
                                     <li
