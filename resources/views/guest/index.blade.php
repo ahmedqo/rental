@@ -386,11 +386,11 @@
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">
                             <li class="w-full">
                                 <a href="" class="w-full flex flex-wrap gap-4 items-center">
-                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
-                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                    <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
                                             <path
-                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                                d="M479.511-83Q468-83 454.91-87q-13.089-4-22.91-13-48-38-99.503-89.226t-94.5-109.5Q195-357 167-421.938 139-486.875 139-555q0-159.719 103.253-253.86Q345.506-903 480-903q134.494 0 238.247 94.14Q822-714.719 822-555q0 68.125-28.5 133.062Q765-357 722.003-298.726t-94.5 109.5Q576-138 530-100q-11.955 9-25.466 13-13.512 4-25.023 4Zm.622-401Q512-484 534.5-506.133q22.5-22.133 22.5-54T534.367-614.5q-22.633-22.5-54.5-22.5T426-614.367q-22 22.633-22 54.5T426.133-506q22.133 22 54 22Z" />
                                         </svg>
                                     </span>
                                     <ul class="w-0 flex-[1] max-w-max flex flex-col">
@@ -409,11 +409,11 @@
                             </li>
                             <li class="w-full">
                                 <a href="" class="w-full flex flex-wrap gap-4 items-center">
-                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
-                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                    <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
                                             <path
-                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                                d="M479-59q-85.352 0-162.749-32.73-77.398-32.731-134.804-89.841Q124.04-238.68 91.52-315.966 59-393.251 59-479.946q0-86.694 32.73-163.947 32.731-77.254 89.683-134.713 56.953-57.459 134.312-90.427Q393.084-902 479.862-902t164.15 33.101q77.371 33.1 134.756 90.13 57.384 57.029 90.308 134.647Q902-566.504 902-481v50.504q0 61.144-44.946 102.82Q812.107-286 750-286q-41.33 0-74.165-19Q643-324 626-358q-25 37-63.808 54.5T480.306-286q-80.721 0-138.014-56.561Q285-399.123 285-480.481q0-82.167 57.013-138.843Q399.026-676 479.625-676q80.6 0 137.987 56.68Q675-562.64 675-480v43.933q0 30.964 22.067 51.015Q719.133-365 749.977-365q29.41 0 50.216-20.052Q821-405.103 821-436.067V-481q0-141.7-99.703-240.85Q621.595-821 479.819-821q-141.775 0-241.297 99.703Q139-621.595 139-479.819q0 141.775 99.15 241.297Q337.3-139 479-139h176q17.15 0 28.075 11.479T694-99.017q0 17.649-10.925 28.833Q672.15-59 655-59H479Zm1.353-306Q527-365 561.5-399.544q34.5-34.544 34.5-80.75Q596-528 561.147-562.5t-81.5-34.5Q433-597 398.5-562.206q-34.5 34.794-34.5 82.5 0 46.206 34.853 80.456t81.5 34.25Z" />
                                         </svg>
                                     </span>
                                     <ul class="w-0 flex-[1] max-w-max flex flex-col">
@@ -432,11 +432,11 @@
                             </li>
                             <li class="w-full">
                                 <a href="" class="w-full flex flex-wrap gap-4 items-center">
-                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
-                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                    <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
                                             <path
-                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                                d="M793-99q-121 0-244.5-58T321-319Q216-423 157.5-548T99-792q0-29 20-49.5t49-20.5h135q31 0 51 16.5t26 47.5l27 106q2 26-3.5 47T383-611l-102 94q20 36 46.5 68.5T385-387q33 36 67 61.5t69 44.5l99-99q16-18 37.5-24.5t46.5-.5l95 22q30 9 46.5 29t16.5 50v136q0 29-20.5 49T793-99Z" />
                                         </svg>
                                     </span>
                                     <ul class="w-0 flex-[1] max-w-max flex flex-col">
