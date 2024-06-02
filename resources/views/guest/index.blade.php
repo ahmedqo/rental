@@ -105,8 +105,8 @@
                 </div>
                 <div class="w-full flex flex-wrap items-center">
                     <button id="ui-car-prev" aria-label="prev_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -me-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-black" viewBox="0 -960 960 960"
+                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -me-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                        <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
                             fill="currentColor">
                             <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
                         </svg>
@@ -209,8 +209,8 @@
                         </ul>
                     </div>
                     <button id="ui-car-next" aria-label="next_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -ms-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-black" viewBox="0 -960 960 960"
+                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -ms-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                        <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
                             fill="currentColor">
                             <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
                         </svg>
@@ -235,11 +235,11 @@
         <div class="w-full mx-auto container p-4 my-6 lg:my-10">
             <div class="flex flex-col gap-6 lg:gap-10">
                 <div class="flex flex-col">
-                    {{-- <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
-                        {{ __('EXPLORE AWSOME CARS') }}
-                    </h2> --}}
-                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                    <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
                         {{ __('WHY CHOOSE US') }}
+                    </h2>
+                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                        {{ __('EXCELLENCE IS OUR STANDARD') }}
                     </h3>
                 </div>
                 <ul class="w-full grid grid-rows-1 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -315,8 +315,8 @@
                 </div>
                 <div class="w-full flex flex-wrap items-center">
                     <button id="ui-blog-prev" aria-label="prev_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -me-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-black" viewBox="0 -960 960 960"
+                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-4 outline-x-white bg-x-white -me-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
+                        <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
                             fill="currentColor">
                             <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
                         </svg>
@@ -356,8 +356,8 @@
                         </ul>
                     </div>
                     <button id="ui-blog-next" aria-label="next_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -ms-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-black" viewBox="0 -960 960 960"
+                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-4 outline-x-white bg-x-white -ms-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
+                        <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
                             fill="currentColor">
                             <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
                         </svg>
