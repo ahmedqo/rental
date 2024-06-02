@@ -231,7 +231,8 @@
             </div>
         </div>
     </section>
-    <section class="my-8 lg:my-10 bg-x-light">
+    <section class="my-8 lg:my-10 bg-x-light bg-center bg-cover bg-no-repeat"
+        style="background-image: url({{ asset('img/pattern.png') }}?v={{ env('APP_VERSION') }})">
         <div class="w-full mx-auto container p-4 my-6 lg:my-10">
             <div class="flex flex-col gap-6 lg:gap-10">
                 <div class="flex flex-col">
@@ -280,8 +281,7 @@
                         ];
                     @endphp
                     @foreach ($array as $arr)
-                        <li class="w-full flex flex-col items-center md:items-start gap-1 p-4 rounded-x-thin bg-x-white bg-center bg-cover bg-no-repeat"
-                            style="background-image: url({{ asset('img/pattern.png') }}?v={{ env('APP_VERSION') }})">
+                        <li class="w-full flex flex-col items-center md:items-start gap-1 p-4 rounded-x-thin bg-x-white">
                             <span
                                 class="w-14 h-14 flex items-center justify-center rounded-x-thin bg-x-acent bg-opacity-30">
                                 <svg slot="end" class="block w-8 h-8 pointer-events-none text-x-prime"
