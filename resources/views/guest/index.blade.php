@@ -380,7 +380,7 @@
             next: document.querySelector("#ui-car-next"),
             opts: {
                 drag: true,
-                gaps: 16,
+                gaps: 24,
             }
         }).lg({
             cols: 2,
@@ -396,7 +396,7 @@
             next: document.querySelector("#ui-blog-next"),
             opts: {
                 drag: true,
-                gaps: 16,
+                gaps: 24,
             }
         }).sm({
             cols: 2,
