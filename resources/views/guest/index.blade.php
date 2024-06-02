@@ -284,8 +284,8 @@
                         <li class="w-full flex flex-col items-center md:items-start gap-1 p-4 rounded-x-thin bg-x-white">
                             <span
                                 class="w-14 h-14 flex items-center justify-center rounded-x-thin bg-x-acent bg-opacity-30">
-                                <svg slot="end" class="block w-8 h-8 pointer-events-none text-x-prime"
-                                    viewBox="0 -960 960 960" fill="currentColor">
+                                <svg class="block w-8 h-8 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
+                                    fill="currentColor">
                                     <path
                                         d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
                                 </svg>
@@ -362,6 +362,99 @@
                             <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
                         </svg>
                     </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="my-8 lg:my-10">
+        <div class="w-full mx-auto container p-4">
+            <div class="flex flex-col gap-6 lg:gap-10">
+                <div class="flex flex-col">
+                    <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
+                        {{ __('CONTACT US') }}
+                    </h2>
+                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                        {{ __('GET IN TOUCH') }}
+                    </h3>
+                </div>
+                <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
+                    <div class="w-full aspect-video rounded-x-thin bg-x-shade"></div>
+                    <div class="w-full flex flex-col gap-6 lg:gap-8">
+                        <p class="text-lg lg:text-xl text-x-black text-opacity-40 font-normal">
+                            {{ __('We\'re here for you and eager to help! Your satisfaction is our top priority. Contact us anytime, we can\'t wait to connect with you.') }}
+                        </p>
+                        <ul class="w-full flex flex-col gap-4 lg:gap-6">
+                            <li class="w-full">
+                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                            viewBox="0 -960 960 960" fill="currentColor">
+                                            <path
+                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                        </svg>
+                                    </span>
+                                    <ul class="w-0 flex-[1] max-w-max flex flex-col">
+                                        <li class="w-full">
+                                            <h4 class="text-lg font-x-huge text-x-black">
+                                                {{ __('Address') }}
+                                            </h4>
+                                        </li>
+                                        <li class="w-full">
+                                            <p class="text-sm font-semibold text-x-black text-opacity-60">
+                                                XXX XXXX XXXXX XXXXX XXXXX
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <li class="w-full">
+                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                            viewBox="0 -960 960 960" fill="currentColor">
+                                            <path
+                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                        </svg>
+                                    </span>
+                                    <ul class="w-0 flex-[1] max-w-max flex flex-col">
+                                        <li class="w-full">
+                                            <h4 class="text-lg font-x-huge text-x-black">
+                                                {{ __('Email') }}
+                                            </h4>
+                                        </li>
+                                        <li class="w-full">
+                                            <p class="text-sm font-semibold text-x-black text-opacity-60">
+                                                test@test.com
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <li class="w-full">
+                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                    <span class="flex items-center justify-center p-2 bg-x-prime rounded-x-thin">
+                                        <svg class="block w-8 h-8 pointer-events-none text-x-white"
+                                            viewBox="0 -960 960 960" fill="currentColor">
+                                            <path
+                                                d="M261-167-5-433l95-95 172 171 95 95-96 95Zm240-32L232-467l97-95 172 171 369-369 96 96-465 465Zm-7-280-95-95 186-186 95 95-186 186Z" />
+                                        </svg>
+                                    </span>
+                                    <ul class="w-0 flex-[1] max-w-max flex flex-col">
+                                        <li class="w-full">
+                                            <h4 class="text-lg font-x-huge text-x-black">
+                                                {{ __('Phone') }}
+                                            </h4>
+                                        </li>
+                                        <li class="w-full">
+                                            <p class="text-sm font-semibold text-x-black text-opacity-60">
+                                                XXXXXXXXXX
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
