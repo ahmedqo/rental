@@ -84,6 +84,36 @@ class GuestController extends Controller
         return view('guest.blog', compact('blog'));
     }
 
+    public function faqs_view()
+    {
+        $data = [
+            'title' => __('FAQs'),
+            'link' => route('views.guest.faqs'),
+            'tabs' => []
+        ];
+        return view('guest.info', compact('data'));
+    }
+
+    public function terms_view()
+    {
+        $data = [
+            'title' => __('Terms And Conditions'),
+            'link' => route('views.guest.terms'),
+            'tabs' => []
+        ];
+        return view('guest.info', compact('data'));
+    }
+
+    public function privacy_view()
+    {
+        $data = [
+            'title' => __('Privacy Policy'),
+            'link' => route('views.guest.privacy'),
+            'tabs' => []
+        ];
+        return view('guest.info', compact('data'));
+    }
+
     public function order_action(Request $Request)
     {
         $validator = Validator::make($Request->all(), [

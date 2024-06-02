@@ -9,7 +9,7 @@
                 </svg>
             </button>
             <ul class="w-full flex flex-col p-2 gap-2">
-                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.blogs', __('Blogs')]] as $url)
+                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.faqs', __('FAQs')], ['views.guest.blogs', __('Blogs')]] as $url)
                     <li class="w-full flex items-center justify-center">
                         <a href="{{ route($url[0]) }}"
                             class="flex px-10 py-1 w-max h-full items-center font-x-thin text-base relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">
@@ -25,7 +25,7 @@
         </a>
         <nav class="hidden w-max lg:flex items-center ms-auto">
             <ul class="flex w-max items-center">
-                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.blogs', __('Blogs')]] as $url)
+                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.faqs', __('FAQs')], ['views.guest.blogs', __('Blogs')]] as $url)
                     <li class="w-max h-full">
                         <a href="{{ route($url[0]) }}"
                             class="flex px-4 py-1 w-max h-full items-center font-x-thin text-base relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">
