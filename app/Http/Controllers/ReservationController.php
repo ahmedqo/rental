@@ -90,7 +90,7 @@ class ReservationController extends Controller
             'email' => ['required', 'email'],
             'phone' => ['required', 'string'],
             'location' => ['required', 'string'],
-            'from_date' => ['required', 'date', 'after_or_equal:today'],
+            'from_date' => ['required', 'date'],
             'to_date' => ['required', 'date', 'after:from_date'],
             'from_time' => ['required', 'string'],
             'to_time' => ['required', 'string'],

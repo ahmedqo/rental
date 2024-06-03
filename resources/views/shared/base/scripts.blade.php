@@ -8,6 +8,11 @@
             Neo.getComponent("neo-datavisualizer").globals = [
                 "{{ asset('css/print.min.css') }}?v={{ env('APP_VERSION') }}"
             ];
+            Neo.getComponent("neo-printer").globals = [
+                "{{ asset('css/print.min.css') }}?v={{ env('APP_VERSION') }}",
+                "{{ asset('css/index.min.css') }}?v={{ env('APP_VERSION') }}",
+                "{{ asset('css/app.min.css') }}?v={{ env('APP_VERSION') }}",
+            ];
         });
     </script>
 @endif

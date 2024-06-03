@@ -106,6 +106,8 @@ Neo.Locales.fr = {
     "To": "À",
     "Total": "Total",
     "Profit": "Profit",
+    "Period": "Période",
+    "Days": "Jours",
 }
 
 Neo.Locales.it = {
@@ -189,6 +191,8 @@ Neo.Locales.it = {
     "To": "A",
     "Total": "Totale",
     "Profit": "Profitto",
+    "Period": "Periodo",
+    "Days": "Giorni",
 }
 
 Neo.Locales.sp = {
@@ -272,6 +276,8 @@ Neo.Locales.sp = {
     "To": "Hasta",
     "Total": "Total",
     "Profit": "Beneficio",
+    "Period": "Período",
+    "Days": "Días",
 }
 
 const Locale = document.documentElement.lang,
@@ -758,6 +764,7 @@ const Locale = document.documentElement.lang,
         cars: ({
             Csrf,
             Patch,
+            Scene,
             Clear
         }) => [{
             name: "id",
@@ -1060,7 +1067,7 @@ const Locale = document.documentElement.lang,
             headStyle: { width: 20, textAlign: "center" },
             bodyStyle: { width: 20, textAlign: "center" },
             bodyRender: (row) => {
-                return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
+                return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"scene="${Scene}"clear="${Clear}"></action-tools>`;
             },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
@@ -1070,6 +1077,165 @@ const Locale = document.documentElement.lang,
             },
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
+        }],
+        car: () => [{
+            name: "id",
+            text: Neo.Helper.trans("Id"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) =>
+                `<span style="font-weight: 500; text-align: center; display: block;">#${row.id}</span>`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "Name",
+            text: Neo.Helper.trans("Name"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "phone",
+            text: Neo.Helper.trans("Phone"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+        }, {
+            name: "email",
+            text: Neo.Helper.trans("Email"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            visible: false,
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.email),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "location",
+            text: Neo.Helper.trans("Location"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            visible: false,
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.location),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "from",
+            text: Neo.Helper.trans("From"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+        }, {
+            name: "to",
+            text: Neo.Helper.trans("To"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+        }, {
+            name: "period",
+            text: Neo.Helper.trans("Period"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => row.period + " " + Neo.Helper.trans("Days"),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "total",
+            text: Neo.Helper.trans("Total"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            visible: false,
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.total, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "charges",
+            text: Neo.Helper.trans("Charges"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            visible: false,
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(JSON.parse(row.charges).total, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "profit",
+            text: Neo.Helper.trans("Profit"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.total - JSON.parse(row.charges).total, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "status",
+            text: Neo.Helper.trans("Status"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.status),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
         }],
         reservations: ({
             Csrf,
@@ -1170,6 +1336,21 @@ const Locale = document.documentElement.lang,
                 color: Color
             },
         }, {
+            name: "period",
+            text: Neo.Helper.trans("Period"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => row.period + " " + Neo.Helper.trans("Days"),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
             name: "total",
             text: Neo.Helper.trans("Total"),
             headStyle: { width: 100, textAlign: "center", },
@@ -1216,7 +1397,7 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "status",
-            text: Neo.Helper.trans("Stato"),
+            text: Neo.Helper.trans("Status"),
             headStyle: { width: 100, textAlign: "center", },
             bodyStyle: { width: 100, textAlign: "center", },
             headPdfStyle: function() {
@@ -1421,7 +1602,6 @@ const Locale = document.documentElement.lang,
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
         }],
-
     }
 
 Neo.load(function() {

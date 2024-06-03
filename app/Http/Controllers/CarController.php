@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Functions\Core;
 use App\Models\Car;
 use App\Models\Image;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -32,9 +34,50 @@ class CarController extends Controller
         return view('car.patch', compact('data'));
     }
 
+    public function scene_view($id)
+    {
+        $data = Car::with('Images')->with('Brand')->with('Category')->findorfail($id);
+
+        [$startDate, $endDate, $columns] = Core::getDates();
+
+        $reservations = Reservation::where('car', $id)->where(function ($query) use ($startDate, $endDate) {
+            $query->where('from', '<=', $endDate)
+                ->where('to', '>=', $startDate);
+        })->get();
+
+        $completed = $reservations->where('status', 'completed');
+        $others =  $reservations->where('status', '!=', 'completed');
+
+        $count = [$completed->count(), $others->count()];
+        $work = [$completed->sum('period'), $others->sum('period')];
+        $money = [Core::formatNumber($completed->sum('total')), Core::formatNumber($others->sum('total'))];
+        $charges = [Core::formatNumber($completed->reduce(function ($carry, $curr) {
+            return $carry + json_decode($curr->charges, true)['total'];
+        }, 0)), Core::formatNumber($others->reduce(function ($carry, $curr) {
+            return $carry + json_decode($curr->charges, true)['total'];
+        }, 0))];
+
+        return view('car.scene', compact('data', 'count', 'work', 'money', 'charges'));
+    }
+
     public function search_action(Request $Request)
     {
         $data = Car::with('Images')->with('Brand')->with('Category')->orderBy('id', 'DESC');
+        if ($Request->search) {
+            $data = $data->search(urldecode($Request->search));
+        }
+        $data = $data->cursorPaginate(50);
+        return response()->json($data);
+    }
+
+    public function reservations_action(Request $Request, $id)
+    {
+        [$startDate, $endDate, $columns] = Core::getDates();
+
+        $data = Reservation::where('car', $id)->where(function ($query) use ($startDate, $endDate) {
+            $query->where('from', '<=', $endDate)
+                ->where('to', '>=', $startDate);
+        });
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }

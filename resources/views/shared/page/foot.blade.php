@@ -6,7 +6,7 @@
     </div>
     <div id="content">
         <h3>
-            {{ url(request()->getHost(), [], true) }}
+            {{ url(env('APP_URL'), [], true) }}
         </h3>
     </div>
 </div>

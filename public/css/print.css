@@ -156,3 +156,11 @@ html[lang="ar"] *::before {
     background-color: rgb(var(--p-prime));
     flex: 3;
 }
+
+#main-title {
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}

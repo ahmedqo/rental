@@ -21,6 +21,7 @@
         TableVisualizer(document.querySelector("neo-datavisualizer"), "cars", {
             Search: "{{ route('actions.cars.search') }}",
             Patch: "{{ route('views.cars.patch', 'XXX') }}",
+            Scene: "{{ route('views.cars.scene', 'XXX') }}",
             Clear: "{{ route('actions.cars.clear', 'XXX') }}",
             Csrf: "{{ csrf_token() }}",
         });
