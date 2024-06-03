@@ -287,6 +287,115 @@ const Locale = document.documentElement.lang,
     Color = "rgb(" + getComputedStyle(document.documentElement)
     .getPropertyValue("--white") + ")",
     COLS = {
+        most: () => [{
+            name: "id",
+            text: Neo.Helper.trans("Id"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) =>
+                `<span style="font-weight: 500; text-align: center; display: block;">#${row.id}</span>`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "image",
+            text: Neo.Helper.trans('Image'),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => `<img part="image" style="margin:auto;display:block;width:4rem;aspect-ratio:1/1;object-fit:contain;object-position:center;background:rgb(209 209 209);" src="${BasePath + row.storage}" />`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return BasePath + row.image.storage;
+            },
+        }, {
+            name: "name",
+            text: Neo.Helper.trans('Name'),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "price",
+            text: Neo.Helper.trans("Price"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.price, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "profit",
+            text: Neo.Helper.trans("Profit"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.profit, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "charges",
+            text: Neo.Helper.trans("Charges"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.charges, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "period",
+            text: Neo.Helper.trans("Period"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => row.period + " " + Neo.Helper.trans("Days"),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }],
         users: ({
             Csrf,
             Patch,
@@ -442,7 +551,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => `<img part="image" style="display: block;width: 4rem;aspect-ratio: 1/1;object-fit: contain;object-position: center;background: rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
+            bodyRender: (row) => `<img part="image" style="margin:auto;display:block;width:4rem;aspect-ratio:1/1;object-fit:contain;object-position:center;background:rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -617,7 +726,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => `<img part="image" style="display: block;width: 4rem;aspect-ratio: 1/1;object-fit: contain;object-position: center;background: rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
+            bodyRender: (row) => `<img part="image" style="margin:auto;display:block;width:4rem;aspect-ratio:1/1;object-fit:contain;object-position:center;background:rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -793,7 +902,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => `<img part="image" style="display: block;width: 4rem;aspect-ratio: 1/1;object-fit: contain;object-position: center;background: rgb(209 209 209);" src="${BasePath + row.images[0].storage}" />`,
+            bodyRender: (row) => `<img part="image" style="margin:auto;display:block;width:4rem;aspect-ratio:1/1;object-fit:contain;object-position:center;background:rgb(209 209 209);" src="${BasePath + row.images[0].storage}" />`,
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1458,7 +1567,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => `<img part="image" style="display: block;width: 4rem;aspect-ratio: 1/1;object-fit: contain;object-position: center;background: rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
+            bodyRender: (row) => `<img part="image" style="margin:auto;display:block;width:4rem;aspect-ratio:1/1;object-fit:contain;object-position:center;background:rgb(209 209 209);" src="${BasePath + row.image.storage}" />`,
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },

@@ -67,5 +67,16 @@
                 </li>
             </ul>
         </div>
+        <neo-datavisualizer print filter download title="{{ __('Popular Cars') }}">
+            @include('shared.page.print')
+        </neo-datavisualizer>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        TableVisualizer(document.querySelector("neo-datavisualizer"), "most", {
+            Search: "{{ route('actions.core.most') }}",
+        });
+    </script>
 @endsection
