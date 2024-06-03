@@ -386,7 +386,8 @@
                         </p>
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">
                             <li class="w-full">
-                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                <a href="" aria-label="map_location"
+                                    class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
                                         <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
@@ -409,7 +410,8 @@
                                 </a>
                             </li>
                             <li class="w-full">
-                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                <a href="mailto:" aria-label="email_address"
+                                    class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
                                         <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
@@ -432,7 +434,8 @@
                                 </a>
                             </li>
                             <li class="w-full">
-                                <a href="" class="w-full flex flex-wrap gap-4 items-center">
+                                <a href="tel:" aria-label="phone_number"
+                                    class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
                                         <svg class="block w-5 h-5 pointer-events-none text-x-white"
                                             viewBox="0 -960 960 960" fill="currentColor">
@@ -463,6 +466,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/neo/plugins/fields.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @if (!Core::lang('en'))
         <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>

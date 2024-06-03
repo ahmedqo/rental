@@ -518,6 +518,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/neo/plugins/fields.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @if (!Core::lang('en'))
         <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @endif

@@ -81,18 +81,6 @@
 @endsection
 
 @section('scripts')
-    @if (!Core::lang('en'))
-        <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
-    @endif
-    <script>
-        const tabs = document.querySelectorAll(".tabs");
-        tabs.forEach((tab) => {
-            tab.querySelector("button").addEventListener("click", () => {
-                tabs.forEach(t => {
-                    t.classList.remove("is-open");
-                });
-                tab.classList.add("is-open");
-            });
-        });
-    </script>
+    <script src="{{ asset('js/neo/plugins/explore.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    <script src="{{ asset('js/info.min.js') }}?v={{ env('APP_VERSION') }}"></script>
 @endsection

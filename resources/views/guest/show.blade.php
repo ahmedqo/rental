@@ -308,6 +308,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/neo/plugins/fields.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @if ($car->Images->count() > 1)
         <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @endif
