@@ -105,6 +105,7 @@ Neo.Locales.fr = {
     "From": "De",
     "To": "À",
     "Total": "Total",
+    "Profit": "Profit",
 }
 
 Neo.Locales.it = {
@@ -187,6 +188,7 @@ Neo.Locales.it = {
     "From": "Da",
     "To": "A",
     "Total": "Totale",
+    "Profit": "Profitto",
 }
 
 Neo.Locales.sp = {
@@ -269,6 +271,7 @@ Neo.Locales.sp = {
     "From": "Desde",
     "To": "Hasta",
     "Total": "Total",
+    "Profit": "Beneficio",
 }
 
 const Locale = document.documentElement.lang,
@@ -1068,7 +1071,7 @@ const Locale = document.documentElement.lang,
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
         }],
-        orders: ({
+        reservations: ({
             Csrf,
             Patch,
             Clear
@@ -1193,6 +1196,21 @@ const Locale = document.documentElement.lang,
                 return this.bodyStyle;
             },
             bodyRender: (row) => Neo.Helper.Str.money(JSON.parse(row.charges).total, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "profit",
+            text: Neo.Helper.trans("Profit"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(row.total - JSON.parse(row.charges).total, 3),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1572,7 +1590,7 @@ function BlogInitializer(data) {
     }
 }
 
-function OrderInitializer({ Search }, data) {
+function ReservationInitializer({ Search }, data) {
     const auto = document.querySelector("neo-autocomplete"),
         value = document.querySelector("#charge_value"),
         trigger = document.querySelector("#charge_trigger"),

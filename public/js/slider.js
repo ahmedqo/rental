@@ -155,12 +155,24 @@ function Slider({
         });
     };
 
+    const scrollArrow = () => {
+        const _prev = rtl ? carousel.scrollLeft < 0 : carousel.scrollLeft > 0,
+            _next = carousel.scrollWidth - (carousel.scrollLeft * (rtl ? -1 : 1)) - carousel.clientWidth > 1;
+
+        setTimeout(() => {
+            prev && prev.classList[_prev ? "remove" : "add"]("ui-hide");
+            next && next.classList[_next ? "remove" : "add"]("ui-hide");
+        }, 250);
+    }
+
     prev && prev.addEventListener("click", prevItem);
 
     next && next.addEventListener("click", nextItem);
 
     window.addEventListener("resize", exec);
+    carousel.addEventListener("scroll", scrollArrow);
 
+    scrollArrow();
     setTimeout(() => {
         exec();
         carousel.style.scrollBehavior = "unset";

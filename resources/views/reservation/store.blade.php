@@ -1,13 +1,13 @@
 @extends('shared.core.base')
-@section('title', __('New Order'))
+@section('title', __('New Reservation'))
 
 @section('content')
     <div class="flex flex-col gap-2">
         <h1 class="text-center lg:text-start text-xl lg:text-2xl text-x-black font-x-thin">
-            {{ __('New Order') }}
+            {{ __('New Reservation') }}
         </h1>
         <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-6">
-            <form action="{{ route('actions.orders.store') }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('actions.reservations.store') }}" method="POST" enctype="multipart/form-data"
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 <input id="charge_value" type="hidden" name="charges" value='{"total":0,"items":[]}' />
@@ -86,7 +86,7 @@
 
 @section('scripts')
     <script>
-        OrderInitializer({
+        ReservationInitializer({
                 Search: "{{ route('actions.cars.search') }}"
             }
             @if (old('charges'))

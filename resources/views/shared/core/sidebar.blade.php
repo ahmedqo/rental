@@ -67,13 +67,13 @@
                     <hr class="border-x-shade">
                 </li>
                 <li class="w-full">
-                    <a href="{{ route('views.orders.index') }}"
-                        class="w-full flex flex-wrap gap-2 p-2 text-start text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::matchRoute('orders') ? '!bg-x-black' : '' }}">
+                    <a href="{{ route('views.reservations.index') }}"
+                        class="w-full flex flex-wrap gap-2 p-2 text-start text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::matchRoute('reservations') ? '!bg-x-black' : '' }}">
                         <svg class="block w-6 h-6 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
                             <path
                                 d="M250-34q-74 0-125-51T74-209.53V-384h123v-542h690v716q0 74-51 125T711-34H250Zm461.5-136q16.5 0 28-11.36Q751-192.71 751-209.5V-790H333v406h338v174q0 17 12 28.5t28.5 11.5ZM373-610v-116h338v116H373Zm0 156v-116h338v116H373Z" />
                         </svg>
-                        <span class="block flex-1 text-base">{{ __('Orders') }}</span>
+                        <span class="block flex-1 text-base">{{ __('Reservations') }}</span>
                     </a>
                 </li>
             </ul>

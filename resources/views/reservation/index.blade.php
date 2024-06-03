@@ -1,10 +1,11 @@
 @extends('shared.core.base')
-@section('title', __('Orders List'))
+@section('title', __('Reservations List'))
 
 @section('content')
     <div class="flex flex-col gap-2">
-        <neo-datavisualizer print search filter download title="{{ __('Orders List') }}">
-            <a slot="end" title="{{ __('Create') }}" href="{{ route('views.orders.store') }}" aria-label="create_page_link"
+        <neo-datavisualizer print search filter download title="{{ __('Reservations List') }}">
+            <a slot="end" title="{{ __('Create') }}" href="{{ route('views.reservations.store') }}"
+                aria-label="create_page_link"
                 class="block w-6 h-6 text-x-black outline-none relative isolate before:content-[''] before:rounded-x-thin before:absolute before:block before:w-[130%] before:h-[130%] before:-inset-[15%] before:-z-[1] before:!bg-opacity-40 hover:before:bg-x-shade focus:before:bg-x-shade focus-within:before:bg-x-shade">
                 <svg class="block w-6 h-6 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
                     <path
@@ -18,10 +19,10 @@
 
 @section('scripts')
     <script>
-        TableVisualizer(document.querySelector("neo-datavisualizer"), "orders", {
-            Search: "{{ route('actions.orders.search') }}",
-            Patch: "{{ route('views.orders.patch', 'XXX') }}",
-            Clear: "{{ route('actions.orders.clear', 'XXX') }}",
+        TableVisualizer(document.querySelector("neo-datavisualizer"), "reservations", {
+            Search: "{{ route('actions.reservations.search') }}",
+            Patch: "{{ route('views.reservations.patch', 'XXX') }}",
+            Clear: "{{ route('actions.reservations.clear', 'XXX') }}",
             Csrf: "{{ csrf_token() }}",
         });
     </script>

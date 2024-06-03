@@ -12,4 +12,4 @@ Route::get('/blogs/{slug}', [GuestController::class, 'blog_view'])->name('views.
 Route::get('/privacy_policy', [GuestController::class, 'privacy_view'])->name('views.guest.privacy');
 Route::get('/terms_and_condition', [GuestController::class, 'terms_view'])->name('views.guest.terms');
 
-Route::post('/order', [GuestController::class, 'order_action'])->name('actions.guest.order');
+Route::post('/reserve', [GuestController::class, 'reserve_action'])->name('actions.guest.reserve');

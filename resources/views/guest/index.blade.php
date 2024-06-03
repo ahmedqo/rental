@@ -92,29 +92,29 @@
             </div>
         </div>
     </section>
-    <section class="my-8 lg:my-10">
-        <div class="w-full mx-auto container p-4">
-            <div class="flex flex-col gap-6 lg:gap-10">
-                <div class="flex flex-col">
-                    <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
-                        {{ __('EXPLORE AWSOME CARS') }}
-                    </h2>
-                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
-                        {{ __('RECOMMENDED FOR YOU') }}
-                    </h3>
-                </div>
-                <div class="w-full flex flex-wrap items-center">
-                    <button id="ui-car-prev" aria-label="prev_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -me-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
-                            fill="currentColor">
-                            <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
-                        </svg>
-                    </button>
-                    <div id="ui-car-carousel" class="flex-[1] w-0">
-                        <ul>
-                            @foreach ($cars as $car)
-                                @for ($i = 0; $i < 5; $i++)
+    @if ($cars->count())
+        <section class="my-8 lg:my-10">
+            <div class="w-full mx-auto container p-4">
+                <div class="flex flex-col gap-6 lg:gap-10">
+                    <div class="flex flex-col">
+                        <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
+                            {{ __('EXPLORE AWSOME CARS') }}
+                        </h2>
+                        <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                            {{ __('RECOMMENDED FOR YOU') }}
+                        </h3>
+                    </div>
+                    <div class="w-full flex flex-wrap items-center">
+                        <button id="ui-car-prev" aria-label="prev_arrow"
+                            class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -me-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                            <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
+                                fill="currentColor">
+                                <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
+                            </svg>
+                        </button>
+                        <div id="ui-car-carousel" class="flex-[1] w-0">
+                            <ul>
+                                @foreach ($cars as $car)
                                     <li class="w-full">
                                         <a href="{{ route('views.guest.show', $car->slug) }}" draggable="false"
                                             class="w-full flex flex-wrap gap-4 p-4 border border-x-shade rounded-x-thin">
@@ -204,35 +204,35 @@
                                             </ul>
                                         </a>
                                     </li>
-                                @endfor
-                            @endforeach
-                        </ul>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <button id="ui-car-next" aria-label="next_arrow"
+                            class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -ms-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                            <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
+                                fill="currentColor">
+                                <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
+                            </svg>
+                        </button>
                     </div>
-                    <button id="ui-car-next" aria-label="next_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-1 outline-x-prime bg-x-white -ms-2 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-prime" viewBox="0 -960 960 960"
-                            fill="currentColor">
-                            <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex flex-col items-center mt-2">
-                    <h4 class="text-lg text-x-black font-x-huge">
-                        {{ __('Don\'t see what you\'re looking for?') }}
-                    </h4>
-                    <h5 class="text-basse text-x-black font-normal">
-                        {{ __('See all car rentals') }}
-                    </h5>
-                    <a href="{{ route('views.guest.fleet') }}"
-                        class="w-max mx-auto block px-6 py-2 text-base text-x-prime font-x-huge border-2 border-x-prime border-opacity-60 rounded-full outline-none hover:bg-x-prime hover:bg-opacity-20 focus:bg-x-prime focus:bg-opacity-20 mt-4">
-                        {{ __('VIEW ALL CARS') }}
-                    </a>
+                    <div class="flex flex-col items-center mt-2">
+                        <h4 class="text-lg text-x-black font-x-huge">
+                            {{ __('Don\'t see what you\'re looking for?') }}
+                        </h4>
+                        <h5 class="text-basse text-x-black font-normal">
+                            {{ __('See all car rentals') }}
+                        </h5>
+                        <a href="{{ route('views.guest.fleet') }}"
+                            class="w-max mx-auto block px-6 py-2 text-base text-x-prime font-x-huge border-2 border-x-prime border-opacity-60 rounded-full outline-none hover:bg-x-prime hover:bg-opacity-20 focus:bg-x-prime focus:bg-opacity-20 mt-4">
+                            {{ __('VIEW ALL CARS') }}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="my-8 lg:my-10 bg-x-light bg-center bg-cover bg-no-repeat"
-        style="background-image: url({{ asset('img/pattern.png') }}?v={{ env('APP_VERSION') }})">
+        </section>
+    @endif
+    <section class="my-8 lg:my-10 bg-x-light bg-repeat"
+        style="background-image: url({{ asset('img/pattern-1.png') }}?v={{ env('APP_VERSION') }})">
         <div class="w-full mx-auto container p-4 my-6 lg:my-10">
             <div class="flex flex-col gap-6 lg:gap-10">
                 <div class="flex flex-col">
@@ -302,29 +302,29 @@
             </div>
         </div>
     </section>
-    <section class="my-8 lg:my-10">
-        <div class="w-full mx-auto container p-4">
-            <div class="flex flex-col gap-6 lg:gap-10">
-                <div class="flex flex-col">
-                    <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
-                        {{ __('BLOG NEWS') }}
-                    </h2>
-                    <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
-                        {{ __('LATEST HEADLINES') }}
-                    </h3>
-                </div>
-                <div class="w-full flex flex-wrap items-center">
-                    <button id="ui-blog-prev" aria-label="prev_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-4 outline-x-white bg-x-white -me-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
-                            fill="currentColor">
-                            <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
-                        </svg>
-                    </button>
-                    <div id="ui-blog-carousel" class="flex-[1] w-0">
-                        <ul>
-                            @foreach ($blogs as $blog)
-                                @for ($i = 0; $i < 6; $i++)
+    @if ($blogs->count())
+        <section class="my-8 lg:my-10">
+            <div class="w-full mx-auto container p-4">
+                <div class="flex flex-col gap-6 lg:gap-10">
+                    <div class="flex flex-col">
+                        <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
+                            {{ __('BLOG NEWS') }}
+                        </h2>
+                        <h3 class="text-2xl lg:text-3xl font-x-huge text-center text-x-black">
+                            {{ __('LATEST HEADLINES') }}
+                        </h3>
+                    </div>
+                    <div class="w-full flex flex-wrap items-center relative">
+                        <button id="ui-blog-prev" aria-label="prev_arrow"
+                            class="flex items-center justify-center w-8 h-8 rounded-full absolute left-4 outline outline-2 outline-x-white bg-x-white -me-4 z-[1] isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
+                            <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
+                                fill="currentColor">
+                                <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
+                            </svg>
+                        </button>
+                        <div id="ui-blog-carousel" class="w-full">
+                            <ul>
+                                @foreach ($blogs as $blog)
                                     <li class="w-full">
                                         <a href="{{ route('views.guest.blog', $blog->slug) }}"
                                             class="flex items-end p-4 w-full rounded-x-thin overflow-hidden aspect-video sm:aspect-[8/10] relative isolate">
@@ -351,23 +351,24 @@
                                             </div>
                                         </a>
                                     </li>
-                                @endfor
-                            @endforeach
-                        </ul>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <button id="ui-blog-next" aria-label="next_arrow"
+                            class="flex items-center justify-center w-8 h-8 rounded-full absolute right-4 outline outline-2 outline-x-white bg-x-white -ms-4 z-[1] isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
+                            <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
+                                fill="currentColor">
+                                <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
+                            </svg>
+                        </button>
                     </div>
-                    <button id="ui-blog-next" aria-label="next_arrow"
-                        class="flex items-center justify-center w-8 h-8 rounded-full outline outline-4 outline-x-white bg-x-white -ms-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-black after:bg-opacity-80 hover:after:bg-x-prime hover:after:bg-opacity-70 focus:after:bg-x-prime focus:after:bg-opacity-70">
-                        <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
-                            fill="currentColor">
-                            <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
-                        </svg>
-                    </button>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="my-8 lg:my-10">
-        <div class="w-full mx-auto container p-4">
+        </section>
+    @endif
+    <section class="bg-x-acent bg-opacity-30 bg-repeat"
+        style="background-image: url({{ asset('img/pattern-2.png') }}?v={{ env('APP_VERSION') }})">
+        <div class="w-full mx-auto container p-4 my-8 lg:my-10">
             <div class="flex flex-col gap-6 lg:gap-10">
                 <div class="flex flex-col">
                     <h2 class="text-base lg:text-lg font-x-thin text-center text-x-prime">
@@ -380,7 +381,7 @@
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
                     <div class="w-full aspect-video rounded-x-thin bg-x-shade"></div>
                     <div class="w-full flex flex-col gap-6 lg:gap-8">
-                        <p class="text-lg lg:text-xl text-x-black text-opacity-40 font-normal">
+                        <p class="text-lg lg:text-xl text-x-black text-opacity-70 font-normal">
                             {{ __('We\'re here for you and eager to help! Your satisfaction is our top priority. Contact us anytime, we can\'t wait to connect with you.') }}
                         </p>
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">

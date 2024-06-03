@@ -6,7 +6,7 @@ use App\Traits\HasSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Reservation extends Model
 {
     use HasFactory, HasSearch;
 

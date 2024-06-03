@@ -3,38 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Models\Order;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 
-class OrderController extends Controller
+class ReservationController extends Controller
 {
     public function index_view(Request $Request)
     {
-        $data = Order::with('Car')->orderBy('id', 'DESC');
+        $data = Reservation::with('Car')->orderBy('id', 'DESC');
         if ($Request->search) {
             $data = $data->search($Request->search);
         }
         $data = $data->cursorPaginate(50);
-        return view('order.index', compact('data'));
+        return view('reservation.index', compact('data'));
     }
 
     public function store_view()
     {
-        return view('order.store');
+        return view('reservation.store');
     }
 
     public function patch_view($id)
     {
-        $data = Order::findorfail($id);
-        return view('order.patch', compact('data'));
+        $data = Reservation::findorfail($id);
+        return view('reservation.patch', compact('data'));
     }
 
     public function search_action(Request $Request)
     {
-        $data = Order::with('Car')->orderBy('id', 'DESC');
+        $data = Reservation::with('Car')->orderBy('id', 'DESC');
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }
@@ -70,7 +70,7 @@ class OrderController extends Controller
         $period = (int) ceil($from->diffInHours($to) / 24);
         $total = $period * $Car->price;
 
-        Order::create($Request->merge([
+        Reservation::create($Request->merge([
             'from' => $from,
             'to' => $to,
             'period' => $period,
@@ -111,8 +111,8 @@ class OrderController extends Controller
         $period = (int) ceil($from->diffInHours($to) / 24);
         $total = $period * $Car->price;
 
-        $Order = Order::findorfail($id);
-        $Order->update($Request->merge([
+        $Reservation = Reservation::findorfail($id);
+        $Reservation->update($Request->merge([
             'from' => $from,
             'to' => $to,
             'period' => $period,
@@ -127,9 +127,9 @@ class OrderController extends Controller
 
     public function clear_action($id)
     {
-        Order::findorfail($id)->delete();
+        Reservation::findorfail($id)->delete();
 
-        return Redirect::route('views.categories.index')->with([
+        return Redirect::route('views.reservations.index')->with([
             'message' => __('Deleted successfully'),
             'type' => 'success'
         ]);

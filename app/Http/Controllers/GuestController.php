@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Functions\Core;
 use App\Models\Blog;
 use App\Models\Car;
+use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Order;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -45,6 +46,8 @@ class GuestController extends Controller
             return $query->where('cargo', '>=', $cargo);
         })->when($Request->type, function ($query, $type) {
             return $query->whereIn('category', $type);
+        })->when($Request->brand, function ($query, $brand) {
+            return $query->whereIn('brand', $brand);
         })->when($Request->min, function ($query, $min) {
             return $query->where('price', '>=', $min);
         })->when($Request->max, function ($query, $max) {
@@ -61,7 +64,13 @@ class GuestController extends Controller
                 'name' => $item->{'name_' . Core::lang()},
             ];
         });
-        return view('guest.fleet', compact('cars', 'types'));
+        $brands = Brand::select('id', 'name_' . Core::lang())->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->{'name_' . Core::lang()},
+            ];
+        });
+        return view('guest.fleet', compact('cars', 'types', 'brands'));
     }
 
     public function blogs_view()
@@ -131,7 +140,7 @@ class GuestController extends Controller
         return view('guest.info', compact('data'));
     }
 
-    public function order_action(Request $Request)
+    public function reserve_action(Request $Request)
     {
         $validator = Validator::make($Request->all(), [
             'name' => ['required', 'string'],
@@ -158,7 +167,7 @@ class GuestController extends Controller
         $period = (int) ceil($from->diffInHours($to) / 24);
         $total = $period * $Car->price;
 
-        Order::create($Request->merge([
+        Reservation::create($Request->merge([
             'from' => $from,
             'to' => $to,
             'period' => $period,

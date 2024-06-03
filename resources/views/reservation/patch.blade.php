@@ -1,15 +1,15 @@
 @extends('shared.core.base')
-@section('title', __('Edit Order') . ' #' . $data->id)
+@section('title', __('Edit Reservation') . ' #' . $data->id)
 @php
     $charges = json_decode($data->charges, true);
 @endphp
 @section('content')
     <div class="flex flex-col gap-2">
         <h1 class="text-center lg:text-start text-xl lg:text-2xl text-x-black font-x-thin">
-            {{ __('Edit Order') . ' #' . $data->id }}
+            {{ __('Edit Reservation') . ' #' . $data->id }}
         </h1>
         <div class="bg-x-white rounded-x-thin shadow-x-core border border-x-shade p-6">
-            <form action="{{ route('actions.orders.patch', $data->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('actions.reservations.patch', $data->id) }}" method="POST" enctype="multipart/form-data"
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
@@ -89,7 +89,7 @@
 
 @section('scripts')
     <script>
-        OrderInitializer({
+        ReservationInitializer({
                 Search: "{{ route('actions.cars.search') }}"
             }
             @if ($data->charges)

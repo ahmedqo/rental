@@ -239,7 +239,7 @@
                             <h3 class="text-x-black font-x-huge text-xl">
                                 {{ __('Reservation') }}
                             </h3>
-                            <form id="book" action="{{ route('actions.guest.order') }}" method="POST"
+                            <form id="book" action="{{ route('actions.guest.reserve') }}" method="POST"
                                 class="grid grid-rows-1 grid-cols-2 gap-4">
                                 @csrf
                                 <input type="hidden" name="car" value="{{ $car->id }}" />
