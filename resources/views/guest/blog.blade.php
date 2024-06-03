@@ -15,7 +15,7 @@
         </div>
     </section>
     <section>
-        <div class="w-full aspect-[16/6] relative isolate flex items-end justify-center lg:py-6">
+        <div class="w-full aspect-[16/6] max-h-[36rem] relative isolate flex items-end justify-center lg:py-6">
             <h1 class="text-x-white font-x-huge text-2xl lg:text-5xl lg:w-9/12 p-4 container mx-auto text-center">
                 {{ $blog->title }}
             </h1>
