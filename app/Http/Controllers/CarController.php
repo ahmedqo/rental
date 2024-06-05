@@ -89,9 +89,6 @@ class CarController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:cars'],
-            'name_fr' => ['required', 'string', 'unique:cars'],
-            'name_it' => ['required', 'string', 'unique:cars'],
-            'name_sp' => ['required', 'string', 'unique:cars'],
             'transmission' => ['required', 'string'],
             'passengers' => ['required', 'integer'],
             'category' => ['required', 'integer'],
@@ -115,6 +112,9 @@ class CarController extends Controller
 
         Car::create($Request->merge([
             'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
             'promote' => $Request->promote == '1'
         ])->all());
 
@@ -128,9 +128,6 @@ class CarController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:cars,name_en,' . $id],
-            'name_fr' => ['required', 'string', 'unique:cars,name_fr,' . $id],
-            'name_it' => ['required', 'string', 'unique:cars,name_it,' . $id],
-            'name_sp' => ['required', 'string', 'unique:cars,name_sp,' . $id],
             'transmission' => ['required', 'string'],
             'passengers' => ['required', 'integer'],
             'category' => ['required', 'integer'],
@@ -161,6 +158,9 @@ class CarController extends Controller
 
         $Car->update($Request->merge([
             'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
             'promote' => $Request->promote == '1'
         ])->all());
 

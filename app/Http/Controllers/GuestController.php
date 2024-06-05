@@ -172,7 +172,8 @@ class GuestController extends Controller
             'to' => $to,
             'period' => $period,
             'total' => $total,
-            'status' => 'pendding'
+            'status' => 'pendding',
+            'charges' => json_encode(['total' => 0, 'items' => []])
         ])->all());
 
         return Redirect::back()->with([

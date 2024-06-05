@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('to');
             $table->integer('period');
             $table->float('total', 15, 5);
-            $table->json('charges')->default(json_encode(['total' => 0, 'items' => []]));
+            $table->json('charges');
             $table->string('status');
             $table->timestamps();
 

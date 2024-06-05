@@ -10,34 +10,33 @@
             <form action="{{ route('actions.reservations.store') }}" method="POST" enctype="multipart/form-data"
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
-                <input id="charge_value" type="hidden" name="charges" value='{"total":0,"items":[]}' />
-                <neo-textbox label="{{ __('Name') }}" name="name" value="{{ old('name') }}"></neo-textbox>
-                <neo-textbox type="tel" label="{{ __('Phone') }}" name="phone"
+                <input id="charge_value" type="hidden" name="charges" value="{!! json_encode(['total' => 0, 'items' => []]) !!}" />
+                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name" value="{{ old('name') }}"></neo-textbox>
+                <neo-textbox type="tel" label="{{ __('Phone') . ' (*)' }}" name="phone"
                     value="{{ old('phone') }}"></neo-textbox>
-                <neo-textbox type="email" label="{{ __('Email') }}" name="email"
+                <neo-textbox type="email" label="{{ __('Email') . ' (*)' }}" name="email"
                     value="{{ old('email') }}"></neo-textbox>
-                <neo-select label="{{ __('Location') }}" name="location">
-                    <neo-select-item value="airport" {{ old('location') == 'airport' ? 'active' : '' }}>
-                        {{ __(ucwords('Airport')) }}
-                    </neo-select-item>
-                    <neo-select-item value="city center" {{ old('location') == 'city center' ? 'active' : '' }}>
-                        {{ __(ucwords('City Center')) }}
-                    </neo-select-item>
+                <neo-select label="{{ __('Location') . ' (*)' }}" name="location">
+                    @foreach (Core::locationList() as $location)
+                        <neo-select-item value="{{ $location }}"{{ old('location') == $location ? 'active' : '' }}>
+                            {{ __(ucwords($location)) }}
+                        </neo-select-item>
+                    @endforeach
                 </neo-select>
-                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Car') }}"
+                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Car') . ' (*)' }}"
                     name="car" value="{{ old('car') }}" query="{{ old('car_name') }}"
                     class="lg:col-span-2"></neo-autocomplete>
-                <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}" name="from_date"
+                <neo-datepicker full-day="3" label="{{ __('Pick-up Date') . ' (*)' }}" name="from_date"
                     value="{{ old('from_date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
-                <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}" name="to_date"
+                <neo-datepicker full-day="3" label="{{ __('Drop-off Date') . ' (*)' }}" name="to_date"
                     value="{{ old('to_date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                <neo-timepicker label="{{ __('Pick-up Time') }}" name="from_time" value="{{ old('from_time') ?? '#now' }}"
-                    format="HH:MM AA"></neo-timepicker>
-                <neo-timepicker label="{{ __('Drop-off Time') }}" name="to_time" value="{{ old('to_date') ?? '#now' }}"
-                    format="HH:MM AA"></neo-timepicker>
+                <neo-timepicker label="{{ __('Pick-up Time') . ' (*)' }}" name="from_time"
+                    value="{{ old('from_time') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
+                <neo-timepicker label="{{ __('Drop-off Time') . ' (*)' }}" name="to_time"
+                    value="{{ old('to_date') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
                 <neo-textbox id="charge_trigger" label="{{ __('Charges') }}" name="total" value="{{ old('total') }}"
-                    value="0" disable></neo-textbox>
-                <neo-select label="{{ __('Status') }}" name="status">
+                    value="0" class="cursor-pointer" disable></neo-textbox>
+                <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::orderList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == old('status') ? 'active' : '' }}>
                             {{ __(ucwords($status)) }}

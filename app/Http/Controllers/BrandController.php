@@ -46,9 +46,6 @@ class BrandController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:brands'],
-            'name_fr' => ['required', 'string', 'unique:brands'],
-            'name_it' => ['required', 'string', 'unique:brands'],
-            'name_sp' => ['required', 'string', 'unique:brands'],
             'image' => ['required', 'image'],
         ]);
 
@@ -60,7 +57,10 @@ class BrandController extends Controller
         }
 
         Brand::create($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
         ])->all());
 
         return Redirect::back()->with([
@@ -73,9 +73,6 @@ class BrandController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:brands,name_en,' . $id],
-            'name_fr' => ['required', 'string', 'unique:brands,name_fr,' . $id],
-            'name_it' => ['required', 'string', 'unique:brands,name_it,' . $id],
-            'name_sp' => ['required', 'string', 'unique:brands,name_sp,' . $id],
         ]);
 
         if ($validator->fails()) {
@@ -87,7 +84,10 @@ class BrandController extends Controller
 
         $Brand = Brand::findorfail($id);
         $Brand->update($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
         ])->all());
 
         if ($Request->hasFile('image')) {

@@ -14,10 +14,9 @@
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
-                <neo-textbox label="{{ __('Name') . ' (en)' }}" name="name_en" value="{{ $data->name_en }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (fr)' }}" name="name_fr" value="{{ $data->name_fr }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (it)' }}" name="name_it" value="{{ $data->name_it }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (sp)' }}" name="name_sp" value="{{ $data->name_sp }}"></neo-textbox>
+                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name_en" value="{{ $data->name_en }}"></neo-textbox>
+                <neo-textbox type="number" label="{{ __('Price') . ' (*)' }}" name="price"
+                    value="{{ $data->price }}"></neo-textbox>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (en)' }}" name="details_en"
                     value="{{ $data->details_en }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (fr)' }}" name="details_fr"
@@ -26,17 +25,15 @@
                     value="{{ $data->details_it }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (sp)' }}" name="details_sp"
                     value="{{ $data->details_sp }}" rows="4"></neo-textarea>
-                <neo-textbox type="number" label="{{ __('Price') }}" name="price" value="{{ $data->price }}"
-                    class="lg:col-span-2"></neo-textbox>
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-4 lg:col-span-2">
-                    <neo-textbox type="number" label="{{ __('Passengers') }}" name="passengers"
+                    <neo-textbox type="number" label="{{ __('Passengers') . ' (*)' }}" name="passengers"
                         value="{{ $data->passengers }}"></neo-textbox>
-                    <neo-textbox type="number" label="{{ __('Doors') }}" name="doors"
+                    <neo-textbox type="number" label="{{ __('Doors') . ' (*)' }}" name="doors"
                         value="{{ $data->doors }}"></neo-textbox>
-                    <neo-textbox type="number" label="{{ __('Cargo') }}" name="cargo"
+                    <neo-textbox type="number" label="{{ __('Cargo') . ' (*)' }}" name="cargo"
                         value="{{ $data->cargo }}"></neo-textbox>
                 </div>
-                <neo-select label="{{ __('Transmission') }}" name="transmission">
+                <neo-select label="{{ __('Transmission') . ' (*)' }}" name="transmission">
                     @foreach (Core::transmissionList() as $transmission)
                         <neo-select-item value="{{ $transmission }}"
                             {{ $transmission == $data->transmission ? 'active' : '' }}>
@@ -44,27 +41,27 @@
                         </neo-select-item>
                     @endforeach
                 </neo-select>
-                <neo-select label="{{ __('Fuel') }}" name="fuel">
+                <neo-select label="{{ __('Fuel') . ' (*)' }}" name="fuel">
                     @foreach (Core::fuelList() as $fuel)
                         <neo-select-item value="{{ $fuel }}" {{ $fuel == $data->fuel ? 'active' : '' }}>
                             {{ __(ucwords($fuel)) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>
-                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Brand') }}"
-                    name="brand" value="{{ $data->brand }}"
+                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id"
+                    label="{{ __('Brand') . ' (*)' }}" name="brand" value="{{ $data->brand }}"
                     query="{{ $data->Brand->{'name_' . Core::lang()} }}"></neo-autocomplete>
-                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Category') }}"
-                    name="category" value="{{ $data->category }}"
+                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id"
+                    label="{{ __('Category') . ' (*)' }}" name="category" value="{{ $data->category }}"
                     query="{{ $data->Category->{'name_' . Core::lang()} }}"></neo-autocomplete>
-                <neo-select label="{{ __('Promote') }}" name="promote">
+                <neo-select label="{{ __('Promote') . ' (*)' }}" name="promote">
                     @foreach (Core::promoteList() as $promote)
                         <neo-select-item value="{{ $promote[0] }}" {{ $promote[0] == $data->promote ? 'active' : '' }}>
                             {{ __(ucwords($promote[1])) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>
-                <neo-select label="{{ __('Status') }}" name="status">
+                <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::statusList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == $data->status ? 'active' : '' }}>
                             {{ __(ucwords($status)) }}
@@ -73,7 +70,7 @@
                 </neo-select>
                 <div class="flex flex-col lg:col-span-2">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Images') }}
+                        {{ __('Images') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="images[]" multiple></neo-imagetransfer>
                 </div>

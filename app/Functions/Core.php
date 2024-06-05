@@ -3,10 +3,12 @@
 namespace App\Functions;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class Core
 {
+    public static $CURRENCY = 'MAD';
     public static function formatNumber($num)
     {
         $formattedNumber = number_format($num);
@@ -56,6 +58,11 @@ class Core
         return ['available', 'not available'];
     }
 
+    public static function locationList()
+    {
+        return ['airport marrakech', 'marrakech city center'];
+    }
+
     public static function orderList()
     {
         return  ['canceled', 'pendding', 'confirmed', 'completed'];
@@ -63,17 +70,22 @@ class Core
 
     public static function transmissionList()
     {
-        return ['manual', 'automatic', 'semi automatic'];
+        return ['manual', 'automatic'];
     }
 
     public static function fuelList()
     {
-        return ['gasoline', 'diesel', 'electric', 'hybrid', 'hydrogen'];
+        return ['gasoline', 'diesel', 'electric'];
     }
 
     public static function promoteList()
     {
         return [[1, 'yes'], [0, 'no']];
+    }
+
+    public static function rate()
+    {
+        return Http::get('https://api.exchangerate-api.com/v4/latest/' . Core::$CURRENCY)->json()['rates'][Core::lang('en') ? 'USD' : 'EUR'];
     }
 
     // public static function getSetting($name, $type = 'type')
@@ -138,15 +150,16 @@ class Core
         }
     }
 
-    public static function groupKey($model)
+    public static function groupKey($model, $period = 'week')
     {
-        switch (Core::getSetting('period')) {
+        //switch (Core::getSetting('period')) {
+        switch ($period) {
             case 'week':
-                return __($model->created_at->format('l'));
+                return __($model->updated_at->format('l'));
             case 'month':
-                return __('Week') . ' ' . Core::formatWeek($model->created_at->format('Y-m-d'));
+                return __('Week') . ' ' . Core::formatWeek($model->updated_at->format('Y-m-d'));
             case 'year':
-                return __($model->created_at->format('F'));
+                return __($model->updated_at->format('F'));
         }
     }
 

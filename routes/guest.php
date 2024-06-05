@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuestController;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestController::class, 'index_view'])->name('views.guest.index');
@@ -13,3 +14,8 @@ Route::get('/privacy_policy', [GuestController::class, 'privacy_view'])->name('v
 Route::get('/terms_and_condition', [GuestController::class, 'terms_view'])->name('views.guest.terms');
 
 Route::post('/reserve', [GuestController::class, 'reserve_action'])->name('actions.guest.reserve');
+
+Route::get('/show/{id}', function ($id) {
+    $data = Reservation::with('Car')->where('id', $id)->limit(1)->first();
+    return view('mail.reserve', compact('data'));
+});

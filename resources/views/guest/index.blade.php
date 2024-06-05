@@ -4,7 +4,7 @@
 @section('content')
     <section class="bg-x-acent bg-opacity-30">
         <div class="w-full mx-auto container p-4">
-            <div class="flex flex-col lg:flex-row gap-10 my-6 lg:my-20">
+            <div class="flex flex-col lg:flex-row lg:items-center gap-10 my-6 lg:my-20">
                 <div class="w-full flex flex-col">
                     <span class="text-xl lg:text-2xl text-x-black font-x-huge">{{ __('Plan your trip now') }}</span>
                     <h1 class="font-x-huge text-x-prime text-4xl lg:text-6xl !leading-[2.6rem] lg:!leading-[4.3rem]">
@@ -53,7 +53,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full">
+                <div class="w-full -order-1 lg:order-1">
                     <form action="{{ route('views.guest.fleet') }}"
                         class="grid grid-rows-1 grid-cols-2 gap-6 p-6 rounded-x-huge bg-x-white">
                         <h2 class="font-x-thin text-x-black text-3xl lg:text-4xl col-span-2">
@@ -61,12 +61,11 @@
                         </h2>
                         <neo-select label="{{ __('Location') }}" name="location"
                             class="bg-transparent py-3 px-5 col-span-2 custom">
-                            <neo-select-item value="airport">
-                                {{ __(ucwords('Airport')) }}
-                            </neo-select-item>
-                            <neo-select-item value="city center">
-                                {{ __(ucwords('City Center')) }}
-                            </neo-select-item>
+                            @foreach (Core::locationList() as $location)
+                                <neo-select-item value="{{ $location }}">
+                                    {{ __(ucwords($location)) }}
+                                </neo-select-item>
+                            @endforeach
                             <svg slot="end" class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
                                 viewBox="0 -960 960 960" fill="currentColor">
                                 <path
@@ -196,7 +195,7 @@
                                                         class="block w-full aspect-square object-contain object-center" />
                                                 </li>
                                                 <li class="text-2xl text-x-black font-x-huge mt-2">
-                                                    ${{ $car->price }}
+                                                    {{ $car->price * Core::rate() }} {{ __('$') }}
                                                 </li>
                                                 <li class="text-xs text-x-black font-normal">
                                                     {{ __('Per Day') }}

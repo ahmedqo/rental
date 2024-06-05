@@ -103,39 +103,48 @@ function reserve(e) {
     for (let i = 0; i < sourceElements.length; i++) {
         const sourceElement = sourceElements[i];
         if ("value" in sourceElement) {
+            const error = document.querySelector(sourceElement.dataset.error);
             if (sourceElement.value.trim()) {
                 sourceElement.classList.remove("outline", "outline-2",
                     "outline-red-400", "outline-offset-[-2px]");
+                error && error.classList.add("hidden");
             } else {
                 sourceElement.classList.add("outline", "outline-2", "outline-red-400",
                     "outline-offset-[-2px]");
-                Neo.Toaster.toast(Neo.Helper.trans(ucWords(sourceElement.name) + " Is Required"), "error");
+                error && (error.innerHTML = Neo.Helper.trans(ucWords(sourceElement.name) + " Is Required"));
+                error && error.classList.remove("hidden");
             }
             errors.push(!sourceElement.value.trim());
         }
     }
 
     if (sourceElements["from_date"].value.trim()) {
+        const error = document.querySelector(sourceElements["from_date"].dataset.error);
         if (betweenDates(Neo.Helper.Str.moment(new Date().toDateString()), sourceElements[
                 "from_date"].value) < 0) {
             sourceElements["from_date"].classList.add("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
-            Neo.Toaster.toast(Neo.Helper.trans("Pick-up Date Must Be Today Or After"), "error");
+            error && (error.innerHTML = Neo.Helper.trans("Pick-up Date Must Be Today Or After"));
+            error && error.classList.remove("hidden");
         } else {
             sourceElements["from_date"].classList.remove("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
+            error && error.classList.add("hidden");
         }
         errors.push(!sourceElements["from_date"].value.trim());
     }
 
     if (sourceElements["from_date"].value.trim() && sourceElements["to_date"].value.trim()) {
+        const error = document.querySelector(sourceElements["from_date"].dataset.error);
         if (betweenDates(sourceElements["from_date"].value, sourceElements["to_date"].value) < 1) {
             sourceElements["to_date"].classList.add("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
-            Neo.Toaster.toast(Neo.Helper.trans("Drop-off Date Must Be After Pick-up Date"), "error");
+            error && (error.innerHTML = Neo.Helper.trans("Drop-off Date Must Be After Pick-up Date"));
+            error && error.classList.remove("hidden");
         } else {
             sourceElements["to_date"].classList.remove("outline", "outline-2", "outline-red-400",
                 "outline-offset-[-2px]");
+            error && error.classList.add("hidden");
         }
         errors.push(!sourceElements["to_date"].value.trim());
     }

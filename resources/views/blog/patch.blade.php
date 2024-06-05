@@ -16,17 +16,17 @@
                 @method('patch')
                 <div class="flex flex-col lg:col-span-2">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Image') }}
+                        {{ __('Image') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="image" class="video"></neo-imagetransfer>
                 </div>
-                <neo-textbox label="{{ __('Title') . ' (en)' }}" name="title_en"
+                <neo-textbox label="{{ __('Title') . ' (en) (*)' }}" name="title_en"
                     value="{{ $data->title_en }}"></neo-textbox>
-                <neo-textbox label="{{ __('Title') . ' (fr)' }}" name="title_fr"
+                <neo-textbox label="{{ __('Title') . ' (fr) (*)' }}" name="title_fr"
                     value="{{ $data->title_fr }}"></neo-textbox>
-                <neo-textbox label="{{ __('Title') . ' (it)' }}" name="title_it"
+                <neo-textbox label="{{ __('Title') . ' (it) (*)' }}" name="title_it"
                     value="{{ $data->title_it }}"></neo-textbox>
-                <neo-textbox label="{{ __('Title') . ' (sp)' }}" name="title_sp"
+                <neo-textbox label="{{ __('Title') . ' (sp) (*)' }}" name="title_sp"
                     value="{{ $data->title_sp }}"></neo-textbox>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (en)' }}" name="details_en"
                     value="{{ $data->details_en }}" rows="5"></neo-textarea>
@@ -38,25 +38,25 @@
                     value="{{ $data->details_sp }}" rows="5"></neo-textarea>
                 <div class="flex flex-col">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Content') }} (en)
+                        {{ __('Content') }} (en) (*)
                     </label>
                     <textarea id="content_en" name="content_en" placeholder="{{ __('Content') }}  (en)" rows="3">{{ $data->content_en }}</textarea>
                 </div>
                 <div class="flex flex-col">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Content') }} (fr)
+                        {{ __('Content') }} (fr) (*)
                     </label>
                     <textarea id="content_fr" name="content_fr" placeholder="{{ __('Content') }}  (fr)" rows="3">{{ $data->content_fr }}</textarea>
                 </div>
                 <div class="flex flex-col">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Content') }} (it)
+                        {{ __('Content') }} (it) (*)
                     </label>
                     <textarea id="content_it" name="content_it" placeholder="{{ __('Content') }}  (it)" rows="3">{{ $data->content_it }}</textarea>
                 </div>
                 <div class="flex flex-col">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Content') }} (sp)
+                        {{ __('Content') }} (sp) (*)
                     </label>
                     <textarea id="content_sp" name="content_sp" placeholder="{{ __('Content') }}  (sp)" rows="3">{{ $data->content_sp }}</textarea>
                 </div>

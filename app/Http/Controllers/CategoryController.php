@@ -46,9 +46,6 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:categories'],
-            'name_fr' => ['required', 'string', 'unique:categories'],
-            'name_it' => ['required', 'string', 'unique:categories'],
-            'name_sp' => ['required', 'string', 'unique:categories'],
             'image' => ['required', 'image'],
         ]);
 
@@ -60,7 +57,10 @@ class CategoryController extends Controller
         }
 
         Category::create($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
         ])->all());
 
         return Redirect::back()->with([
@@ -73,9 +73,6 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($Request->all(), [
             'name_en' => ['required', 'string', 'unique:categories,name_en,' . $id],
-            'name_fr' => ['required', 'string', 'unique:categories,name_fr,' . $id],
-            'name_it' => ['required', 'string', 'unique:categories,name_it,' . $id],
-            'name_sp' => ['required', 'string', 'unique:categories,name_sp,' . $id],
         ]);
 
         if ($validator->fails()) {
@@ -87,7 +84,10 @@ class CategoryController extends Controller
 
         $Category = Category::findorfail($id);
         $Category->update($Request->merge([
-            'slug' =>  Str::slug($Request->name_en)
+            'slug' =>  Str::slug($Request->name_en),
+            'name_fr' => $Request->name_en,
+            'name_it' => $Request->name_en,
+            'name_sp' => $Request->name_en,
         ])->all());
 
         if ($Request->hasFile('image')) {

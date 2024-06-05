@@ -210,8 +210,8 @@
                                     {{ __('Per Day') }}
                                 </li>
                                 <li class="text-x-black font-x-huge text-base">
-                                    <span>$</span>
-                                    <span id="price">{{ $car->price }}</span>
+                                    <span id="price">{{ $car->price * Core::rate() }}</span>
+                                    <span>{{ __('$') }}</span>
                                 </li>
                             </ul>
                             <ul class="w-full flex items-end justify-between col-span-2">
@@ -229,8 +229,8 @@
                                     {{ __('Total') }}
                                 </li>
                                 <li class="text-x-black font-x-huge text-lg">
-                                    <span>$</span>
-                                    <span id="total">{{ $car->price }}</span>
+                                    <span id="total">{{ $car->price * Core::rate() }}</span>
+                                    <span>{{ __('$') }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -240,46 +240,73 @@
                                 {{ __('Reservation') }}
                             </h3>
                             <form id="book" action="{{ route('actions.guest.reserve') }}" method="POST"
-                                class="grid grid-rows-1 grid-cols-2 gap-4">
+                                class="grid grid-rows-1 grid-cols-1 gap-4">
                                 @csrf
                                 <input type="hidden" name="car" value="{{ $car->id }}" />
-                                <neo-textbox label="{{ __('Name') }}" value="{{ old('name') ?? '' }}" name="name"
-                                    class="bg-transparent col-span-2"></neo-textbox>
-                                <neo-textbox type="email" label="{{ __('Email') }}"
-                                    value="{{ old('email') ?? '' }}" name="email"
-                                    class="bg-transparent col-span-2"></neo-textbox>
-                                <neo-textbox type="tel" label="{{ __('Phone') }}"
-                                    value="{{ old('phone') ?? '' }}" name="phone"
-                                    class="bg-transparent col-span-2"></neo-textbox>
-                                <neo-select label="{{ __('Location') }}" name="location"
-                                    class="bg-transparent col-span-2 custom">
-                                    <neo-select-item value="airport"
-                                        {{ request('location') == 'airport' ? 'active' : '' }}>
-                                        {{ __(ucwords('Airport')) }}
-                                    </neo-select-item>
-                                    <neo-select-item value="city center"
-                                        {{ request('location') == 'city center' ? 'active' : '' }}>
-                                        {{ __(ucwords('City Center')) }}
-                                    </neo-select-item>
-                                    <svg slot="end"
-                                        class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
-                                        viewBox="0 -960 960 960" fill="currentColor">
-                                        <path
-                                            d="M479.77 12Q303 12 191.5-44.11 80-100.23 80-189q0-43.06 30-80.53T196-335l94 103q-18 6-39 17t-36 24q21.49 27.2 101.28 47.1Q396.07-124 481.25-124q86.02 0 164.81-20.3T746-191q-16-14-37.81-24.86Q686.38-226.71 667-233l95-104q57 28 87.5 66.5t30.5 80.77q0 89.63-111.73 145.68Q656.54 12 479.77 12ZM481-154Q315.76-271 235.38-382.44T155-600.74q0-80.61 29.83-141.33 29.83-60.71 76.62-101.57 46.79-40.85 104.54-61.61Q423.74-926 480.31-926q56.9 0 115.53 20.93 58.63 20.92 104.87 61.77t75.77 101.49Q806-681.17 806-601.08q0 107.38-80.63 218.73Q644.73-271 481-154Zm.12-360q38.88 0 66.38-27.56 27.5-27.57 27.5-65.16 0-38.87-27.44-66.58Q520.13-701 481.5-701q-39.04 0-67.27 27.7Q386-645.59 386-607.22q0 38.38 28.12 65.8 28.12 27.42 67 27.42Z" />
-                                    </svg>
-                                </neo-select>
-                                <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                                    class="bg-transparent custom start" name="from_date"
-                                    value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
-                                <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                                    class="bg-transparent custom end" name="to_date"
-                                    value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                                <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent custom start"
-                                    name="from_time" value="{{ request('pick-up-time') ?? '#now' }}"
-                                    format="HH:MM AA"></neo-timepicker>
-                                <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent custom end"
-                                    name="to_time" value="{{ request('drop-off-time') ?? '#now' }}"
-                                    format="HH:MM AA"></neo-timepicker>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <neo-textbox data-error=".error-0" label="{{ __('Name') . ' (*)' }}"
+                                        value="{{ old('name') ?? '' }}" name="name"
+                                        class="bg-transparent"></neo-textbox>
+                                    <span class="error-0 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <neo-textbox data-error=".error-1"type="email" label="{{ __('Email') . ' (*)' }}"
+                                        value="{{ old('email') ?? '' }}" name="email"
+                                        class="bg-transparent"></neo-textbox>
+                                    <span class="error-1 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <neo-textbox data-error=".error-2"type="tel" label="{{ __('Phone') . ' (*)' }}"
+                                        value="{{ old('phone') ?? '' }}" name="phone"
+                                        class="bg-transparent"></neo-textbox>
+                                    <span class="error-2 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <neo-select data-error=".error-3"label="{{ __('Location') . ' (*)' }}"
+                                        name="location" class="bg-transparent custom">
+                                        @foreach (Core::locationList() as $location)
+                                            <neo-select-item
+                                                value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
+                                                {{ __(ucwords($location)) }}
+                                            </neo-select-item>
+                                        @endforeach
+                                        <svg slot="end"
+                                            class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
+                                            viewBox="0 -960 960 960" fill="currentColor">
+                                            <path
+                                                d="M479.77 12Q303 12 191.5-44.11 80-100.23 80-189q0-43.06 30-80.53T196-335l94 103q-18 6-39 17t-36 24q21.49 27.2 101.28 47.1Q396.07-124 481.25-124q86.02 0 164.81-20.3T746-191q-16-14-37.81-24.86Q686.38-226.71 667-233l95-104q57 28 87.5 66.5t30.5 80.77q0 89.63-111.73 145.68Q656.54 12 479.77 12ZM481-154Q315.76-271 235.38-382.44T155-600.74q0-80.61 29.83-141.33 29.83-60.71 76.62-101.57 46.79-40.85 104.54-61.61Q423.74-926 480.31-926q56.9 0 115.53 20.93 58.63 20.92 104.87 61.77t75.77 101.49Q806-681.17 806-601.08q0 107.38-80.63 218.73Q644.73-271 481-154Zm.12-360q38.88 0 66.38-27.56 27.5-27.57 27.5-65.16 0-38.87-27.44-66.58Q520.13-701 481.5-701q-39.04 0-67.27 27.7Q386-645.59 386-607.22q0 38.38 28.12 65.8 28.12 27.42 67 27.42Z" />
+                                        </svg>
+                                    </neo-select>
+                                    <span class="error-3 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <div class="flex gap-4">
+                                        <neo-datepicker data-error=".error-4"full-day="3"
+                                            label="{{ __('Pick-up Date') . ' (*)' }}"
+                                            class="bg-transparent flex-[1] custom start" name="from_date"
+                                            value="{{ request('pick-up-date') ?? '#now' }}"
+                                            format="mmm dd"></neo-datepicker>
+                                        <neo-datepicker data-error=".error-4"full-day="3"
+                                            label="{{ __('Drop-off Date') . ' (*)' }}"
+                                            class="bg-transparent flex-[1] custom end" name="to_date"
+                                            value="{{ request('drop-off-date') ?? '#now+1' }}"
+                                            format="mmm dd"></neo-datepicker>
+                                    </div>
+                                    <span class="error-4 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
+                                <div class="flex flex-col gap-1 col-span-2">
+                                    <div class="flex gap-4">
+                                        <neo-timepicker data-error=".error-5"label="{{ __('Pick-up Time') . ' (*)' }}"
+                                            class="bg-transparent flex-[1] custom start" name="from_time"
+                                            value="{{ request('pick-up-time') ?? '#now' }}"
+                                            format="HH:MM AA"></neo-timepicker>
+                                        <neo-timepicker data-error=".error-5"label="{{ __('Drop-off Time') . ' (*)' }}"
+                                            class="bg-transparent flex-[1] custom end" name="to_time"
+                                            value="{{ request('drop-off-time') ?? '#now' }}"
+                                            format="HH:MM AA"></neo-timepicker>
+                                    </div>
+                                    <span class="error-5 hidden block text-sm font-x-thin text-red-400"></span>
+                                </div>
                                 <neo-button
                                     class="w-full col-span-2 px-10 text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
                                     <span>{{ __('Reserve') }}</span>
@@ -293,8 +320,8 @@
         <ul id="sm-reserve"
             class="w-full translate-y-full transition-transform duration-200 lg:hidden flex items-center justify-between gap-4 p-4 bg-x-white shadow-2xl shadow-x-black fixed left-0 right-0 bottom-0">
             <li class="text-x-black font-x-huge text-2xl">
-                <span>$</span>
-                <span id="sm-total">{{ $car->price }}</span>
+                <span id="sm-total">{{ $car->price * Core::rate() }}</span>
+                <span>{{ __('$') }}</span>
                 <span id="sm-days" class="font-x-thin text-lg"></span>
             </li>
             <li>

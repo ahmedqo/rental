@@ -11,11 +11,11 @@
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
-                <neo-password label="{{ __('Old Password') }}" name="old_password" value="{{ old('old_password') }}"
+                <neo-password label="{{ __('Old Password') . ' (*)' }}" name="old_password" value="{{ old('old_password') }}"
                     class="lg:col-span-2"></neo-password>
-                <neo-password label="{{ __('New Password') }}" name="new_password"
+                <neo-password label="{{ __('New Password') . ' (*)' }}" name="new_password"
                     value="{{ old('new_password') }}"></neo-password>
-                <neo-password label="{{ __('Confirm Password') }}" name="confirm_password"
+                <neo-password label="{{ __('Confirm Password') . ' (*)' }}" name="confirm_password"
                     value="{{ old('confirm_password') }}"></neo-password>
                 <div class="w-full flex lg:col-span-2">
                     <neo-button

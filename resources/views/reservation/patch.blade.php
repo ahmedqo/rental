@@ -14,33 +14,32 @@
                 @csrf
                 @method('patch')
                 <input id="charge_value" type="hidden" name="charges" value="{!! $data->charges !!}" />
-                <neo-textbox label="{{ __('Name') }}" name="name" value="{{ $data->name }}"></neo-textbox>
-                <neo-textbox type="tel" label="{{ __('Phone') }}" name="phone"
+                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name" value="{{ $data->name }}"></neo-textbox>
+                <neo-textbox type="tel" label="{{ __('Phone') . ' (*)' }}" name="phone"
                     value="{{ $data->phone }}"></neo-textbox>
-                <neo-textbox type="email" label="{{ __('Email') }}" name="email"
+                <neo-textbox type="email" label="{{ __('Email') . ' (*)' }}" name="email"
                     value="{{ $data->email }}"></neo-textbox>
-                <neo-select label="{{ __('Location') }}" name="location">
-                    <neo-select-item value="airport" {{ $data->location == 'airport' ? 'active' : '' }}>
-                        {{ __(ucwords('Airport')) }}
-                    </neo-select-item>
-                    <neo-select-item value="city center" {{ $data->location == 'city center' ? 'active' : '' }}>
-                        {{ __(ucwords('City Center')) }}
-                    </neo-select-item>
+                <neo-select label="{{ __('Location') . ' (*)' }}" name="location">
+                    @foreach (Core::locationList() as $location)
+                        <neo-select-item value="{{ $location }}"{{ $data->location == $location ? 'active' : '' }}>
+                            {{ __(ucwords($location)) }}
+                        </neo-select-item>
+                    @endforeach
                 </neo-select>
-                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Car') }}"
+                <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id" label="{{ __('Car') . ' (*)' }}"
                     name="car" value="{{ $data->car }}" query="{{ $data->Car->{'name_' . Core::lang()} }}"
                     class="lg:col-span-2"></neo-autocomplete>
-                <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}" name="from_date"
+                <neo-datepicker full-day="3" label="{{ __('Pick-up Date') . ' (*)' }}" name="from_date"
                     value="{{ Carbon::parse($data->from)->format('Y-m-d') ?? '#now' }}" format="mmm dd"></neo-datepicker>
-                <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}" name="to_date"
+                <neo-datepicker full-day="3" label="{{ __('Drop-off Date') . ' (*)' }}" name="to_date"
                     value="{{ Carbon::parse($data->to)->format('Y-m-d') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                <neo-timepicker label="{{ __('Pick-up Time') }}" name="from_time"
+                <neo-timepicker label="{{ __('Pick-up Time') . ' (*)' }}" name="from_time"
                     value="{{ Carbon::parse($data->from)->format('H:i') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
-                <neo-timepicker label="{{ __('Drop-off Time') }}" name="to_time"
+                <neo-timepicker label="{{ __('Drop-off Time') . ' (*)' }}" name="to_time"
                     value="{{ Carbon::parse($data->to)->format('H:i') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
                 <neo-textbox id="charge_trigger" label="{{ __('Charges') }}" name="total" value="{{ old('total') }}"
-                    value="{{ $charges['total'] }}" disable></neo-textbox>
-                <neo-select label="{{ __('Status') }}" name="status">
+                    value="{{ $charges['total'] }}" class="cursor-pointer" disable></neo-textbox>
+                <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::orderList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == $data->status ? 'active' : '' }}>
                             {{ __(ucwords($status)) }}

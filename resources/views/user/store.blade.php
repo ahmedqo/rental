@@ -10,8 +10,10 @@
             <form action="{{ route('actions.users.store') }}" method="POST"
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
-                <neo-textbox label="{{ __('First Name') }}" name="first_name" value="{{ old('first_name') }}"></neo-textbox>
-                <neo-textbox label="{{ __('Last Name') }}" name="last_name" value="{{ old('last_name') }}"></neo-textbox>
+                <neo-textbox label="{{ __('First Name') . ' (*)' }}" name="first_name"
+                    value="{{ old('first_name') }}"></neo-textbox>
+                <neo-textbox label="{{ __('Last Name') . ' (*)' }}" name="last_name"
+                    value="{{ old('last_name') }}"></neo-textbox>
                 <neo-select label="{{ __('Gender') }}" name="gender">
                     @foreach (Core::genderList() as $gender)
                         <neo-select-item value="{{ $gender }}" {{ $gender == old('gender') ? 'active' : '' }}>
@@ -21,9 +23,9 @@
                 </neo-select>
                 <neo-datepicker {{ !Core::lang('ar') ? 'full-day=3' : '' }} label="{{ __('Birth Date') }}"
                     name="birth_date" format="dddd dd mmmm yyyy" value="{{ old('birth_date') }}"></neo-datepicker>
-                <neo-textbox type="email" label="{{ __('Email') }}" name="email"
+                <neo-textbox type="email" label="{{ __('Email') . ' (*)' }}" name="email"
                     value="{{ old('email') }}"></neo-textbox>
-                <neo-textbox type="tel" label="{{ __('Phone') }}" name="phone"
+                <neo-textbox type="tel" label="{{ __('Phone') . ' (*)' }}" name="phone"
                     value="{{ old('phone') }}"></neo-textbox>
                 <neo-textarea label="{{ __('Address') }}" name="address" value="{{ old('address') }}"
                     class="lg:col-span-2"></neo-textarea>

@@ -16,7 +16,7 @@
     --p-r-huge: 10px;
     --p-w-thin: 600;
     --p-w-huge: 800;
-    --p-shadow: 0px 10px 20px -15px #07263e;
+    --p-shadow: 0px 8px 8px -8px rgb(var(--p-black) / 20%);
     /** */
     --p-color-sys-0: #94A3B8;
     --p-color-sys-1: #78716C;
@@ -163,4 +163,15 @@ html[lang="ar"] *::before {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
     line-height: 2rem;
+}
+
+#chart-viewer {
+    width: 100%;
+    padding: 16px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--p-r-thin);
+    background: rgb(var(--p-white));
+    border: 1px solid rgb(var(--p-shade));
+    box-shadow: 0 0 #0000, 0 0 #0000, var(--p-shade);
 }

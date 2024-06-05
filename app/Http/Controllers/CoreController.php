@@ -30,7 +30,42 @@ class CoreController extends Controller
             return $carry + json_decode($curr->charges, true)['total'];
         }, 0))];
 
-        return view('core.index', compact('count', 'work', 'money', 'charges'));
+        return view('core.index', compact('count', 'work', 'money', 'charges', 'startDate', 'endDate'));
+    }
+
+    public function chart_action()
+    {
+        [$startDate, $endDate, $columns] = Core::getDates();
+
+        $profit = array_slice($columns, 0);
+        $charges = array_slice($columns, 0);
+
+        Reservation::where('status', 'completed')->where(function ($query) use ($startDate, $endDate) {
+            $query->where('from', '<=', $endDate)
+                ->where('to', '>=', $startDate);
+        })->get()->groupBy(function ($model) {
+            return Core::groupKey($model);
+        })->map(function ($group) {
+            $total = $group->sum(function ($carry) {
+                return $carry->total;
+            });
+            $charges = $group->sum(function ($carry) {
+                return json_decode($carry->charges, true)['total'];
+            });
+
+            return [$total - $charges, $charges];
+        })->each(function ($item, $key) use (&$profit, &$charges) {
+            $profit[$key] = $item[0];
+            $charges[$key] = $item[1];
+        });
+
+        return response()->json([
+            'data' => [
+                array_keys($columns),
+                array_values($profit),
+                array_values($charges)
+            ]
+        ]);
     }
 
     public function most_action()

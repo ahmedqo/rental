@@ -24,12 +24,12 @@
                     class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
                     <neo-select label="{{ __('Location') }}" name="location"
                         class="bg-transparent lg:flex-[2.5] col-span-2 custom">
-                        <neo-select-item value="airport" {{ request('location') == 'airport' ? 'active' : '' }}>
-                            {{ __(ucwords('Airport')) }}
-                        </neo-select-item>
-                        <neo-select-item value="city center" {{ request('location') == 'city center' ? 'active' : '' }}>
-                            {{ __(ucwords('City Center')) }}
-                        </neo-select-item>
+                        @foreach (Core::locationList() as $location)
+                            <neo-select-item
+                                value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
+                                {{ __(ucwords($location)) }}
+                            </neo-select-item>
+                        @endforeach
                         <svg slot="end" class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
                             viewBox="0 -960 960 960" fill="currentColor">
                             <path
@@ -381,7 +381,7 @@
                         <ul class="w-full grid grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
                             @forelse ($cars as $car)
                                 <li
-                                    class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 bg-x-white shadow-x-core rounded-x-thin">
+                                    class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 lg:p-6 bg-x-white shadow-x-core rounded-2xl">
                                     <img src="{{ $car->Images[0]->Link }}" alt="{{ ucwords($car->name) }} Image"
                                         loading="lazy"
                                         class="hidden lg:block w-1/5 aspect-square object-contain object-center" />
@@ -451,14 +451,15 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <ul class="w-full flex flex-col items-end flex-[1] min-w-20 lg:min-w-0 my-auto">
+                                    <ul
+                                        class="w-full flex flex-col items-end flex-[1] min-w-20 lg:min-w-0 my-auto lg:me-2">
                                         <li class="w-full lg:hidden">
-                                            <img src="{{ $car->Images[0]->Link }}"
-                                                alt="{{ ucwords($car->name) }} Image" loading="lazy"
+                                            <img src="{{ $car->Images[0]->Link }}" alt="{{ ucwords($car->name) }} Image"
+                                                loading="lazy"
                                                 class="block w-full aspect-square object-contain object-center" />
                                         </li>
                                         <li class="hidden lg:block text-2xl text-x-black font-x-huge mt-2">
-                                            ${{ $car->price }}
+                                            {{ $car->price }} {{ __('$') }}
                                         </li>
                                         <li class="hidden lg:block text-xs lg:text-base text-x-black font-normal">
                                             {{ __('Per Day') }}
@@ -480,7 +481,7 @@
                                         <li>
                                             <ul class="w-full flex flex-col items-end">
                                                 <li class=" text-2xl text-x-black font-x-huge">
-                                                    ${{ $car->price }}
+                                                    {{ $car->price * Core::rate() }} {{ __('$') }}
                                                 </li>
                                                 <li class=" text-xs lg:text-base text-x-black font-normal">
                                                     {{ __('Per Day') }}

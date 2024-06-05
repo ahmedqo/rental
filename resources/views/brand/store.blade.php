@@ -12,14 +12,12 @@
                 @csrf
                 <div class="flex flex-col lg:col-span-2">
                     <label class="text-sm text-x-black font-x-thin">
-                        {{ __('Image') }}
+                        {{ __('Image') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="image" class="video"></neo-imagetransfer>
                 </div>
-                <neo-textbox label="{{ __('Name') . ' (en)' }}" name="name_en" value="{{ old('name_en') }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (fr)' }}" name="name_fr" value="{{ old('name_fr') }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (it)' }}" name="name_it" value="{{ old('name_it') }}"></neo-textbox>
-                <neo-textbox label="{{ __('Name') . ' (sp)' }}" name="name_sp" value="{{ old('name_sp') }}"></neo-textbox>
+                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name_en" value="{{ old('name_en') }}"
+                    class="lg:col-span-2"></neo-textbox>
                 <neo-textarea auto="false" label="{{ __('Description') . ' (en)' }}" name="description_en"
                     value="{{ old('description_en') }}" rows="5"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Description') . ' (fr)' }}" name="description_fr"

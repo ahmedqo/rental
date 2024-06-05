@@ -1,4 +1,5 @@
 {
+    "$": "€",
     "Forgot your password? No problem. Just tell us your email, and we will send you a link that will allow you to choose a new password": "Mot de passe oublié ? Pas de problème. Indiquez votre e-mail, nous vous enverrons un lien pour un nouveau mot de passe",
     "No need to worry, we've got you covered! Let us provide you with a new password": "Pas besoin de s'inquiéter, nous sommes là pour vous ! Laissez-nous vous fournir un nouveau mot de passe",
     "Please check your email for password reset instructions": "Veuillez vérifier votre e-mail pour les instructions de réinitialisation du mot de passe",
@@ -189,5 +190,14 @@
     "Terms And Conditions": "Conditions Générales",
     "Explore our guidelines for product/service usage, outlining responsibilities, rights, and limitations for a transparent relationship.": "Découvrez nos directives pour l'utilisation des produits/services, décrivant les responsabilités, droits et limitations pour une relation transparente.",
     "Discover how we safeguard your data and outline its usage, ensuring confidentiality and security.": "Découvrez comment nous protégeons vos données et décrivons leur utilisation, en assurant confidentialité et sécurité.",
-    "Find quick answers to common queries, ensuring a smooth experience.": "Trouvez des réponses rapides aux questions courantes, garantissant une expérience fluide."
+    "Find quick answers to common queries, ensuring a smooth experience.": "Trouvez des réponses rapides aux questions courantes, garantissant une expérience fluide.",
+
+    "Popular Cars": "Voitures Populaires",
+    "Income Visualization": "Visualisation Des Revenus",
+    "Your car is reserved at": "Votre voiture est réservée à",
+    "Your Receipt": "Votre Reçu",
+    "Have a Question?": "Vous Avez une Question?",
+    "Go to FAQ": "Consultez la FAQ",
+    "Give us a call": "Appelez-nous",
+    "Message us": "Envoyez-nous un message"
 }

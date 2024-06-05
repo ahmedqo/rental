@@ -93,7 +93,7 @@
                                 class="block w-full aspect-square object-contain object-center" />
                         </li>
                         <li class="text-2xl text-x-black font-x-huge mt-2">
-                            ${{ $data->price }}
+                            {{ $data->price }} {{ Core::$CURRENCY }}
                         </li>
                         <li class="text-xs text-x-black font-normal">
                             {{ __('Per Day') }}
@@ -110,7 +110,8 @@
                                     d="M222-340v-56H121v-121h202v-40H180q-24.28 0-41.64-16.8T121-615.94V-782q0-23.85 17.36-40.42Q155.72-839 180-839h42v-55h121v55h101v121H242v40h145q23.85 0 40.42 16.86Q444-644.27 444-620v166q0 23.85-16.58 40.92Q410.85-396 387-396h-44v56H222ZM573-75 380-269l91-90 102 102 216-214 90 90L573-75Z" />
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
-                                <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Profit') }}</h2>
+                                <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Profit') }}
+                                    ({{ Core::$CURRENCY }})</h2>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ Core::formatNumber($money[0] - $charges[0]) }} /
                                     {{ Core::formatNumber($money[1] - $charges[1]) }}
@@ -125,7 +126,8 @@
                                     d="M527-94v-91h183L527-367v-128l246 246v-183h93v338H527ZM234-276v-46H97v-92h247v-113H189q-37.95 0-64.97-26.74Q97-580.47 97-621v-110q0-38 27.03-66 27.02-28 64.97-28h45v-45h68v45h134v92H188v114h154q39.06 0 66.53 27.5T436-525v110q0 39.41-27.47 66.21Q381.06-322 342-322h-40v46h-68Z" />
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
-                                <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Charges') }}</h2>
+                                <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Charges') }}
+                                    ({{ Core::$CURRENCY }})</h2>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ $charges[0] }} / {{ $charges[1] }}
                                 </p>

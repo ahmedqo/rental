@@ -286,6 +286,7 @@ const Locale = document.documentElement.lang,
     .getPropertyValue("--prime") + ")",
     Color = "rgb(" + getComputedStyle(document.documentElement)
     .getPropertyValue("--white") + ")",
+    Currency = document.querySelector("[name=currency]").content,
     COLS = {
         most: () => [{
             name: "id",
@@ -337,9 +338,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "price",
-            text: Neo.Helper.trans("Price"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Price") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -352,9 +353,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "profit",
-            text: Neo.Helper.trans("Profit"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Profit") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -367,9 +368,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "charges",
-            text: Neo.Helper.trans("Charges"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Charges") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -560,58 +561,12 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "name_en",
-            text: Neo.Helper.trans('Name') + " (en)",
-            visible: Locale === "en",
+            text: Neo.Helper.trans('Name'),
             headPdfStyle: {
                 background: Background,
                 color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_fr",
-            text: Neo.Helper.trans('Name') + " (fr)",
-            visible: Locale === "fr",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_it",
-            text: Neo.Helper.trans('Name') + " (it)",
-            visible: Locale === "it",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_sp",
-            text: Neo.Helper.trans('Name') + " (sp)",
-            visible: Locale === "sp",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -735,58 +690,12 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "name_en",
-            text: Neo.Helper.trans('Name') + " (en)",
-            visible: Locale === "en",
+            text: Neo.Helper.trans('Name'),
             headPdfStyle: {
                 background: Background,
                 color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_fr",
-            text: Neo.Helper.trans('Name') + " (fr)",
-            visible: Locale === "fr",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_it",
-            text: Neo.Helper.trans('Name') + " (it)",
-            visible: Locale === "it",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_sp",
-            text: Neo.Helper.trans('Name') + " (sp)",
-            visible: Locale === "sp",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -911,58 +820,12 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "name_en",
-            text: Neo.Helper.trans('Name') + " (en)",
-            visible: Locale === "en",
+            text: Neo.Helper.trans('Name'),
             headPdfStyle: {
                 background: Background,
                 color: Color
             },
             bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_en),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_fr",
-            text: Neo.Helper.trans('Name') + " (fr)",
-            visible: Locale === "fr",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_fr),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_it",
-            text: Neo.Helper.trans('Name') + " (it)",
-            visible: Locale === "it",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_it),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-            bodyCsvRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "name_sp",
-            text: Neo.Helper.trans('Name') + " (sp)",
-            visible: Locale === "sp",
-            headPdfStyle: {
-                background: Background,
-                color: Color
-            },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name_sp),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -976,7 +839,7 @@ const Locale = document.documentElement.lang,
                 background: Background,
                 color: Color,
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.brand["name_" + Locale]),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.brand.name_en),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -990,7 +853,7 @@ const Locale = document.documentElement.lang,
                 background: Background,
                 color: Color,
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.category["name_" + Locale]),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.category.name_en),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -999,9 +862,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "price",
-            text: Neo.Helper.trans("Price"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Price") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -1284,42 +1147,10 @@ const Locale = document.documentElement.lang,
                 return this.bodyRender(row);
             },
         }, {
-            name: "total",
-            text: Neo.Helper.trans("Total"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
-            visible: false,
-            headPdfStyle: function() {
-                return {...this.headStyle, background: Background, color: Color };
-            },
-            bodyPdfStyle: function() {
-                return this.bodyStyle;
-            },
-            bodyRender: (row) => Neo.Helper.Str.money(row.total, 3),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
-            name: "charges",
-            text: Neo.Helper.trans("Charges"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
-            visible: false,
-            headPdfStyle: function() {
-                return {...this.headStyle, background: Background, color: Color };
-            },
-            bodyPdfStyle: function() {
-                return this.bodyStyle;
-            },
-            bodyRender: (row) => Neo.Helper.Str.money(JSON.parse(row.charges).total, 3),
-            bodyPdfRender: function(row) {
-                return this.bodyRender(row);
-            },
-        }, {
             name: "profit",
-            text: Neo.Helper.trans("Profit"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Profit") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -1327,6 +1158,21 @@ const Locale = document.documentElement.lang,
                 return this.bodyStyle;
             },
             bodyRender: (row) => Neo.Helper.Str.money(row.total - JSON.parse(row.charges).total, 3),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "charges",
+            text: Neo.Helper.trans("Charges") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.money(JSON.parse(row.charges).total, 3),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1409,7 +1255,7 @@ const Locale = document.documentElement.lang,
                 background: Background,
                 color: Color
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.car["name_" + Locale]),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.car.name_en),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1461,9 +1307,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "total",
-            text: Neo.Helper.trans("Total"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Total") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -1476,9 +1322,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "charges",
-            text: Neo.Helper.trans("Charges"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Charges") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -1491,9 +1337,9 @@ const Locale = document.documentElement.lang,
             },
         }, {
             name: "profit",
-            text: Neo.Helper.trans("Profit"),
-            headStyle: { width: 100, textAlign: "center", },
-            bodyStyle: { width: 100, textAlign: "center", },
+            text: Neo.Helper.trans("Profit") + " (" + Currency + ")",
+            headStyle: { width: 120, textAlign: "center", },
+            bodyStyle: { width: 120, textAlign: "center", },
             headPdfStyle: function() {
                 return {...this.headStyle, background: Background, color: Color };
             },
@@ -1964,4 +1810,97 @@ function ReservationInitializer({ Search }, data) {
             }
         });
     }
+}
+
+async function CoreInitializer({ Table, Pie, Line, Search, Data, Profit, Charges }) {
+    TableVisualizer(Table, "most", { Search });
+
+    new Chart(Pie, {
+        type: "doughnut",
+        data: {
+            labels: [Neo.Helper.trans("Profit"), Neo.Helper.trans("Charges")],
+            datasets: [{
+                data: [Profit, Charges],
+                borderWidth: 1,
+                backgroundColor: ["#22C55E", "#EC4899"],
+                borderColor: ["#22C55E", "#EC4899"]
+            }, ]
+        },
+        options: {
+            responsive: true,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+        }
+    });
+
+    const data = await getData(Data);
+    data[0] = data[0].map(e => Neo.Helper.trans(e));
+
+    new Chart(line, {
+        type: "line",
+        data: {
+            labels: data[0],
+            datasets: [{
+                data: data[1],
+                borderWidth: 2,
+                backgroundColor: "#22C55E",
+                borderColor: "#22C55E"
+            }, {
+                data: data[2],
+                borderWidth: 2,
+                backgroundColor: "#EC4899",
+                borderColor: "#EC4899"
+            }, ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+        }
+    });
+
+    line.parentElement.classList.remove("aspect-video");
+    line.nextElementSibling.remove();
+
+    document.querySelector("#printer").addEventListener("click", () => {
+        document.querySelector("#chart-viewer").src = line.toDataURL();
+        document.querySelector("neo-printer").print();
+    });
+
+    function parse(str) {
+        if (!str) return '""';
+        str = String(str).replace(/"/g, `""`);
+        if (/[",\n]/.test(str)) {
+            str = `"${str}"`;
+        }
+        return str;
+    }
+
+    function resize() {
+        Pie.style.width = "100%";
+        Pie.style.height = "100%";
+        Line.style.width = "100%";
+        Line.style.height = "100%";
+    }
+
+    const csv = [
+        ["", ...data[0]],
+        [Neo.Helper.trans("Profit"), ...data[1]],
+        [Neo.Helper.trans("Charges"), ...data[2]]
+    ].map(e => e.map(c => parse(typeof c === "number" ? Neo.Helper.Str.money(c) : c)).join(',')).join("\n");
+    document.querySelector("#download").href = URL.createObjectURL(new Blob([csv], {
+        type: "text/csv",
+    }));
+
+    window.addEventListener("resize", resize);
+    document.querySelector("#trigger").addEventListener("click", e => {
+        setTimeout(() => resize(), 250);
+    });
 }
