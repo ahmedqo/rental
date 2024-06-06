@@ -314,6 +314,76 @@
                             </form>
                         </div>
                     </div>
+                    <div class="w-full flex flex-col gap-6 lg:col-span-3">
+                        <div class="w-full flex flex-col gap-4 items-center justify-center px-4 py-10">
+                            <h3 class="text-x-black font-x-thin text-xl text-center">
+                                {{ __('Your opinion matters. Tell us about your experience') }}
+                            </h3>
+                            <button id="feedback_trigger"
+                                class="w-max max-w-full text-center py-2 px-4 font-x-huge text-x-prime text-base border rounded-x-thin border-x-prime bg-x-white relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                                {{ __('Share Feedback') }}
+                            </button>
+                            <neo-overlay id="feedback_overlay" label="{{ __('Create Feedback') }}">
+                                <form id="feedback_form" action=""
+                                    class="w-full grid grid-row-1 grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+                                    <div class="lg:col-span-2">
+                                        <p class="text-x-black font-x-thin text-base">
+                                            {{ __('Thank you in advance for your feedback.') }}
+                                        </p>
+                                    </div>
+                                    <div class="flex flex-col lg:col-span-2">
+                                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                                            {{ __('Overall Satisfaction') . ' (*)' }}
+                                        </label>
+                                        <div id="rate-group" class="w-full flex gap-2 rounded-x-thin">
+                                            @for ($i = 1; $i < 6; $i++)
+                                                <div class="flex-[1] relative">
+                                                    <input type="radio" id="rate-{{ $i }}" name="rate"
+                                                        value="1" data-error=".feed-error-0"
+                                                        class="w-0 h-0 absolute inset-0 pointer-events-none opacity-0 peer" />
+                                                    <label for="rate-{{ $i }}"
+                                                        class="w-full p-2 flex font-x-huge text-base items-center justify-center gap-2 border border-x-shade rounded-x-thin peer-checked:bg-x-prime peer-checked:text-x-white peer-focus:bg-x-prime peer-focus:bg-opacity-20 hover:bg-x-prime hover:bg-opacity-20">
+                                                        {{ $i }}
+                                                        <svg class="block w-2.5 h-2.5 pointer-events-none"
+                                                            viewBox="0 -960 960 960" fill="currentColor">
+                                                            <path
+                                                                d="M279.78-736.59 394-884q16.48-20.94 39.38-31.47Q456.29-926 480-926q25 0 47.67 10.53Q550.33-904.94 567-884l113.22 147.41L852-679q36 12 55 41.5t19 62.45q0 17.05-4.5 33.55Q917-525 906-510L797-353.41 801-187q0 47-34 79t-82 32q-2 0-23-2l-182-50-181.11 50.08Q293-76 287-75.5q-6 .5-12 .5-47.2 0-81.6-32.5Q159-140 160-188l4-165L53.79-510.33Q43-526 38.5-542.17 34-558.33 34-575q0-34 19.42-63.11Q72.84-667.21 109-679l170.78-57.59Z" />
+                                                        </svg>
+                                                    </label>
+                                                </div>
+                                            @endfor
+                                        </div>
+                                        <span
+                                            class="feed-error-0 mt-1 hidden block text-sm font-x-thin text-red-400"></span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <neo-textbox data-error=".feed-error-1" label="{{ __('Name') . ' (*)' }}"
+                                            name="name" value="{{ old('name') }}"
+                                            class="bg-transparent"></neo-textbox>
+                                        <span class="feed-error-1 hidden block text-sm font-x-thin text-red-400"></span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <neo-textbox data-error=".feed-error-2" type="email"
+                                            label="{{ __('Email') . ' (*)' }}" name="email"
+                                            value="{{ old('email') }}" class="bg-transparent"></neo-textbox>
+                                        <span class="feed-error-2 hidden block text-sm font-x-thin text-red-400"></span>
+                                    </div>
+                                    <div class="flex flex-col gap-1 lg:col-span-2">
+                                        <neo-textarea data-error=".feed-error-3" label="{{ __('Content') . ' (*)' }}"
+                                            name="content" value="{{ old('content') }}" rows="4"
+                                            class="bg-transparent"></neo-textarea>
+                                        <span class="feed-error-3 hidden block text-sm font-x-thin text-red-400"></span>
+                                    </div>
+                                    <div class="w-full flex lg:col-span-2">
+                                        <neo-button
+                                            class="w-full lg:w-max lg:px-20 lg:ms-auto px-4 py-2 text-base lg:text-lg font-x-huge text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
+                                            <span>{{ __('Create') }}</span>
+                                        </neo-button>
+                                    </div>
+                                </form>
+                            </neo-overlay>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -332,6 +402,24 @@
             </li>
         </ul>
     </div>
+    @if (Session::has('modal'))
+        <neo-overlay id="modal" class="sm-center">
+            <div class="w-full flex flex-col gap-4 p-6 overflow-hidden pb-12">
+                <div class="check-container">
+                    <div class="check-background">
+                        <svg viewBox="0 0 65 51" class="text-x-white" fill="none">
+                            <path d="M7 25L27.3077 44L58.5 7" stroke="currentColor" stroke-width="13"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="check-shadow"></div>
+                </div>
+                <span class="check-text text-x-black font-x-thin text-xl lg:text-2xl text-center">
+                    {{ __('Reervation completed successfully') }}
+                </span>
+            </div>
+        </neo-overlay>
+    @endif
 @endsection
 
 @section('scripts')

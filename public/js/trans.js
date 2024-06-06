@@ -1,5 +1,7 @@
 Neo.Locales.fr = {
     ...Neo.Locales.fr,
+    "Content Is Required": "Le Contenu Est Requis",
+    "Rate Is Required": "L'Evaluation Est Requis",
     "Name Is Required": "Le Nom Est Requis",
     "Email Is Required": "L'Email Est Requis",
     "Phone Is Required": "Le Téléphone Est Requis",
@@ -44,6 +46,8 @@ Neo.Locales.it = {
     "Download": "Scaricare",
     "No Data Found": "Nessun Dato Trovato",
 
+    "Content Is Required": "Il Contenuto E Richiesto",
+    "Rate Is Required": "Il Valutazione E Richiesto",
     "Name Is Required": "Il Nome E Richiesto",
     "Email Is Required": "L'Email E Richiesto",
     "Phone Is Required": "Il Telefono E Richiesto",
@@ -88,6 +92,8 @@ Neo.Locales.sp = {
     "Download": "Descargar",
     "No Data Found": "No Se Encontraron Datos",
 
+    "Content Is Required": "EL Contenido Es Requerido",
+    "Rate Is Required": "EL Calificación Es Requerido",
     "Name Is Required": "El Nombre Es Requerido",
     "Email Is Required": "El Correo Electrónico Es Requerido",
     "Phone Is Required": "El Teléfono Es Requerido",

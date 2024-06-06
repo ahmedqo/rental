@@ -177,8 +177,7 @@ class GuestController extends Controller
         ])->all());
 
         return Redirect::back()->with([
-            'message' => __('Created successfully'),
-            'type' => 'success'
+            'modal' => true
         ]);
     }
 }

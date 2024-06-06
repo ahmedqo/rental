@@ -12,7 +12,7 @@
                 @csrf
                 @method('patch')
                 <div class="flex flex-col lg:col-span-2">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Image') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="image" class="video"></neo-imagetransfer>

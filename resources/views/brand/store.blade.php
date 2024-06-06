@@ -11,7 +11,7 @@
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 <div class="flex flex-col lg:col-span-2">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Image') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="image" class="video"></neo-imagetransfer>

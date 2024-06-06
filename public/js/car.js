@@ -1,3 +1,5 @@
+if (document.querySelector("#modal")) document.querySelector("#modal").show();
+
 const
     tabs = document.querySelectorAll(".tabs"),
     blocks = document.querySelectorAll("[block]"),
@@ -8,7 +10,10 @@ const
     smdays = document.querySelector("#sm-days"),
     booking = document.querySelector("#book"),
     reservation = document.querySelector("#reservation"),
-    smreserve = document.querySelector("#sm-reserve");
+    smreserve = document.querySelector("#sm-reserve"),
+    feedback_trigger = document.querySelector("#feedback_trigger"),
+    feedback_overlay = document.querySelector("#feedback_overlay"),
+    feedback_form = document.querySelector("#feedback_form");
 
 if (document.querySelector("#ui-carousel")) Slider({
     root: document.querySelector("#ui-carousel"),
@@ -152,14 +157,57 @@ function reserve(e) {
     if (!errors.includes(true)) booking.submit();
 }
 
+function feedback(e) {
+    e.preventDefault();
+    const errors = [];
+    const sourceElements = feedback_form.elements;
+
+    for (let i = 0; i < sourceElements.length; i++) {
+        const sourceElement = sourceElements[i];
+        if ("value" in sourceElement) {
+            const error = document.querySelector(sourceElement.dataset.error);
+            if (sourceElement.value.trim()) {
+                sourceElement.classList.remove("outline", "outline-2",
+                    "outline-red-400", "outline-offset-[-2px]");
+                error && error.classList.add("hidden");
+            } else {
+                sourceElement.classList.add("outline", "outline-2", "outline-red-400",
+                    "outline-offset-[-2px]");
+                error && (error.innerHTML = Neo.Helper.trans(ucWords(sourceElement.name) + " Is Required"));
+                error && error.classList.remove("hidden");
+            }
+            errors.push(!sourceElement.value.trim());
+        }
+    }
+
+    const error = document.querySelector(sourceElements['rate'][0].dataset.error);
+    if ([...sourceElements['rate']].map(e => e.checked).find(e => e)) {
+        document.querySelector("#rate-group").classList.remove("outline", "outline-2",
+            "outline-red-400", "outline-offset-[-2px]", "p-1");
+        error && error.classList.add("hidden");
+        errors.push(true);
+    } else {
+        document.querySelector("#rate-group").classList.add("outline", "outline-2",
+            "outline-red-400", "outline-offset-[-2px]", "p-1");
+        error && (error.innerHTML = Neo.Helper.trans(ucWords("Rate Is Required")));
+        error && error.classList.remove("hidden");
+        errors.push(false);
+    }
+}
+
 (new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         smreserve.classList[entry.isIntersecting ? "add" : "remove"]("translate-y-full");
     });
 })).observe(reservation);
 
+feedback_trigger.addEventListener("click", e => {
+    feedback_overlay.show();
+});
+
 booking.addEventListener("change", calcPrice);
 booking.addEventListener("input", calcPrice);
 window.addEventListener("scroll", intersect);
 booking.addEventListener("submit", reserve);
+feedback_form.addEventListener("submit", feedback);
 calcPrice();

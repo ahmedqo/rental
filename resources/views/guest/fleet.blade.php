@@ -60,7 +60,7 @@
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10">
                     <neo-dropdown label="{{ __('Filters') }}" class="lg:hidden">
                         <button slot="trigger"
-                            class="w-full text-center py-2 font-x-huge text-x-prime text-base border border-x-prime bg-x-white relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                            class="w-full text-center py-2 font-x-huge rounded-x-thin text-x-prime text-base border border-x-prime bg-x-white relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
                             {{ __('Filters') }}
                         </button>
                         <form id="sm-form" class="flex flex-col">

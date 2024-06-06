@@ -1,6 +1,6 @@
 <header>
     <neo-topbar align="space-between" class="bg-x-white">
-        <neo-dropdown label="{{ __('Menu') }}" class="lg:hidden menu-dropdown" position="center">
+        <neo-dropdown label="{{ __('Menu') }}" class="lg:hidden sm-center" position="center">
             <button aria-label="menu_trigger" slot="trigger"
                 class="flex items-center justify-center w-6 h-6 text-x-black outline-none relative isolate before:content-[''] before:rounded-x-thin before:absolute before:block before:w-[130%] before:h-[130%] before:-inset-[15%] before:-z-[1] before:!bg-opacity-40 hover:before:bg-x-shade focus:before:bg-x-shade focus-within:before:bg-x-shade">
                 <svg class="block w-5 h-5 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
@@ -35,7 +35,8 @@
                 @endforeach
             </ul>
         </nav>
-        <neo-dropdown label="{{ __('Languages') }}" position="{{ Core::lang('ar') ? 'start' : 'end' }}">
+        <neo-dropdown label="{{ __('Languages') }}" class="sm-center"
+            position="{{ Core::lang('ar') ? 'start' : 'end' }}">
             <button slot="trigger" aria-label="language_trigger"
                 class="flex items-center justify-center w-6 h-6 text-x-black outline-none relative isolate before:content-[''] before:rounded-x-thin before:absolute before:block before:w-[130%] before:h-[130%] before:-inset-[15%] before:-z-[1] before:!bg-opacity-40 hover:before:bg-x-shade focus:before:bg-x-shade focus-within:before:bg-x-shade">
                 <svg class="block w-5 h-5 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">

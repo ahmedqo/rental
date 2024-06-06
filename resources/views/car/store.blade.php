@@ -69,31 +69,31 @@
                     @endforeach
                 </neo-select>
                 <div class="flex flex-col lg:col-span-2">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Images') . ' (*)' }}
                     </label>
                     <neo-imagetransfer name="images[]" class="lg:col-span-2" multiple></neo-imagetransfer>
                 </div>
                 <div class="flex flex-col">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Description') }} (en)
                     </label>
                     <textarea id="description_en" name="description_en" placeholder="{{ __('Description') }}  (en)" rows="3">{{ old('description_en') }}</textarea>
                 </div>
                 <div class="flex flex-col">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Description') }} (fr)
                     </label>
                     <textarea id="description_fr" name="description_fr" placeholder="{{ __('Description') }}  (fr)" rows="3">{{ old('description_fr') }}</textarea>
                 </div>
                 <div class="flex flex-col">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Description') }} (it)
                     </label>
                     <textarea id="description_it" name="description_it" placeholder="{{ __('Description') }}  (it)" rows="3">{{ old('description_it') }}</textarea>
                 </div>
                 <div class="flex flex-col">
-                    <label class="text-sm text-x-black font-x-thin">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Description') }} (sp)
                     </label>
                     <textarea id="description_sp" name="description_sp" placeholder="{{ __('Description') }}  (sp)" rows="3">{{ old('description_sp') }}</textarea>
