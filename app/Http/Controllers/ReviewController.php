@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
+use App\Models\Review;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
-class BrandController extends Controller
+class ReviewController extends Controller
 {
     public function index_view(Request $Request)
     {
-        return view('brand.index');
+        return view('review.index');
     }
 
     public function store_view()
     {
-        return view('brand.store');
+        return view('review.store');
     }
 
     public function patch_view($id)
     {
-        $data = Brand::findorfail($id);
-        return view('brand.patch', compact('data'));
+        $data = Review::findorfail($id);
+        return view('review.patch', compact('data'));
     }
 
     public function search_action(Request $Request)
     {
-        $data = Brand::with('Image')->orderBy('id', 'DESC');
+        $data = Review::with('Car')->orderBy('id', 'DESC');
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }
@@ -40,8 +40,12 @@ class BrandController extends Controller
     public function store_action(Request $Request)
     {
         $validator = Validator::make($Request->all(), [
-            'name_en' => ['required', 'string', 'unique:brands'],
-            'image' => ['required', 'image'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'status' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'rate' => ['required', 'integer'],
+            'car' => ['required', 'integer'],
         ]);
 
         if ($validator->fails()) {
@@ -51,12 +55,7 @@ class BrandController extends Controller
             ]);
         }
 
-        Brand::create($Request->merge([
-            'slug' =>  Str::slug($Request->name_en),
-            'name_fr' => $Request->name_en,
-            'name_it' => $Request->name_en,
-            'name_sp' => $Request->name_en,
-        ])->all());
+        Review::create($Request->all());
 
         return Redirect::back()->with([
             'message' => __('Created successfully'),
@@ -67,7 +66,12 @@ class BrandController extends Controller
     public function patch_action(Request $Request, $id)
     {
         $validator = Validator::make($Request->all(), [
-            'name_en' => ['required', 'string', 'unique:brands,name_en,' . $id],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'status' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'rate' => ['required', 'integer'],
+            'car' => ['required', 'integer'],
         ]);
 
         if ($validator->fails()) {
@@ -77,19 +81,7 @@ class BrandController extends Controller
             ]);
         }
 
-        $Brand = Brand::findorfail($id);
-        $Brand->update($Request->merge([
-            'slug' =>  Str::slug($Request->name_en),
-            'name_fr' => $Request->name_en,
-            'name_it' => $Request->name_en,
-            'name_sp' => $Request->name_en,
-        ])->all());
-
-        if ($Request->hasFile('image')) {
-            Image::$FILE = $Request->file('image');
-            $Brand->Image->delete();
-            $Brand->Image()->create();
-        }
+        Review::findorfail($id)->update($Request->all());
 
         return Redirect::back()->with([
             'message' => __('Updated successfully'),
@@ -99,9 +91,9 @@ class BrandController extends Controller
 
     public function clear_action($id)
     {
-        Brand::findorfail($id)->delete();
+        Review::findorfail($id)->delete();
 
-        return Redirect::route('views.brands.index')->with([
+        return Redirect::route('views.reviews.index')->with([
             'message' => __('Deleted successfully'),
             'type' => 'success'
         ]);

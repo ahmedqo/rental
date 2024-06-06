@@ -13,12 +13,7 @@ class BlogController extends Controller
 {
     public function index_view(Request $Request)
     {
-        $data = Blog::with('Image')->orderBy('id', 'DESC');
-        if ($Request->search) {
-            $data = $data->search($Request->search);
-        }
-        $data = $data->cursorPaginate(50);
-        return view('blog.index', compact('data'));
+        return view('blog.index');
     }
 
     public function store_view()

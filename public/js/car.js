@@ -164,6 +164,7 @@ function feedback(e) {
 
     for (let i = 0; i < sourceElements.length; i++) {
         const sourceElement = sourceElements[i];
+        if (sourceElement.type === "radio") continue;
         if ("value" in sourceElement) {
             const error = document.querySelector(sourceElement.dataset.error);
             if (sourceElement.value.trim()) {
@@ -185,14 +186,15 @@ function feedback(e) {
         document.querySelector("#rate-group").classList.remove("outline", "outline-2",
             "outline-red-400", "outline-offset-[-2px]", "p-1");
         error && error.classList.add("hidden");
-        errors.push(true);
     } else {
         document.querySelector("#rate-group").classList.add("outline", "outline-2",
             "outline-red-400", "outline-offset-[-2px]", "p-1");
         error && (error.innerHTML = Neo.Helper.trans(ucWords("Rate Is Required")));
         error && error.classList.remove("hidden");
-        errors.push(false);
     }
+    errors.push(![...sourceElements['rate']].map(e => e.checked).find(e => e));
+
+    if (!errors.includes(true)) feedback_form.submit();
 }
 
 (new IntersectionObserver((entries) => {

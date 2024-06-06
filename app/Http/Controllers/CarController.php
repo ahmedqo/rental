@@ -6,6 +6,7 @@ use App\Functions\Core;
 use App\Models\Car;
 use App\Models\Image;
 use App\Models\Reservation;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -15,12 +16,7 @@ class CarController extends Controller
 {
     public function index_view(Request $Request)
     {
-        $data = Car::with('Images')->with('Brand')->with('Category')->orderBy('id', 'DESC');
-        if ($Request->search) {
-            $data = $data->search($Request->search);
-        }
-        $data = $data->cursorPaginate(50);
-        return view('car.index', compact('data'));
+        return view('car.index');
     }
 
     public function store_view()
@@ -77,6 +73,21 @@ class CarController extends Controller
         $data = Reservation::where('car', $id)->where(function ($query) use ($startDate, $endDate) {
             $query->where('from', '<=', $endDate)
                 ->where('to', '>=', $startDate);
+        });
+        if ($Request->search) {
+            $data = $data->search(urldecode($Request->search));
+        }
+        $data = $data->cursorPaginate(50);
+        return response()->json($data);
+    }
+
+    public function reviews_action(Request $Request, $id)
+    {
+        [$startDate, $endDate, $columns] = Core::getDates();
+
+        $data = Review::where('car', $id)->where(function ($query) use ($startDate, $endDate) {
+            $query->where('updated_at', '<=', $endDate)
+                ->where('updated_at', '>=', $startDate);
         });
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));

@@ -68,6 +68,11 @@ class Core
         return  ['canceled', 'pendding', 'confirmed', 'completed'];
     }
 
+    public static function rateList()
+    {
+        return  ['pendding', 'approved'];
+    }
+
     public static function transmissionList()
     {
         return ['manual', 'automatic'];

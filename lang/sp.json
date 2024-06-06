@@ -73,6 +73,7 @@
     "Cars List": "Lista De Coches",
     "New Car": "Nuevo Coche",
     "Edit Car": "Editar Coche",
+    "Preview Car": "Vista Del Coche",
     "Reservations": "Reservas",
     "Reservations List": "Lista De Reservas",
     "New Reservation": "Nueva Reserva",
@@ -81,6 +82,10 @@
     "Blogs List": "Lista De Blogs",
     "New Blog": "Nuevo Blog",
     "Edit Blog": "Editar Blog",
+    "Reviews": "Reseñas",
+    "Reviews List": "Lista De Reseñas",
+    "New Review": "Nueva Reseña",
+    "Edit Review": "Editar Reseña",
     "Image": "Imagen",
     "Name": "Nombre",
     "Description": "Descripción",
@@ -91,6 +96,7 @@
     "Status": "Estado",
     "Title": "Título",
     "Content": "Contenido",
+    "Rate": "Tasa",
     "Menu": "Menu",
     "Car": "Coche",
     "Charges": "Cargos",
@@ -98,6 +104,7 @@
     "pendding": "pendiente",
     "confirmed": "confirmado",
     "completed": "completado",
+    "approved": "aprobado",
     "Cost": "Costo",
     "Add": "Agregar",
     "Finence": "Finanzas",
@@ -201,10 +208,14 @@
     "Give us a call": "Llámenos",
     "Message us": "Envíenos un mensaje",
 
+    "Feedback created successfully": "Comentarios creados con éxito",
     "Reervation completed successfully": "Reserva completada con éxito",
     "Your opinion matters. Tell us about your experience": "Tu opinión es importante. Cuéntanos sobre tu experiencia",
     "Thank you in advance for your feedback.": "Gracias de antemano por tu comentario.",
     "Overall Satisfaction": "Satisfacción General",
     "Share Feedback": "Compartir Comentario",
-    "Create Feedback": "Crear Comentario"
+    "Create Feedback": "Crear Comentario",
+
+    "airport marrakech": "aeropuerto Marrakech",
+    "marrakech city center": "centro de la ciudad Marrakech"
 }

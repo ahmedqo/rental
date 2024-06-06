@@ -101,6 +101,7 @@ Neo.Locales.fr = {
     "pendding": "en attente",
     "confirmed": "confirmé",
     "completed": "terminé",
+    "approved": "approuvé",
     "Location": "Emplacement",
     "From": "De",
     "To": "À",
@@ -108,6 +109,11 @@ Neo.Locales.fr = {
     "Profit": "Profit",
     "Period": "Période",
     "Days": "Jours",
+    "Content": "Contenu",
+    "Rate": "Taux",
+
+    "airport marrakech": "aéroporte Marrakech",
+    "marrakech city center": "centre-ville Marrakech",
 }
 
 Neo.Locales.it = {
@@ -186,6 +192,7 @@ Neo.Locales.it = {
     "pendding": "in attesa",
     "confirmed": "confermato",
     "completed": "completato",
+    "approved": "approvato",
     "Location": "Posizione",
     "From": "Da",
     "To": "A",
@@ -193,6 +200,11 @@ Neo.Locales.it = {
     "Profit": "Profitto",
     "Period": "Periodo",
     "Days": "Giorni",
+    "Content": "Contenuto",
+    "Rate": "Tasso",
+
+    "airport marrakech": "aeroporto Marrakech",
+    "marrakech city center": "centro città Marrakech",
 }
 
 Neo.Locales.sp = {
@@ -271,6 +283,7 @@ Neo.Locales.sp = {
     "pendding": "pendiente",
     "confirmed": "confirmado",
     "completed": "completado",
+    "approved": "aprobado",
     "Location": "Ubicación",
     "From": "Desde",
     "To": "Hasta",
@@ -278,6 +291,11 @@ Neo.Locales.sp = {
     "Profit": "Beneficio",
     "Period": "Período",
     "Days": "Días",
+    "Content": "Contenido",
+    "Rate": "Tasa",
+
+    "airport marrakech": "aeropuerto Marrakech",
+    "marrakech city center": "centro de la ciudad Marrakech",
 }
 
 const Locale = document.documentElement.lang,
@@ -969,7 +987,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => Neo.Helper.trans(Neo.Helper.Str.capitalize(row.status)),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.status)),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1050,7 +1068,7 @@ const Locale = document.documentElement.lang,
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
         }],
-        car: () => [{
+        reservation: () => [{
             name: "id",
             text: Neo.Helper.trans("Id"),
             headStyle: { width: 20, textAlign: "center" },
@@ -1110,7 +1128,7 @@ const Locale = document.documentElement.lang,
                 color: Color
             },
             visible: false,
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.location),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.location)),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1187,7 +1205,101 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.status),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.status)),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }],
+        review: () => [{
+            name: "id",
+            text: Neo.Helper.trans("Id"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) =>
+                `<span style="font-weight: 500; text-align: center; display: block;">#${row.id}</span>`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "Name",
+            text: Neo.Helper.trans("Name"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "email",
+            text: Neo.Helper.trans("Email"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.email),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "content",
+            text: Neo.Helper.trans("Content"),
+            headStyle: { maxWidth: 600 },
+            bodyStyle: { maxWidth: 600 },
+            visible: false,
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.content),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "rate",
+            text: Neo.Helper.trans("Rate"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => row.rate + " / 5",
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "status",
+            text: Neo.Helper.trans("Status"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.status)),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1269,7 +1381,7 @@ const Locale = document.documentElement.lang,
                 background: Background,
                 color: Color
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.location),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.location)),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1361,7 +1473,7 @@ const Locale = document.documentElement.lang,
             bodyPdfStyle: function() {
                 return this.bodyStyle;
             },
-            bodyRender: (row) => Neo.Helper.Str.capitalize(row.status),
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.status)),
             bodyPdfRender: function(row) {
                 return this.bodyRender(row);
             },
@@ -1557,6 +1669,134 @@ const Locale = document.documentElement.lang,
             bodyPdfRender: () => empty(),
             bodyCsvRender: () => empty(),
         }],
+        reviews: ({
+            Csrf,
+            Patch,
+            Clear
+        }) => [{
+            name: "id",
+            text: Neo.Helper.trans("Id"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) =>
+                `<span style="font-weight: 500; text-align: center; display: block;">#${row.id}</span>`,
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "Name",
+            text: Neo.Helper.trans("Name"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.name),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "email",
+            text: Neo.Helper.trans("Email"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.email),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "car",
+            text: Neo.Helper.trans("Car"),
+            headPdfStyle: {
+                background: Background,
+                color: Color
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.car.name_en),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "content",
+            text: Neo.Helper.trans("Content"),
+            headStyle: { maxWidth: 600 },
+            bodyStyle: { maxWidth: 600 },
+            visible: false,
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(row.content),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+            bodyCsvRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "rate",
+            text: Neo.Helper.trans("Rate"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => row.rate + " / 5",
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "status",
+            text: Neo.Helper.trans("Status"),
+            headStyle: { width: 100, textAlign: "center", },
+            bodyStyle: { width: 100, textAlign: "center", },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyRender: (row) => Neo.Helper.Str.capitalize(Neo.Helper.trans(row.status)),
+            bodyPdfRender: function(row) {
+                return this.bodyRender(row);
+            },
+        }, {
+            name: "action",
+            text: Neo.Helper.trans("Actions"),
+            headStyle: { width: 20, textAlign: "center" },
+            bodyStyle: { width: 20, textAlign: "center" },
+            bodyRender: (row) => {
+                return `<action-tools target="${row.id}"csrf="${Csrf}"patch="${Patch}"clear="${Clear}"></action-tools>`;
+            },
+            headPdfStyle: function() {
+                return {...this.headStyle, background: Background, color: Color };
+            },
+            bodyPdfStyle: function() {
+                return this.bodyStyle;
+            },
+            bodyPdfRender: () => empty(),
+            bodyCsvRender: () => empty(),
+        }],
     }
 
 Neo.load(function() {
@@ -1687,14 +1927,16 @@ function CarInitializer(List = [], imageTransfer) {
     List.forEach(Item => {
         var timer;
         Item.Auto.addEventListener("input", async(e) => {
+            Item.Auto.classList.add("loading");
             if (timer) clearTimeout(timer);
             Item.Auto.data = await new Promise((resolver, rejecter) => {
                 timer = setTimeout(async() => {
                     const data = await getData(Item.Link + "?search=" +
                         encodeURIComponent(
                             Item.Auto.query.trim()));
+                    Item.Auto.classList.remove("loading");
                     resolver(data);
-                }, 1000);
+                }, 250);
             });
         });
     });
@@ -1789,13 +2031,15 @@ function ReservationInitializer({ Search }, data) {
     var timer;
     auto.addEventListener("input", async(e) => {
         if (timer) clearTimeout(timer);
+        auto.classList.add("loading");
         auto.data = await new Promise((resolver, rejecter) => {
             timer = setTimeout(async() => {
                 const data = await getData(Search + "?search=" +
                     encodeURIComponent(
                         auto.query.trim()));
+                auto.classList.remove("loading");
                 resolver(data);
-            }, 1000);
+            }, 250);
         });
     });
 
@@ -1810,6 +2054,24 @@ function ReservationInitializer({ Search }, data) {
             }
         });
     }
+}
+
+function ReviewInitializer({ Search }) {
+    const auto = document.querySelector("neo-autocomplete");
+    var timer;
+    auto.addEventListener("input", async(e) => {
+        if (timer) clearTimeout(timer);
+        auto.classList.add("loading");
+        auto.data = await new Promise((resolver, rejecter) => {
+            timer = setTimeout(async() => {
+                const data = await getData(Search + "?search=" +
+                    encodeURIComponent(
+                        auto.query.trim()));
+                auto.classList.remove("loading");
+                resolver(data);
+            }, 250);
+        });
+    });
 }
 
 async function CoreInitializer({ Table, Pie, Line, Search, Data, Profit, Charges }) {

@@ -25,7 +25,7 @@
                     value="{{ $data->details_it }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (sp)' }}" name="details_sp"
                     value="{{ $data->details_sp }}" rows="4"></neo-textarea>
-                <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-4 lg:col-span-2">
+                <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-6 lg:col-span-2">
                     <neo-textbox type="number" label="{{ __('Passengers') . ' (*)' }}" name="passengers"
                         value="{{ $data->passengers }}"></neo-textbox>
                     <neo-textbox type="number" label="{{ __('Doors') . ' (*)' }}" name="doors"
@@ -50,10 +50,22 @@
                 </neo-select>
                 <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id"
                     label="{{ __('Brand') . ' (*)' }}" name="brand" value="{{ $data->brand }}"
-                    query="{{ $data->Brand->{'name_' . Core::lang()} }}"></neo-autocomplete>
+                    query="{{ $data->Brand->{'name_' . Core::lang()} }}">
+                    <svg slot="end" class="icon hidden w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
+                        fill="currentcolor" viewBox="0 -960 960 960">
+                        <path
+                            d="M196-305q-28-40-39.5-83.5T145-480q0-136 98.5-234.5T476-813h43l-69-70 45-45 160 160-160 160-46-45 69-69h-39q-99 0-171 72t-72 170q0 32 6.5 60.5T260-369l-64 64ZM464-29 304-189l160-162 45 47-70 69h43q98 1 170-71t72-172q0-31-6.5-59.5T699-589l65-64q27 43 39 86t12 89q0 137-98.5 236.5T485-143h-46l70 70-45 44Z" />
+                    </svg>
+                </neo-autocomplete>
                 <neo-autocomplete set-query="{{ 'name_' . Core::lang() }}" set-value="id"
                     label="{{ __('Category') . ' (*)' }}" name="category" value="{{ $data->category }}"
-                    query="{{ $data->Category->{'name_' . Core::lang()} }}"></neo-autocomplete>
+                    query="{{ $data->Category->{'name_' . Core::lang()} }}">
+                    <svg slot="end" class="icon hidden w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
+                        fill="currentcolor" viewBox="0 -960 960 960">
+                        <path
+                            d="M196-305q-28-40-39.5-83.5T145-480q0-136 98.5-234.5T476-813h43l-69-70 45-45 160 160-160 160-46-45 69-69h-39q-99 0-171 72t-72 170q0 32 6.5 60.5T260-369l-64 64ZM464-29 304-189l160-162 45 47-70 69h43q98 1 170-71t72-172q0-31-6.5-59.5T699-589l65-64q27 43 39 86t12 89q0 137-98.5 236.5T485-143h-46l70 70-45 44Z" />
+                    </svg>
+                </neo-autocomplete>
                 <neo-select label="{{ __('Promote') . ' (*)' }}" name="promote">
                     @foreach (Core::promoteList() as $promote)
                         <neo-select-item value="{{ $promote[0] }}" {{ $promote[0] == $data->promote ? 'active' : '' }}>

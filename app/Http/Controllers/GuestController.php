@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Reservation;
+use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -81,7 +82,7 @@ class GuestController extends Controller
 
     public function show_view($slug)
     {
-        $car = Car::with('Category', 'Brand', 'Images')->where('slug', $slug)->limit(1)->first();
+        $car = Car::with('Category', 'Brand', 'Images', 'Reviews')->where('slug', $slug)->limit(1)->first();
         if (!$car) abort(404);
         return view('guest.show', compact('car'));
     }
@@ -177,6 +178,34 @@ class GuestController extends Controller
         ])->all());
 
         return Redirect::back()->with([
+            'content' => __('Reervation completed successfully'),
+            'modal' => true
+        ]);
+    }
+
+    public function review_action(Request $Request, $id)
+    {
+        $validator = Validator::make($Request->all(), [
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'content' => ['required', 'string'],
+            'rate' => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->with([
+                'message' => $validator->errors()->all(),
+                'type' => 'error'
+            ]);
+        }
+
+        Review::create($Request->merge([
+            'car' => $id,
+            'status' => 'pendding'
+        ])->all());
+
+        return Redirect::back()->with([
+            'content' => __('Feedback created successfully'),
             'modal' => true
         ]);
     }

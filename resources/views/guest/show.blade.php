@@ -90,9 +90,9 @@
                                         </li>
                                         <li class="w-max flex flex-wrap items-center gap-2">
                                             <svg class="block w-4 h-4 pointer-events-none text-x-black text-opacity-50"
-                                                fill="currentcolor" viewBox="0 -960 960 960">
+                                                fill="currentcolor" viewBox="0 0 48 48">
                                                 <path
-                                                    d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
+                                                    d="M23.0864 4C19.7858 4 15.278 6.00759 13.0712 8.46097L1.76252 21.0267C0.290132 22.6617 -0.397464 25.7222 0.235532 27.8318L3.93631 40.1677C4.5675 42.2749 6.88589 43.9999 9.08667 43.9999H43.9998C46.2108 43.9999 48 42.2089 48 39.9997V4H23.0864ZM43.9998 29.9996H36.0001V25.9994H43.9998V29.9996ZM43.9998 21.9993H6.26669L16.0436 11.137C17.4968 9.52356 20.9186 7.99957 23.0864 7.99957H43.9998V21.9993Z" />
                                             </svg>
                                             <span class="text-base text-x-black text-opacity-50 font-normal">
                                                 {{ $car->doors }} {{ __('Doors') }}
@@ -126,6 +126,16 @@
                                             </svg>
                                             <span class="text-base text-x-black text-opacity-50 font-normal">
                                                 {{ __(ucwords($car->fuel)) }}
+                                            </span>
+                                        </li>
+                                        <li class="w-max flex flex-wrap items-center gap-2">
+                                            <svg class="block w-4 h-4 pointer-events-none text-x-black text-opacity-50"
+                                                fill="currentcolor" viewBox="0 -960 960 960">
+                                                <path
+                                                    d="M279.78-736.59 394-884q16.48-20.94 39.38-31.47Q456.29-926 480-926q25 0 47.67 10.53Q550.33-904.94 567-884l113.22 147.41L852-679q36 12 55 41.5t19 62.45q0 17.05-4.5 33.55Q917-525 906-510L797-353.41 801-187q0 47-34 79t-82 32q-2 0-23-2l-182-50-181.11 50.08Q293-76 287-75.5q-6 .5-12 .5-47.2 0-81.6-32.5Q159-140 160-188l4-165L53.79-510.33Q43-526 38.5-542.17 34-558.33 34-575q0-34 19.42-63.11Q72.84-667.21 109-679l170.78-57.59Z" />
+                                            </svg>
+                                            <span class="text-base text-x-black text-opacity-50 font-normal">
+                                                {{ $car->rating }} / 5
                                             </span>
                                         </li>
                                     </ul>
@@ -267,7 +277,7 @@
                                         @foreach (Core::locationList() as $location)
                                             <neo-select-item
                                                 value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
-                                                {{ __(ucwords($location)) }}
+                                                {{ ucwords(__($location)) }}
                                             </neo-select-item>
                                         @endforeach
                                         <svg slot="end"
@@ -324,8 +334,9 @@
                                 {{ __('Share Feedback') }}
                             </button>
                             <neo-overlay id="feedback_overlay" label="{{ __('Create Feedback') }}">
-                                <form id="feedback_form" action=""
-                                    class="w-full grid grid-row-1 grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+                                <form id="feedback_form" action="{{ route('actions.guest.review', $car->id) }}"
+                                    method="POST" class="w-full grid grid-row-1 grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+                                    @csrf
                                     <div class="lg:col-span-2">
                                         <p class="text-x-black font-x-thin text-base">
                                             {{ __('Thank you in advance for your feedback.') }}
@@ -339,10 +350,11 @@
                                             @for ($i = 1; $i < 6; $i++)
                                                 <div class="flex-[1] relative">
                                                     <input type="radio" id="rate-{{ $i }}" name="rate"
-                                                        value="1" data-error=".feed-error-0"
+                                                        value="{{ $i }}"
+                                                        {{ old('rate') == $i ? 'checked' : '' }}
                                                         class="w-0 h-0 absolute inset-0 pointer-events-none opacity-0 peer" />
                                                     <label for="rate-{{ $i }}"
-                                                        class="w-full p-2 flex font-x-huge text-base items-center justify-center gap-2 border border-x-shade rounded-x-thin peer-checked:bg-x-prime peer-checked:text-x-white peer-focus:bg-x-prime peer-focus:bg-opacity-20 hover:bg-x-prime hover:bg-opacity-20">
+                                                        class="w-full p-2 flex font-x-huge text-base items-center justify-center gap-2 bg-x-light border border-x-shade rounded-x-thin peer-checked:outline peer-checked:outline-2 peer-checked:-outline-offset-2 peer-checked:outline-x-prime peer-focus:bg-x-prime peer-focus:bg-opacity-20 hover:bg-x-prime hover:bg-opacity-20">
                                                         {{ $i }}
                                                         <svg class="block w-2.5 h-2.5 pointer-events-none"
                                                             viewBox="0 -960 960 960" fill="currentColor">
@@ -384,6 +396,37 @@
                             </neo-overlay>
                         </div>
                     </div>
+                    @php
+                        $Reviews = $car->Reviews->where('status', 'approved');
+                    @endphp
+                    @if ($Reviews->count())
+                        <ul class="w-full gap-6 lg:col-span-3 grid grid-rows-1 grid-cols-1 lg:grid-cols-2 items-start">
+                            @foreach ($Reviews as $Review)
+                                <li class="w-full flex flex-col gap-4 rounded-x-thin bg-x-white p-6">
+                                    <ul class="w-full flex gap-4 items-center flex-wrap">
+                                        <li class="text-x-black font-x-huge text-base flex-[1]">
+                                            {{ ucwords($Review->name) }}
+                                        </li>
+                                        <li class="w-max flex flex-wrap items-center gap-px">
+                                            @for ($i = 1; $i < 6; $i++)
+                                                <svg class="block w-4 h-4 pointer-events-none {{ $Review->rate >= $i ? 'text-yellow-500' : 'text-x-black text-opacity-70' }}"
+                                                    fill="currentcolor" viewBox="0 -960 960 960">
+                                                    <path
+                                                        d="M279.78-736.59 394-884q16.48-20.94 39.38-31.47Q456.29-926 480-926q25 0 47.67 10.53Q550.33-904.94 567-884l113.22 147.41L852-679q36 12 55 41.5t19 62.45q0 17.05-4.5 33.55Q917-525 906-510L797-353.41 801-187q0 47-34 79t-82 32q-2 0-23-2l-182-50-181.11 50.08Q293-76 287-75.5q-6 .5-12 .5-47.2 0-81.6-32.5Q159-140 160-188l4-165L53.79-510.33Q43-526 38.5-542.17 34-558.33 34-575q0-34 19.42-63.11Q72.84-667.21 109-679l170.78-57.59Z" />
+                                                </svg>
+                                            @endfor
+                                        </li>
+                                    </ul>
+                                    <p class="text-x-black text-base font-normal">
+                                        {{ $Review->content }}
+                                    </p>
+                                    <span class="text-x-black text-opacity-50 font-x-huge text-sm">
+                                        {{ $Review->updated_at }}
+                                    </span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
         </section>
@@ -415,7 +458,7 @@
                     <div class="check-shadow"></div>
                 </div>
                 <span class="check-text text-x-black font-x-thin text-xl lg:text-2xl text-center">
-                    {{ __('Reervation completed successfully') }}
+                    {{ Session::get('content') }}
                 </span>
             </div>
         </neo-overlay>

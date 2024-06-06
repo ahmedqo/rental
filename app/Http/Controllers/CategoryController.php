@@ -13,12 +13,7 @@ class CategoryController extends Controller
 {
     public function index_view(Request $Request)
     {
-        $data = Category::with('Image')->orderBy('id', 'DESC');
-        if ($Request->search) {
-            $data = $data->search($Request->search);
-        }
-        $data = $data->cursorPaginate(50);
-        return view('category.index', compact('data'));
+        return view('category.index');
     }
 
     public function store_view()

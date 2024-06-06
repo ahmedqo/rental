@@ -13,3 +13,4 @@ require __DIR__ . '/category.php';
 require __DIR__ . '/car.php';
 require __DIR__ . '/reservation.php';
 require __DIR__ . '/blog.php';
+require __DIR__ . '/review.php';

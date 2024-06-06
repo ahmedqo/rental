@@ -94,6 +94,16 @@
                         <span class="block flex-1 text-base">{{ __('Blogs') }}</span>
                     </a>
                 </li>
+                <li class="w-full">
+                    <a href="{{ route('views.reviews.index') }}"
+                        class="w-full flex flex-wrap gap-2 p-2 text-start text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::matchRoute('reviews') ? '!bg-x-black' : '' }}">
+                        <svg class="block w-6 h-6 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
+                            <path
+                                d="M279.78-736.59 394-884q16.48-20.94 39.38-31.47Q456.29-926 480-926q25 0 47.67 10.53Q550.33-904.94 567-884l113.22 147.41L852-679q36 12 55 41.5t19 62.45q0 17.05-4.5 33.55Q917-525 906-510L797-353.41 801-187q0 47-34 79t-82 32q-2 0-23-2l-182-50-181.11 50.08Q293-76 287-75.5q-6 .5-12 .5-47.2 0-81.6-32.5Q159-140 160-188l4-165L53.79-510.33Q43-526 38.5-542.17 34-558.33 34-575q0-34 19.42-63.11Q72.84-667.21 109-679l170.78-57.59Z" />
+                        </svg>
+                        <span class="block flex-1 text-base">{{ __('Reviews') }}</span>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="w-full">

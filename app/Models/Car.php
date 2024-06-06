@@ -127,6 +127,12 @@ class Car extends Model implements Sitemapable
         return $this->details ? preg_split("/\n\r|\n/", $this->details) : null;
     }
 
+    public function getRatingAttribute()
+    {
+        $rev =  $this->Reviews->where('status', 'approved');
+        return $rev->sum('rate') / $rev->count();
+    }
+
     public function Brand()
     {
         return $this->belongsTo(Brand::class, 'brand');
@@ -135,6 +141,16 @@ class Car extends Model implements Sitemapable
     public function Category()
     {
         return $this->belongsTo(Category::class, 'category');
+    }
+
+    public function Reservations()
+    {
+        return $this->hasMany(Reservation::class, 'car');
+    }
+
+    public function Reviews()
+    {
+        return $this->hasMany(Review::class, 'car');
     }
 
     public function Images(): MorphMany

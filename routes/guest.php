@@ -14,6 +14,7 @@ Route::get('/privacy_policy', [GuestController::class, 'privacy_view'])->name('v
 Route::get('/terms_and_condition', [GuestController::class, 'terms_view'])->name('views.guest.terms');
 
 Route::post('/reserve', [GuestController::class, 'reserve_action'])->name('actions.guest.reserve');
+Route::post('/revie/{id}w', [GuestController::class, 'review_action'])->name('actions.guest.review');
 
 Route::get('/show/{id}', function ($id) {
     $data = Reservation::with('Car')->where('id', $id)->limit(1)->first();

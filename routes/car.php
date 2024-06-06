@@ -13,5 +13,6 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::get('/cars/search', [CarController::class, 'search_action'])->name('actions.cars.search');
     Route::patch('/cars/{id}/patch', [CarController::class, 'patch_action'])->name('actions.cars.patch');
     Route::delete('/cars/{id}/clear', [CarController::class, 'clear_action'])->name('actions.cars.clear');
+    Route::get('/cars/{id}/reviews', [CarController::class, 'reviews_action'])->name('actions.cars.reviews');
     Route::get('/cars/{id}/reservations', [CarController::class, 'reservations_action'])->name('actions.cars.reservations');
 });

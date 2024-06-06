@@ -13,12 +13,7 @@ class ReservationController extends Controller
 {
     public function index_view(Request $Request)
     {
-        $data = Reservation::with('Car')->orderBy('id', 'DESC');
-        if ($Request->search) {
-            $data = $data->search($Request->search);
-        }
-        $data = $data->cursorPaginate(50);
-        return view('reservation.index', compact('data'));
+        return view('reservation.index');
     }
 
     public function store_view()

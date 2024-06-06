@@ -27,7 +27,7 @@
                         @foreach (Core::locationList() as $location)
                             <neo-select-item
                                 value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
-                                {{ __(ucwords($location)) }}
+                                {{ ucwords(__($location)) }}
                             </neo-select-item>
                         @endforeach
                         <svg slot="end" class="block w-[1.2rem] h-[1.2rem] pointer-events-none text-x-black"
@@ -397,7 +397,7 @@
                                             </h4>
                                         </li>
                                         <li class="w-full mt-2">
-                                            <ul class="w-full lg:w-2/3 flex flex-wrap gap-2">
+                                            <ul class="w-full lg:w-2/3 flex flex-wrap gap-2" style="column-gap: 1rem;">
                                                 <li class="w-max flex flex-wrap items-center gap-2">
                                                     <svg class="block w-4 h-4 pointer-events-none text-x-black text-opacity-50"
                                                         fill="currentcolor" viewBox="0 -960 960 960">
@@ -410,9 +410,9 @@
                                                 </li>
                                                 <li class="w-max flex flex-wrap items-center gap-2">
                                                     <svg class="block w-4 h-4 pointer-events-none text-x-black text-opacity-50"
-                                                        fill="currentcolor" viewBox="0 -960 960 960">
+                                                        fill="currentcolor" viewBox="0 0 48 48">
                                                         <path
-                                                            d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
+                                                            d="M23.0864 4C19.7858 4 15.278 6.00759 13.0712 8.46097L1.76252 21.0267C0.290132 22.6617 -0.397464 25.7222 0.235532 27.8318L3.93631 40.1677C4.5675 42.2749 6.88589 43.9999 9.08667 43.9999H43.9998C46.2108 43.9999 48 42.2089 48 39.9997V4H23.0864ZM43.9998 29.9996H36.0001V25.9994H43.9998V29.9996ZM43.9998 21.9993H6.26669L16.0436 11.137C17.4968 9.52356 20.9186 7.99957 23.0864 7.99957H43.9998V21.9993Z" />
                                                     </svg>
                                                     <span class="text-base text-x-black text-opacity-50 font-normal">
                                                         {{ $car->doors }} {{ __('Doors') }}
@@ -448,14 +448,24 @@
                                                         {{ __(ucwords($car->fuel)) }}
                                                     </span>
                                                 </li>
+                                                <li class="w-max flex flex-wrap items-center gap-2">
+                                                    <svg class="block w-4 h-4 pointer-events-none text-x-black text-opacity-50"
+                                                        fill="currentcolor" viewBox="0 -960 960 960">
+                                                        <path
+                                                            d="M279.78-736.59 394-884q16.48-20.94 39.38-31.47Q456.29-926 480-926q25 0 47.67 10.53Q550.33-904.94 567-884l113.22 147.41L852-679q36 12 55 41.5t19 62.45q0 17.05-4.5 33.55Q917-525 906-510L797-353.41 801-187q0 47-34 79t-82 32q-2 0-23-2l-182-50-181.11 50.08Q293-76 287-75.5q-6 .5-12 .5-47.2 0-81.6-32.5Q159-140 160-188l4-165L53.79-510.33Q43-526 38.5-542.17 34-558.33 34-575q0-34 19.42-63.11Q72.84-667.21 109-679l170.78-57.59Z" />
+                                                    </svg>
+                                                    <span class="text-base text-x-black text-opacity-50 font-normal">
+                                                        {{ $car->rating }} / 5
+                                                    </span>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul
                                         class="w-full flex flex-col items-end flex-[1] min-w-20 lg:min-w-0 my-auto lg:me-2">
                                         <li class="w-full lg:hidden">
-                                            <img src="{{ $car->Images[0]->Link }}" alt="{{ ucwords($car->name) }} Image"
-                                                loading="lazy"
+                                            <img src="{{ $car->Images[0]->Link }}"
+                                                alt="{{ ucwords($car->name) }} Image" loading="lazy"
                                                 class="block w-full aspect-square object-contain object-center" />
                                         </li>
                                         <li class="hidden lg:block text-2xl text-x-black font-x-huge mt-2">
