@@ -2,6 +2,7 @@
 
 namespace App\Functions;
 
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -58,6 +59,11 @@ class Core
         return ['available', 'not available'];
     }
 
+    public static function periodList()
+    {
+        return ['week', 'month', 'year'];
+    }
+
     public static function locationList()
     {
         return ['airport marrakech', 'marrakech city center'];
@@ -93,15 +99,14 @@ class Core
         return Http::get('https://api.exchangerate-api.com/v4/latest/' . Core::$CURRENCY)->json()['rates'][Core::lang('en') ? 'USD' : 'EUR'];
     }
 
-    // public static function getSetting($name, $type = 'type')
-    // {
-    //     return Setting::filterBy($name, $type);
-    // }
+    public static function getSetting($name, $type = 'type')
+    {
+        return Setting::filterBy($name, $type);
+    }
 
     public static function getDates($period = 'week')
     {
-        // switch (Core::getSetting('period')) {
-        switch ($period) {
+        switch (Core::getSetting('period')) {
             case "week":
                 return [
                     Carbon::now()->startOfWeek(Carbon::SUNDAY),
@@ -157,8 +162,7 @@ class Core
 
     public static function groupKey($model, $period = 'week')
     {
-        //switch (Core::getSetting('period')) {
-        switch ($period) {
+        switch (Core::getSetting('period')) {
             case 'week':
                 return __($model->updated_at->format('l'));
             case 'month':
@@ -166,23 +170,6 @@ class Core
             case 'year':
                 return __($model->updated_at->format('F'));
         }
-    }
-
-    public static function groupSum($group)
-    {
-        return $group->sum(function ($carry) {
-            return $carry->total + ($carry->total * ($carry->charges / 100));
-        });
-    }
-
-    public static function reduceSum($collection)
-    {
-        return $collection->reduce(
-            function ($carry, $item) {
-                return $carry + ($item->total + ($item->total * ($item->charges / 100)));
-            },
-            0
-        );
     }
 
     public static function formatWeek($datestr)

@@ -217,5 +217,15 @@
     "Create Feedback": "Créer Un Avis",
 
     "airport marrakech": "aéroporte Marrakech",
-    "marrakech city center": "centre-ville Marrakech"
+    "marrakech city center": "centre-ville Marrakech",
+
+    "Edit Settings": "Modifier Les Paramètres",
+    "Notification Email": "Email De Notification",
+    "Contact Email": "Email De Contact",
+    "Contact Phone": "Téléphone De Contact",
+    "Print Email": "Email D'Impression",
+    "Print Phone": "Email D'Impression",
+    "Week": "Semaine",
+    "Month": "Mois",
+    "Year": "Année"
 }

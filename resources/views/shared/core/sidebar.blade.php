@@ -122,6 +122,16 @@
                         <span class="block flex-1 text-base">{{ __('Users') }}</span>
                     </a>
                 </li>
+                <li class="w-full">
+                    <a href="{{ route('views.core.settings') }}"
+                        class="w-full flex flex-wrap gap-2 p-2 text-start text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::matchRoute('settings') ? '!bg-x-black' : '' }}">
+                        <svg class="block w-6 h-6 pointer-events-none" fill="currentcolor" viewBox="0 -960 960 960">
+                            <path
+                                d="M497-572v-136h120v-165h136v165h120v136H497ZM617-87v-428h136v428H617Zm-410 0v-165H87v-136h376v136H343v165H207Zm0-358v-428h136v428H207Z" />
+                        </svg>
+                        <span class="block flex-1 text-base">{{ __('Settings') }}</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

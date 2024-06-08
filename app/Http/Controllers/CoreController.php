@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Functions\Core;
 use App\Models\Reservation;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use App\Models\Setting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class CoreController extends Controller
 {
@@ -31,6 +33,54 @@ class CoreController extends Controller
         }, 0))];
 
         return view('core.index', compact('count', 'work', 'money', 'charges', 'startDate', 'endDate'));
+    }
+
+    public function setting_view()
+    {
+        return view('core.setting');
+    }
+
+    public function setting_action(Request $Request)
+    {
+        $validator = Validator::make($Request->all(), [
+            'contact_email' => ['required', 'email'],
+            'print_email' => ['required', 'email'],
+            'notify_email' => ['required', 'email'],
+            'contact_phone' => ['required', 'string'],
+            'print_phone' => ['required', 'string'],
+            'period' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->with([
+                'message' => $validator->errors()->all(),
+                'type' => 'error'
+            ]);
+        }
+
+        foreach ([
+            'contact_email',
+            'print_email',
+            'notify_email',
+            'contact_phone',
+            'print_phone',
+            'period',
+            'instagram',
+            'telegram',
+            'facebook',
+            'youtube',
+            'tiktok',
+            'x',
+        ] as $type) {
+            Setting::findBy($type)->update([
+                'content' => $Request->input($type)
+            ]);
+        }
+
+        return Redirect::back()->with([
+            'message' => __('Updated successfully'),
+            'type' => 'success'
+        ]);
     }
 
     public function chart_action()

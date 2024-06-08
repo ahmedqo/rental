@@ -8,5 +8,11 @@
         <h3>
             {{ url(env('APP_URL'), [], true) }}
         </h3>
+        <h3>
+            {{ Core::getSetting('print_phone') }}
+        </h3>
+        <h3>
+            {{ Core::getSetting('print_email') }}
+        </h3>
     </div>
 </div>
