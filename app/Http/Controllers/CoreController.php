@@ -25,12 +25,12 @@ class CoreController extends Controller
 
         $count = [$completed->count(), $others->count()];
         $work = [$completed->sum('period'), $others->sum('period')];
-        $money = [Core::formatNumber($completed->sum('total')), Core::formatNumber($others->sum('total'))];
-        $charges = [Core::formatNumber($completed->reduce(function ($carry, $curr) {
+        $money = [$completed->sum('total'), $others->sum('total')];
+        $charges = [$completed->reduce(function ($carry, $curr) {
             return $carry + json_decode($curr->charges, true)['total'];
-        }, 0)), Core::formatNumber($others->reduce(function ($carry, $curr) {
+        }, 0), $others->reduce(function ($carry, $curr) {
             return $carry + json_decode($curr->charges, true)['total'];
-        }, 0))];
+        }, 0)];
 
         return view('core.index', compact('count', 'work', 'money', 'charges', 'startDate', 'endDate'));
     }
@@ -59,6 +59,8 @@ class CoreController extends Controller
         }
 
         foreach ([
+            'usd_rate',
+            'eur_rate',
             'contact_email',
             'print_email',
             'notify_email',

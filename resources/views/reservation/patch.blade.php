@@ -13,7 +13,7 @@
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
-                <input id="charge_value" type="hidden" name="charges" value="{!! $data->charges !!}" />
+                <input id="charge_value" type="hidden" name="charges" value="{{ $data->charges }}" />
                 <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name" value="{{ $data->name }}"></neo-textbox>
                 <neo-textbox type="tel" label="{{ __('Phone') . ' (*)' }}" name="phone"
                     value="{{ $data->phone }}"></neo-textbox>
@@ -54,7 +54,7 @@
                 <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::orderList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == $data->status ? 'active' : '' }}>
-                            {{ __(ucwords($status)) }}
+                            {{ ucwords(__($status)) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>

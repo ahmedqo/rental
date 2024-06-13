@@ -1,6 +1,23 @@
 @extends('shared.guest.base')
 @section('title', $data['title'])
 
+@section('seo')
+    <meta name="description" content="{{ Core::subString('') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="{{ env('APP_NAME') }} {{ $data['title'] }} Page">
+    <meta property="og:description" content="{{ Core::subString('') }}">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
+    @if (Core::getSetting('x'))
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
+        <meta name="twitter:title" content="{{ env('APP_NAME') }} {{ $data['title'] }} Page">
+        <meta name="twitter:description" content="{{ Core::subString('') }}">
+        <meta name="twitter:image" content="">
+    @endif
+@endsection
+
 @section('content')
     <section>
         <hr class="border-t border-t-x-shade">
@@ -15,9 +32,10 @@
         <div class="w-full mx-auto container p-4">
             <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
                 <div class="w-full lg:col-span-2 flex flex-col gap-6">
-                    <neo-explorer label="{{ __('Search') }}" target=".tabs" class="bg-transparent col-span-2"></neo-explorer>
+                    <neo-explorer label="{{ __('Search') }}" target=".tabs"
+                        class="bg-transparent col-span-2"></neo-explorer>
                     @foreach ($data['tabs'] as $tab)
-                        <div class="tabs w-full flex flex-col">
+                        <div class="tabs w-full flex flex-col {{ $loop->index === 0 ? 'is-open' : '' }}">
                             <button
                                 class="btn w-full bg-x-prime bg-opacity-10 p-2 outline-none rounded-x-thin flex flex-wrap gap-2 items-center hover:bg-opacity-20 focus:bg-opacity-20">
                                 <svg class="block w-8 h-8 pointer-events-none text-x-prime" viewBox="0 96 960 960"
@@ -45,7 +63,7 @@
                         <a href="{{ route('views.guest.faqs') }}"
                             class="w-full flex flex-col gap-2 p-4 bg-x-light rounded-x-thin outline-none hover:bg-x-prime hover:bg-opacity-20 hover:shadow-x-core focus:bg-x-prime focus:bg-opacity-20 focus:shadow-x-core">
                             <h3 class="text-x-black font-x-huge text-base">
-                                {{ __('FAQs') }}
+                                {{ __('FAQ') }}
                             </h3>
                             <p class="text-x-black text-opacity-70 font-x-thin text-sm">
                                 {{ __('Find quick answers to common queries, ensuring a smooth experience.') }}
@@ -59,7 +77,7 @@
                                 {{ __('Terms And Conditions') }}
                             </h3>
                             <p class="text-x-black text-opacity-70 font-x-thin text-sm">
-                                {{ __('Explore our guidelines for product/service usage, outlining responsibilities, rights, and limitations for a transparent relationship.') }}
+                                {{ __('Explore our guidelines for services usage, outlining responsibilities, rights, and limitations for a transparent relationship.') }}
                             </p>
                         </a>
                     @endif

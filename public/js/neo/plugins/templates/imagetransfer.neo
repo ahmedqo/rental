@@ -231,6 +231,7 @@
                     this.state.data.items.add(file);
                 });
                 this.refs.field.value = "";
+                this.props.value = null;
                 this.props.value = this.props.multiple ? (this.paint(), this.state.data.files.length ? this.state.data.files : "") : this.state.data.files[0];
             },
             remove(id, def) {

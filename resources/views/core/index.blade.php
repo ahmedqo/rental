@@ -12,7 +12,7 @@
                     <canvas id="rate" class="w-full h-full"></canvas>
                     <h3
                         class="text-3xl text-x-black font-x-thin absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                        {{ (($money[0] - $charges[0]) / $money[0]) * 100 }}%
+                        {{ (($money[0] - $charges[0]) / ($money[0] ? $money[0] : 1)) * 100 }}%
                     </h3>
                 </li>
                 <li class="w-full lg:col-span-4">
@@ -26,7 +26,7 @@
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
                                 <h3 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Profit') }}
-                                    ({{ Core::$CURRENCY }})</h3>
+                                    ({{ Core::$UNIT }})</h3>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ Core::formatNumber($money[0] - $charges[0]) }} /
                                     {{ Core::formatNumber($money[1] - $charges[1]) }}
@@ -42,7 +42,7 @@
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
                                 <h3 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Charges') }}
-                                    ({{ Core::$CURRENCY }})</h3>
+                                    ({{ Core::$UNIT }})</h3>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ $charges[0] }} / {{ $charges[1] }}
                                 </p>

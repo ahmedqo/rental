@@ -1,6 +1,23 @@
 @extends('shared.guest.base')
 @section('title', __('Home'))
 
+@section('seo')
+    <meta name="description" content="{{ Core::subString('') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="{{ env('APP_NAME') }} Home Page">
+    <meta property="og:description" content="{{ Core::subString('') }}">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
+    @if (Core::getSetting('x'))
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
+        <meta name="twitter:title" content="{{ env('APP_NAME') }} Home Page">
+        <meta name="twitter:description" content="{{ Core::subString('') }}">
+        <meta name="twitter:image" content="">
+    @endif
+@endsection
+
 @section('content')
     <section class="bg-x-acent bg-opacity-30">
         <div class="w-full mx-auto container p-4">
@@ -83,7 +100,7 @@
                         <div class="w-full flex col-span-2">
                             <neo-button
                                 class="w-full lg:w-max lg:px-20 py-[.95rem] px-5 text-lg font-x-huge text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
-                                <span>{{ __('custom') }}</span>
+                                <span>{{ __('Search') }}</span>
                             </neo-button>
                         </div>
                     </form>
@@ -206,7 +223,8 @@
                                                         class="block w-full aspect-square object-contain object-center" />
                                                 </li>
                                                 <li class="text-2xl text-x-black font-x-huge mt-2">
-                                                    {{ $car->price * Core::rate() }} {{ __('$') }}
+                                                    {{ number_format($car->price / Core::rate(), 2) }}
+                                                    {{ Core::$CURRENCY }}
                                                 </li>
                                                 <li class="text-xs text-x-black font-normal">
                                                     {{ __('Per Day') }}

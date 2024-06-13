@@ -31,8 +31,8 @@
                                     {{ __('Per Day') }}
                                 </td>
                                 <td style="color:#1d1d1d;font-weight: 700;font-size: 18px;text-align: end">
-                                    <span>{{ $data->Car->price * Core::rate() }}</span>
-                                    <span>{{ __('$') }}</span>
+                                    <span>{{ number_format($data->Car->price / Core::rate(), 2) }}</span>
+                                    <span>{{ Core::$CURRENCY }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -54,8 +54,8 @@
                                     {{ __('Total') }}
                                 </td>
                                 <td style="color:#1d1d1d;font-weight: 700;font-size: 18px;text-align: end">
-                                    <span>{{ $data->total * Core::rate() }}</span>
-                                    <span>{{ __('$') }}</span>
+                                    <span>{{ number_format($data->total / Core::rate(), 2) }}</span>
+                                    <span>{{ Core::$CURRENCY }}</span>
                                 </td>
                             </tr>
                         </table>

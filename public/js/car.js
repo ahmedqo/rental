@@ -74,8 +74,8 @@ function calcPrice() {
     ));
 
     days.innerHTML = nbrDays;
-    total.innerHTML = nbrDays * price;
-    smtotal.innerHTML = nbrDays * price;
+    total.innerHTML = (nbrDays * price).toFixed(2);
+    smtotal.innerHTML = (nbrDays * price).toFixed(2);
     smdays.innerHTML = Neo.Helper.trans("Per") + " " + nbrDays + " " + Neo.Helper.trans("Days");
 }
 

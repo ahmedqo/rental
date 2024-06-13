@@ -172,12 +172,13 @@ function Slider({
     window.addEventListener("resize", exec);
     carousel.addEventListener("scroll", scrollArrow);
 
-    scrollArrow();
+
     setTimeout(() => {
         exec();
         carousel.style.scrollBehavior = "unset";
         carousel.scrollLeft = (opts.flip ? itemSize() * children.length : 0) * (rtl ? -1 : 1);
         carousel.style.scrollBehavior = "";
+        scrollArrow();
     }, 0);
 
     return {

@@ -97,7 +97,7 @@ class GuestController extends Controller
     public function faqs_view()
     {
         $data = [
-            'title' => __('FAQs'),
+            'title' => __('FAQ'),
             'link' => route('views.guest.faqs'),
             'tabs' => []
         ];
@@ -178,7 +178,7 @@ class GuestController extends Controller
         ])->all());
 
         return Redirect::back()->with([
-            'content' => __('Reervation completed successfully'),
+            'content' => __('Reservation completed successfully'),
             'modal' => true
         ]);
     }

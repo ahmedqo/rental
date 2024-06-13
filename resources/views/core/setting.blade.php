@@ -11,6 +11,10 @@
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
                 @method('patch')
+                <neo-textbox type="number" label="{{ __('Rate') . ' (USD) (*)' }}" name="usd_rate"
+                    value="{{ Core::getSetting('usd_rate') }}"></neo-textbox>
+                <neo-textbox type="number" label="{{ __('Rate') . ' (EUR) (*)' }}" name="eur_rate"
+                    value="{{ Core::getSetting('eur_rate') }}"></neo-textbox>
                 <neo-select label="{{ __('Period') . ' (*)' }}" name="period">
                     @foreach (Core::periodList() as $period)
                         <neo-select-item value="{{ $period }}"

@@ -1,4 +1,12 @@
 <header>
+    @php
+        $urls = [
+            ['views.guest.index', __('Home')],
+            ['views.guest.fleet', __('Fleet')],
+            ['views.guest.faqs', __('FAQ')],
+            ['views.guest.blogs', __('Blogs')],
+        ];
+    @endphp
     <neo-topbar align="space-between" class="bg-x-white">
         <neo-dropdown label="{{ __('Menu') }}" class="lg:hidden sm-center" position="center">
             <button aria-label="menu_trigger" slot="trigger"
@@ -9,7 +17,7 @@
                 </svg>
             </button>
             <ul class="w-full flex flex-col p-2 gap-2">
-                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.faqs', __('FAQs')], ['views.guest.blogs', __('Blogs')]] as $url)
+                @foreach ($urls as $url)
                     <li class="w-full flex items-center justify-center">
                         <a href="{{ route($url[0]) }}"
                             class="flex px-10 py-1 w-max h-full items-center font-x-thin text-lg relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">
@@ -25,7 +33,7 @@
         </a>
         <nav class="hidden w-max lg:flex items-center ms-auto">
             <ul class="flex w-max items-center gap-2">
-                @foreach ([['views.guest.index', __('Home')], ['views.guest.fleet', __('Fleet')], ['views.guest.faqs', __('FAQs')], ['views.guest.blogs', __('Blogs')]] as $url)
+                @foreach ($urls as $url)
                     <li class="w-max h-full">
                         <a href="{{ route($url[0]) }}"
                             class="flex px-4 py-1 w-max h-full items-center font-semibold text-lg relative isolate rounded-full overflow-hidden {{ request()->routeIs($url[0]) ? 'text-x-white after:z-[-1] after:content-[\'\'] after:absolute after:w-full after:h-full after:inset-0 after:bg-x-core after:bg-gradient-to-br' : 'outline-none text-x-black hover:text-x-prime focus:text-x-prime' }}">

@@ -22,7 +22,7 @@
                 <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::rateList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == $data->status ? 'active' : '' }}>
-                            {{ __(ucwords($status)) }}
+                            {{ ucwords(__($status)) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>

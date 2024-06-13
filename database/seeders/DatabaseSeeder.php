@@ -27,6 +27,16 @@ class DatabaseSeeder extends Seeder
 
         foreach ([
             [
+                'type' => 'usd_rate',
+                'group' => 'currency',
+                'content' => '10'
+            ],
+            [
+                'type' => 'eur_rate',
+                'group' => 'currency',
+                'content' => '10'
+            ],
+            [
                 'type' => 'period',
                 'group' => 'core',
                 'content' => 'week'
@@ -76,7 +86,8 @@ class DatabaseSeeder extends Seeder
                 'content' => ''
             ],
         ] as $arr) {
-            Setting::create($arr);
+            if (!Setting::where('type', $arr['type'])->limit(1)->first())
+                Setting::create($arr);
         }
     }
 }

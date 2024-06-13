@@ -69,7 +69,7 @@ class Blog extends Model implements Sitemapable
 
     public function toSitemapTag(): Url | string | array
     {
-        return Url::create(url(route('views.guest.blog', $this->slug), [], true))
+        return Url::create(url(route('views.guest.blog', $this->slug), secure: true))
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
             ->setPriority(0.1);

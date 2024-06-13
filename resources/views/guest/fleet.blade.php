@@ -1,6 +1,23 @@
 @extends('shared.guest.base')
 @section('title', __('Fleet'))
 
+@section('seo')
+    <meta name="description" content="{{ Core::subString('') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="{{ env('APP_NAME') }} Fleet Page">
+    <meta property="og:description" content="{{ Core::subString('') }}">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
+    @if (Core::getSetting('x'))
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
+        <meta name="twitter:title" content="{{ env('APP_NAME') }} Fleet Page">
+        <meta name="twitter:description" content="{{ Core::subString('') }}">
+        <meta name="twitter:image" content="">
+    @endif
+@endsection
+
 @section('content')
     <div class="bg-x-light">
         <section class="bg-x-white shadow-x-core">
@@ -381,7 +398,7 @@
                         <ul class="w-full grid grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
                             @forelse ($cars as $car)
                                 <li
-                                    class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 lg:p-6 bg-x-white shadow-x-core rounded-2xl">
+                                    class="w-full flex flex-wrap gap-4 lg:gap-6 p-4 lg:p-6 bg-x-white shadow-x-core border border-x-light rounded-x-huge">
                                     <img src="{{ $car->Images[0]->Link }}" alt="{{ ucwords($car->name) }} Image"
                                         loading="lazy"
                                         class="hidden lg:block w-1/5 aspect-square object-contain object-center" />
@@ -469,7 +486,8 @@
                                                 class="block w-full aspect-square object-contain object-center" />
                                         </li>
                                         <li class="hidden lg:block text-2xl text-x-black font-x-huge mt-2">
-                                            {{ $car->price }} {{ __('$') }}
+                                            {{ number_format($car->price / Core::rate(), 2) }}
+                                            {{ Core::$CURRENCY }}
                                         </li>
                                         <li class="hidden lg:block text-xs lg:text-base text-x-black font-normal">
                                             {{ __('Per Day') }}
@@ -491,7 +509,8 @@
                                         <li>
                                             <ul class="w-full flex flex-col items-end">
                                                 <li class=" text-2xl text-x-black font-x-huge">
-                                                    {{ $car->price * Core::rate() }} {{ __('$') }}
+                                                    {{ number_format($car->price / Core::rate(), 2) }}
+                                                    {{ Core::$CURRENCY }}
                                                 </li>
                                                 <li class=" text-xs lg:text-base text-x-black font-normal">
                                                     {{ __('Per Day') }}

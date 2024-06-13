@@ -92,7 +92,7 @@
                                 class="block w-full aspect-square object-contain object-center" />
                         </li>
                         <li class="text-2xl text-x-black font-x-huge mt-2">
-                            {{ $data->price }} {{ Core::$CURRENCY }}
+                            {{ $data->price }} {{ Core::$UNIT }}
                         </li>
                         <li class="text-xs text-x-black font-normal">
                             {{ __('Per Day') }}
@@ -110,7 +110,7 @@
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
                                 <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Profit') }}
-                                    ({{ Core::$CURRENCY }})</h2>
+                                    ({{ Core::$UNIT }})</h2>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ Core::formatNumber($money[0] - $charges[0]) }} /
                                     {{ Core::formatNumber($money[1] - $charges[1]) }}
@@ -126,7 +126,7 @@
                             </svg>
                             <div class="flex flex-1 flex-col items-center lg:items-end">
                                 <h2 class="text-sm lg:text-base text-x-black font-x-thin">{{ __('Charges') }}
-                                    ({{ Core::$CURRENCY }})</h2>
+                                    ({{ Core::$UNIT }})</h2>
                                 <p class="text-base text-x-black text-opacity-50">
                                     {{ $charges[0] }} / {{ $charges[1] }}
                                 </p>

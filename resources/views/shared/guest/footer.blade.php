@@ -77,7 +77,7 @@
                 <li class="w-full flex flex-wrap gap-4 items-center">
                     <a href="{{ route('views.guest.faqs') }}" aria-label="{{ env('APP_NAME') }} faqs"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
-                        {{ __('FAQs') }}
+                        {{ __('FAQ') }}
                     </a>
                 </li>
             </ul>

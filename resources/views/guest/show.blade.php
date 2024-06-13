@@ -1,6 +1,23 @@
 @extends('shared.guest.base')
 @section('title', $car->name)
 
+@section('seo')
+    <meta name="description" content="{{ Core::subString($car->details ?? '') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="{{ env('APP_NAME') }} {{ $car->name }} Page">
+    <meta property="og:description" content="{{ Core::subString('') }}">
+    <meta property="og:image" content="{{ $car->Images[0]->Link }}">
+    <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
+    @if (Core::getSetting('x'))
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
+        <meta name="twitter:title" content="{{ env('APP_NAME') }} {{ $car->name }} Page">
+        <meta name="twitter:description" content="{{ Core::subString($car->details ?? '') }}">
+        <meta name="twitter:image" content="{{ $car->Images[0]->Link }}">
+    @endif
+@endsection
+
 @section('content')
     <div class="bg-x-light">
         <section class="bg-x-white shadow-x-core">
@@ -173,14 +190,14 @@
                                     <div
                                         class="w-full absolute left-0 right-0 flex justify-between top-1/2 -translate-y-1/2 pointer-events-none">
                                         <button id="ui-prev" aria-label="prev_arrow"
-                                            class="pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -me-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                                            class="pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20 me-auto">
                                             <svg class="block w-5 h-5 pointer-events-none text-x-black"
                                                 viewBox="0 -960 960 960" fill="currentColor">
                                                 <path d="M423-59 2-480l421-421 78 79-342 342 342 342-78 79Z" />
                                             </svg>
                                         </button>
                                         <button id="ui-next" aria-label="next_arrow"
-                                            class="pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white -ms-4 z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
+                                            class="pointer-events-auto flex items-center justify-center w-8 h-8 rounded-full outline-none border border-x-shade shadow-x-core bg-x-white z-[1] relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20 ms-auto">
                                             <svg class="block w-5 h-5 pointer-events-none text-x-black"
                                                 viewBox="0 -960 960 960" fill="currentColor">
                                                 <path d="m305-61-79-79 342-342-342-342 79-79 420 421L305-61Z" />
@@ -220,8 +237,8 @@
                                     {{ __('Per Day') }}
                                 </li>
                                 <li class="text-x-black font-x-huge text-base">
-                                    <span id="price">{{ $car->price * Core::rate() }}</span>
-                                    <span>{{ __('$') }}</span>
+                                    <span id="price">{{ number_format($car->price / Core::rate(), 2) }}</span>
+                                    <span>{{ Core::$CURRENCY }}</span>
                                 </li>
                             </ul>
                             <ul class="w-full flex items-end justify-between col-span-2">
@@ -239,8 +256,8 @@
                                     {{ __('Total') }}
                                 </li>
                                 <li class="text-x-black font-x-huge text-lg">
-                                    <span id="total">{{ $car->price * Core::rate() }}</span>
-                                    <span>{{ __('$') }}</span>
+                                    <span id="total">{{ number_format($car->price / Core::rate(), 2) }}</span>
+                                    <span>{{ Core::$CURRENCY }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -354,7 +371,7 @@
                                                         {{ old('rate') == $i ? 'checked' : '' }}
                                                         class="w-0 h-0 absolute inset-0 pointer-events-none opacity-0 peer" />
                                                     <label for="rate-{{ $i }}"
-                                                        class="w-full p-2 flex font-x-huge text-base items-center justify-center gap-2 bg-x-light border border-x-shade rounded-x-thin peer-checked:outline peer-checked:outline-2 peer-checked:-outline-offset-2 peer-checked:outline-x-prime peer-focus:bg-x-prime peer-focus:bg-opacity-20 hover:bg-x-prime hover:bg-opacity-20">
+                                                        class="w-full p-2 flex font-x-huge text-base items-center justify-center gap-2 border border-x-shade rounded-x-thin peer-checked:outline peer-checked:outline-2 peer-checked:-outline-offset-2 peer-checked:outline-x-prime peer-focus:bg-x-prime peer-focus:bg-opacity-20 hover:bg-x-prime hover:bg-opacity-20">
                                                         {{ $i }}
                                                         <svg class="block w-2.5 h-2.5 pointer-events-none"
                                                             viewBox="0 -960 960 960" fill="currentColor">
@@ -433,8 +450,8 @@
         <ul id="sm-reserve"
             class="w-full translate-y-full transition-transform duration-200 lg:hidden flex items-center justify-between gap-4 p-4 bg-x-white shadow-2xl shadow-x-black fixed left-0 right-0 bottom-0">
             <li class="text-x-black font-x-huge text-2xl">
-                <span id="sm-total">{{ $car->price * Core::rate() }}</span>
-                <span>{{ __('$') }}</span>
+                <span id="sm-total">{{ number_format($car->price / Core::rate(), 2) }}</span>
+                <span>{{ Core::$CURRENCY }}</span>
                 <span id="sm-days" class="font-x-thin text-lg"></span>
             </li>
             <li>

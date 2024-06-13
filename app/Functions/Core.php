@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class Core
 {
     public static $CURRENCY = 'MAD';
+    public static $UNIT = 'MAD';
     public static function formatNumber($num)
     {
         $formattedNumber = number_format($num);
@@ -86,7 +87,7 @@ class Core
 
     public static function fuelList()
     {
-        return ['gasoline', 'diesel', 'electric'];
+        return ['gasoline', 'diesel'];
     }
 
     public static function promoteList()
@@ -96,7 +97,13 @@ class Core
 
     public static function rate()
     {
-        return Http::get('https://api.exchangerate-api.com/v4/latest/' . Core::$CURRENCY)->json()['rates'][Core::lang('en') ? 'USD' : 'EUR'];
+        try {
+            Core::$CURRENCY = Core::lang('en') ? '$' : '€';
+            return (float)(Core::lang('en') ? Core::getSetting('usd_rate') : Core::getSetting('eur_rate'));
+        } catch (\Exception $e) {
+            Core::$CURRENCY = 'MAD';
+            return 1;
+        }
     }
 
     public static function getSetting($name, $type = 'type')

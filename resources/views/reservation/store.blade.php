@@ -50,7 +50,7 @@
                 <neo-select label="{{ __('Status') . ' (*)' }}" name="status">
                     @foreach (Core::orderList() as $status)
                         <neo-select-item value="{{ $status }}" {{ $status == old('status') ? 'active' : '' }}>
-                            {{ __(ucwords($status)) }}
+                            {{ ucwords(__($status)) }}
                         </neo-select-item>
                     @endforeach
                 </neo-select>

@@ -101,7 +101,7 @@ class Car extends Model implements Sitemapable
 
     public function toSitemapTag(): Url | string | array
     {
-        return Url::create(url(route('views.guest.show', $this->slug), [], true))
+        return Url::create(url(route('views.guest.show', $this->slug), secure: true))
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
             ->setPriority(0.1);
@@ -130,7 +130,7 @@ class Car extends Model implements Sitemapable
     public function getRatingAttribute()
     {
         $rev =  $this->Reviews->where('status', 'approved');
-        return $rev->sum('rate') / $rev->count();
+        return $rev->count() ? $rev->sum('rate') / $rev->count() : 0;
     }
 
     public function Brand()

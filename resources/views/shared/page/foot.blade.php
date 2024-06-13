@@ -6,7 +6,7 @@
     </div>
     <div id="content">
         <h3>
-            {{ url(env('APP_URL'), [], true) }}
+            {{ url(env('APP_URL'), secure: true) }}
         </h3>
         <h3>
             {{ Core::getSetting('print_phone') }}
