@@ -94,12 +94,50 @@ class GuestController extends Controller
         return view('guest.blog', compact('blog'));
     }
 
+    public function about_view()
+    {
+        $reviews = Review::inRandomOrder()->limit(10)->get();
+        return view('guest.about', compact('reviews'));
+    }
+
     public function faqs_view()
     {
         $data = [
             'title' => __('FAQ'),
             'link' => route('views.guest.faqs'),
-            'tabs' => []
+            'tabs' => [
+                [
+                    'title' => __('I need to rent a car, how can I book my vehicle?'),
+                    'content' => __('Our booking process is simple and straight to the point, select the pick up and drop off date, select the delivery location, right after that, choose a car that responds best to your needs, add your info, and in few seconds you will receive a reservation confirmation email and one of our assistants will reach out to you as soon as possible.')
+                ],
+                [
+                    'title' => __('What are your requirements to make accept my reservation?'),
+                    'content' => [
+                        '- ' . __('Valide driven licence.'),
+                        '- ' . __('Valid form of identification.'),
+                        '- ' . __('Must be 21 years of age or older.'),
+                    ]
+                ],
+                [
+                    'title' => __('What is your cancellation policy?'),
+                    'content' => __('Cancellation is free up to 72 hours prior to your pickup date is FREE OF CHARGE, after that a fee of :price will be charged to your card.', ['price' => number_format(200 / Core::rate(), 2) . Core::$CURRENCY])
+                ], [
+                    'title' => __('Where do you deliver?'),
+                    'content' => __('We deliver everywhere in Morroco, inside of Marrakech city delivery is free, and for deliveries in other cities you need to cover the charges for gas that will sufficient to deliver the car to you, highway and transportation fee of the assistant that will take care of the delivery.')
+                ], [
+                    'title' => __('Where can I make the drop off?'),
+                    'content' => __('Same as our delivery policy, our team will pick up the car anywhere in Marrakech free of charge. However, if the drop off location is in a different city you will need to cover gas and transportation to bring the car from the city where you would like to drop it off.')
+                ], [
+                    'title' => __('When i return the car do i need to clean or refuel it?'),
+                    'content' => [
+                        __('Refueling policy: you need to return the car with the same fuel level it had when you first picked it up (it will be mentioned in your renting contract)'),
+                        __('Cleaning policy: We are not responsible if you lose any of your belongings in the car, so make sure you double check that you took everything before you drop the car off. If you return the car clean, no extra fees will be paid, otherwise a :price pay to clean up the car.', ['price' => number_format(100 / Core::rate(), 2) . Core::$CURRENCY])
+                    ]
+                ], [
+                    'title' => __('If I have an event and i would like to decorate the car, can you take care of it?'),
+                    'content' => __('For car decoration and special requests, please make sure to mention it to our team members that will reach out to make it happen.')
+                ],
+            ]
         ];
         return view('guest.info', compact('data'));
     }

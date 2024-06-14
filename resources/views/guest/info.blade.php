@@ -48,9 +48,19 @@
                                 </h3>
                             </button>
                             <div class="w-full txt">
-                                <p class="w-full p-4 ps-12 text-base">
-                                    {!! $tab['content'] !!}
-                                </p>
+                                @if (is_array($tab['content']))
+                                    <div class="w-full flex flex-col gap-4 p-4 ps-12">
+                                        @foreach ($tab['content'] as $t)
+                                            <p class="w-full text-base">
+                                                {!! $t !!}
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <p class="w-full p-4 ps-12 text-base">
+                                        {!! $tab['content'] !!}
+                                    </p>
+                                @endif
                             </div>
                         </div>
                     @endforeach

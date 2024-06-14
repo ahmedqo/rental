@@ -5,6 +5,7 @@
             ['views.guest.fleet', __('Fleet')],
             ['views.guest.faqs', __('FAQ')],
             ['views.guest.blogs', __('Blogs')],
+            ['views.guest.about', __('About us')],
         ];
     @endphp
     <neo-topbar align="space-between" class="bg-x-white">
