@@ -513,6 +513,8 @@
         <script src="{{ asset('js/trans.min.js') }}?v={{ env('APP_VERSION') }}"></script>
     @endif
     <script src="{{ asset('js/neo/plugins/fields.min.js') }}?v={{ env('APP_VERSION') }}"></script>
-    <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @if ($cars->count() || $blogs->count())
+        <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
     <script src="{{ asset('js/home.min.js') }}?v={{ env('APP_VERSION') }}"></script>
 @endsection

@@ -7,7 +7,7 @@
             </a>
             <div class="w-full flex flex-col gap-4">
                 <p class="text-base font-normal text-x-white text-justify">
-                    {{ __('XCARS, a top-tier car rental company, prides itself on offering unparalleled service and a diverse fleet, featuring the latest models to meet every traveler\'s needs.') }}
+                    {{ __(':company, a top-tier car rental company, prides itself on offering unparalleled service and a diverse fleet, featuring the latest models to meet every traveler\'s needs.', ['company' => env('APP_NAME')]) }}
                 </p>
             </div>
         </div>

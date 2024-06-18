@@ -40,7 +40,7 @@
                 <form id="se-form"
                     class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
                     <neo-select label="{{ __('Location') }}" name="location"
-                        class="bg-transparent lg:flex-[2.5] col-span-2 custom">
+                        class="bg-transparent lg:flex-[2] col-span-2 custom">
                         @foreach (Core::locationList() as $location)
                             <neo-select-item
                                 value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>

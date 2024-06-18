@@ -144,12 +144,7 @@ class GuestController extends Controller
 
     public function terms_view()
     {
-        $data = [
-            'title' => __('Terms And Conditions'),
-            'link' => route('views.guest.terms'),
-            'tabs' => []
-        ];
-        return view('guest.info', compact('data'));
+        return view('guest.term');
     }
 
     public function privacy_view()

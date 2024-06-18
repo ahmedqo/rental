@@ -192,7 +192,7 @@ neo-select.custom:focus-within>svg {
 neo-overlay.sm-center,
 neo-dropdown.sm-center::part(modal) {
     align-items: center;
-    padding: 4rem;
+    padding: 1rem;
 }
 
 input[type="range"] {

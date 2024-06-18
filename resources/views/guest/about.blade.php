@@ -45,7 +45,7 @@
                     </div>
                     <div class="flex flex-col gap-4">
                         <p class="text-base text-x-black font-medium">
-                            {{ __('XCARS makes renting a car hastle free, our goal is to provide you with a simple and efficient way to make your booking without going through a long process. You will have access 24/7 to personalized assistance to help you make the most out of your holiday, customer service is a greaet deal for us and we take it seriously, so whatever you need, we will try our best to make it happen.') }}
+                            {{ __(':company makes renting a car hastle free, our goal is to provide you with a simple and efficient way to make your booking without going through a long process. You will have access 24/7 to personalized assistance to help you make the most out of your holiday, customer service is a greaet deal for us and we take it seriously, so whatever you need, we will try our best to make it happen.', ['company' => env('APP_NAME')]) }}
                         </p>
                         <p class="text-base text-x-black font-medium">
                             {{ __('Our word is our currency. We will guarantee your car is ready for you before you arrive or 15 minutes before the pickup time in the exact location where you need it.') }}
@@ -216,6 +216,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
-    <script src="{{ asset('js/about.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @if ($reviews->count())
+        <script src="{{ asset('js/slider.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+        <script src="{{ asset('js/about.min.js') }}?v={{ env('APP_VERSION') }}"></script>
+    @endif
 @endsection

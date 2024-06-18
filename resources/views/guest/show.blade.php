@@ -179,6 +179,18 @@
                             <h3 class="text-x-black font-x-huge text-xl">
                                 {{ __('Rental Policies') }}
                             </h3>
+                            <div class="flex flex-col gap-2">
+                                <p class="text-x-black text-base font-normal">
+                                    {{ __('Obligations of the contract holder and authorised drivers with respect to the rented vehicleThe contract holder is directly and jointly responsible for ensuring that the main driver and any additional drivers authorised to drive the rented vehicle comply with the contractual obligations described below.', ['company' => env('COMPANY_NAME'), 'email' => 'email.com']) }}
+                                </p>
+                                <p class="text-x-black text-base font-normal">
+                                    {{ __('In the event that :company considers that any of the following obligations are being violated, :company reserves the right to take the appropriate legal actions, such as removing the rented vehicle from the driver of the vehicle and/or judicially requiring the return of the rented vehicle.', ['company' => env('COMPANY_NAME'), 'email' => 'email.com']) }}
+                                </p>
+                                <a href="{{ route('views.guest.terms') }}"
+                                    class="w-max max-w-full text-x-prime hover:text-opacity-60 focus:text-opacity-60 outline-none text-base font-x-thin underline underline-offset-2">
+                                    {{ __('view terms and conditions') }}
+                                </a>
+                            </div>
                         </div>
                         @if ($car->Images->count() > 1)
                             <div block id="gallery"
@@ -350,7 +362,7 @@
                                 class="w-max max-w-full text-center py-2 px-4 font-x-huge text-x-prime text-base border rounded-x-thin border-x-prime bg-x-white relative isolate overflow-hidden after:z-[-1] after:content-[''] after:absolute after:w-full after:h-full after:inset-0 hover:after:bg-x-prime hover:after:bg-opacity-20 focus:after:bg-x-prime focus:after:bg-opacity-20">
                                 {{ __('Share Feedback') }}
                             </button>
-                            <neo-overlay id="feedback_overlay" label="{{ __('Create Feedback') }}">
+                            <neo-overlay id="feedback_overlay" label="{{ __('Create Feedback') }}" class="sm-center">
                                 <form id="feedback_form" action="{{ route('actions.guest.review', $car->id) }}"
                                     method="POST" class="w-full grid grid-row-1 grid-cols-1 lg:grid-cols-2 gap-4 p-4">
                                     @csrf
