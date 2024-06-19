@@ -25,7 +25,7 @@
                     </svg>
                     <a href="{{ env('MAP_CONTACT_LINK') }}" aria-label="map_location"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
-                        XXX XXXX XXXXX XXXXX XXXXX
+                        {{ env('MAP_CONTACT_ADDRESS') }}
                     </a>
                 </li>
                 <li class="w-full flex flex-wrap gap-2 items-center">

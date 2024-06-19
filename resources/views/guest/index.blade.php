@@ -431,7 +431,7 @@
                         </p>
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">
                             <li class="w-full">
-                                <a href="" aria-label="map_location"
+                                <a href="{{ env('MAP_CONTACT_LINK') }}" aria-label="map_location"
                                     class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
                                         <svg class="block w-5 h-5 pointer-events-none text-x-white"
@@ -448,7 +448,7 @@
                                         </li>
                                         <li class="w-full">
                                             <p class="text-sm font-semibold text-x-black text-opacity-60">
-                                                XXX XXXX XXXXX XXXXX XXXXX
+                                                {{ env('MAP_CONTACT_ADDRESS') }}
                                             </p>
                                         </li>
                                     </ul>

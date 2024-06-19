@@ -52,7 +52,11 @@
                         </p>
                     </div>
                 </div>
-                <div class="w-full aspect-video min-h-[calc(100%+2rem)] rounded-x-thin bg-x-shade"></div>
+                <div class="w-full lg:ps-12">
+                    <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}"
+                        alt="{{ env('APP_NAME') }} logo image" class="block w-full" width="500" height="349"
+                        loading="lazy" />
+                </div>
             </div>
         </div>
     </section>
@@ -136,7 +140,7 @@
                         </p>
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">
                             <li class="w-full">
-                                <a href="" aria-label="map_location"
+                                <a href="{{ env('MAP_CONTACT_LINK') }}" aria-label="map_location"
                                     class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
                                         <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
@@ -153,7 +157,7 @@
                                         </li>
                                         <li class="w-full">
                                             <p class="text-sm font-semibold text-x-black text-opacity-60">
-                                                XXX XXXX XXXXX XXXXX XXXXX
+                                                {{ env('MAP_CONTACT_ADDRESS') }}
                                             </p>
                                         </li>
                                     </ul>
@@ -163,8 +167,8 @@
                                 <a href="mailto:{{ Core::getSetting('contact_email') }}" aria-label="email_address"
                                     class="w-full flex flex-wrap gap-4 items-center">
                                     <span class="flex items-center justify-center p-4 bg-x-prime rounded-x-thin">
-                                        <svg class="block w-5 h-5 pointer-events-none text-x-white" viewBox="0 -960 960 960"
-                                            fill="currentColor">
+                                        <svg class="block w-5 h-5 pointer-events-none text-x-white"
+                                            viewBox="0 -960 960 960" fill="currentColor">
                                             <path
                                                 d="M479-59q-85.352 0-162.749-32.73-77.398-32.731-134.804-89.841Q124.04-238.68 91.52-315.966 59-393.251 59-479.946q0-86.694 32.73-163.947 32.731-77.254 89.683-134.713 56.953-57.459 134.312-90.427Q393.084-902 479.862-902t164.15 33.101q77.371 33.1 134.756 90.13 57.384 57.029 90.308 134.647Q902-566.504 902-481v50.504q0 61.144-44.946 102.82Q812.107-286 750-286q-41.33 0-74.165-19Q643-324 626-358q-25 37-63.808 54.5T480.306-286q-80.721 0-138.014-56.561Q285-399.123 285-480.481q0-82.167 57.013-138.843Q399.026-676 479.625-676q80.6 0 137.987 56.68Q675-562.64 675-480v43.933q0 30.964 22.067 51.015Q719.133-365 749.977-365q29.41 0 50.216-20.052Q821-405.103 821-436.067V-481q0-141.7-99.703-240.85Q621.595-821 479.819-821q-141.775 0-241.297 99.703Q139-621.595 139-479.819q0 141.775 99.15 241.297Q337.3-139 479-139h176q17.15 0 28.075 11.479T694-99.017q0 17.649-10.925 28.833Q672.15-59 655-59H479Zm1.353-306Q527-365 561.5-399.544q34.5-34.544 34.5-80.75Q596-528 561.147-562.5t-81.5-34.5Q433-597 398.5-562.206q-34.5 34.794-34.5 82.5 0 46.206 34.853 80.456t81.5 34.25Z" />
                                         </svg>
