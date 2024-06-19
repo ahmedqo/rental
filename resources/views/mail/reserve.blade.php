@@ -1,4 +1,4 @@
-<table style="width: 100%; background: #2196f3">
+<table style="width: 100%; background: #5fbee6">
     <tr>
         <td style="padding: 32px 16px;">
             <div
@@ -11,7 +11,7 @@
                     </a>
                     <h1
                         style="text-align: center; margin: 0; font-size: 24px; font-weight: 900; margin-bottom: 4px; color: #1d1d1d">
-                        {{ __('Your car is reserved at') }}
+                        {{ __('Your car is reserved at') }} {{ env('COMPANY_NAME') }}
                     </h1>
                     <h2 style="text-align: center; margin: 0; font-size: 16px; font-weight: 600; color: #9f9f9f">
                         {{ strtoupper($data->Car->name) }}
@@ -67,7 +67,7 @@
                             <td
                                 style="padding: 20px; max-width: 100%; width:max-content; background: #ffffff; border-radius: 8px;">
                                 <span
-                                    style="foxt-size: 16px; font-weight:600; color: #2196f3; display: block; margin: auto; width: max-content; max-width: 100%;">
+                                    style="foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
                                     {{ __('Pick-up Date') }}
                                 </span>
                                 <span
@@ -83,7 +83,7 @@
                             <td
                                 style="padding: 20px; max-width: 100%; width:max-content; background: #ffffff; border-radius: 8px;">
                                 <span
-                                    style="foxt-size: 16px; font-weight:600; color: #2196f3; display: block; margin: auto; width: max-content; max-width: 100%;">
+                                    style="foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
                                     {{ __('Drop-off Date') }}
                                 </span>
                                 <span
@@ -102,20 +102,20 @@
                     <table style="width: 100%; margin-top: 16px;">
                         <tr>
                             <td style="padding: 0 8px 0 0">
-                                <a href=""
-                                    style="display: block; border: 2px solid #2196f3; color: #2196f3; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
+                                <a href="{{ route('views.guest.faqs') }}"
+                                    style="display: block; border: 2px solid #5fbee6; color: #5fbee6; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
                                     {{ __('Go to FAQ') }}
                                 </a>
                             </td>
                             <td style="padding: 0 8px">
-                                <a href=""
-                                    style="display: block; border: 2px solid #2196f3; color: #2196f3; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
+                                <a href="tel:{{ Core::getSetting('contact_phone') }}"
+                                    style="display: block; border: 2px solid #5fbee6; color: #5fbee6; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
                                     {{ __('Give us a call') }}
                                 </a>
                             </td>
                             <td style="padding: 0 0 0 8px">
-                                <a href=""
-                                    style="display: block; border: 2px solid #2196f3; color: #2196f3; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
+                                <a href="{{ Core::getSetting('contact_phone') }}"
+                                    style="display: block; border: 2px solid #5fbee6; color: #5fbee6; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
                                     {{ __('Message us') }}
                                 </a>
                             </td>

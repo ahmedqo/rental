@@ -11,7 +11,7 @@
                     {{ __('Did you forget your password?') }}<br />
                     {{ __('No need to worry, we\'ve got you covered! Let us provide you with a new password') }}
                 </p>
-                <div style="border-radius: 6px;background: #2196f3;width: max-content;margin: auto;
+                <div style="border-radius: 6px;background: #5fbee6;width: max-content;margin: auto;
                 ">
                     <a href="{{ route('views.reset.index', $data['token']) }}" aria-label="reset_page_link"
                         style="display: block;max-width: 100%;text-align: center;color: #fcfcfc;font-weight: 600;font-size: 18px;padding: 12px 32px;text-decoration: unset;">

@@ -19,12 +19,14 @@
 @endsection
 
 @section('content')
-    <section class="bg-x-acent bg-opacity-30">
+    <section class="bg-x-acent bg-opacity-30 bg-no-repeat bg-center bg-cover"
+        style="background-image: linear-gradient(180deg, rgb(var(--black)/.3), rgb(var(--black)/.2)), url({{ asset('img/bg-cover.webp') }}?v={{ env('APP_VERSION') }})">
         <div class="w-full mx-auto container p-4">
             <div class="flex flex-col lg:flex-row lg:items-center gap-10 my-6 lg:my-20">
                 <div class="w-full flex flex-col">
-                    <span class="text-xl lg:text-2xl text-x-black font-x-huge">{{ __('Plan your trip now') }}</span>
-                    <h1 class="font-x-huge text-x-prime text-4xl lg:text-6xl !leading-[2.6rem] lg:!leading-[4.3rem]">
+                    <span class="text-xl lg:text-2xl text-x-white font-x-huge">{{ __('Plan your trip now') }}</span>
+                    <h1 class="font-x-huge text-x-prime text-4xl lg:text-6xl !leading-[2.6rem] lg:!leading-[4.3rem]"
+                        style="text-shadow: .5px .5px rgb(var(--light));">
                         {{ __('Fast And Easy Way To Rent A Car.') }}
                     </h1>
                     <ul class="w-full grid grid-rows-1 grid-cols-1 gap-4 mt-8">
@@ -34,7 +36,7 @@
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('Free Replacement') }}</span>
+                            <span class="text-xl lg:text-2xl text-x-white font-x-thin">{{ __('Free Replacement') }}</span>
                         </li>
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
@@ -42,7 +44,7 @@
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('Free Cancellation') }}</span>
+                            <span class="text-xl lg:text-2xl text-x-white font-x-thin">{{ __('Free Cancellation') }}</span>
                         </li>
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
@@ -50,7 +52,7 @@
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('All-Risk Coverage') }}</span>
+                            <span class="text-xl lg:text-2xl text-x-white font-x-thin">{{ __('All-Risk Coverage') }}</span>
                         </li>
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
@@ -58,7 +60,7 @@
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('No Hidden Fees') }}</span>
+                            <span class="text-xl lg:text-2xl text-x-white font-x-thin">{{ __('No Hidden Fees') }}</span>
                         </li>
                         <li class="w-full flex flex-wrap items-center gap-2">
                             <svg class="block w-6 h-6 pointer-events-none text-x-prime" fill="currentcolor"
@@ -66,7 +68,7 @@
                                 <path
                                     d="m437-439-69-73q-10-12-25-11.5t-26 9.5q-12 13-12 27.5t12 25.5l88 86q12 15 32 15t33-15l174-172q10-9 10-24.5T643-598q-11-8-25-8t-23 10L437-439ZM316-68l-60-103-119-25q-19-3-29.5-17t-7.5-32l14-116-76-90q-10-12-10-29t10-30l76-88-14-116q-3-18 7.5-32t29.5-18l119-24 60-104q9-15 26-20.5t34 1.5l104 49 105-49q16-5 33-1t26 19l61 105 118 24q19 4 29.5 18t7.5 32l-14 116 76 88q10 13 10 30t-10 29l-76 90 14 116q3 18-7.5 32T823-196l-118 25-61 104q-9 15-26 19t-33-1L480-98 376-49q-17 5-34 .5T316-68Z" />
                             </svg>
-                            <span class="text-lg lg:text-xl text-x-black font-x-thin">{{ __('24/7 Support') }}</span>
+                            <span class="text-xl lg:text-2xl text-x-white font-x-thin">{{ __('24/7 Support') }}</span>
                         </li>
                     </ul>
                 </div>

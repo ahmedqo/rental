@@ -28,9 +28,9 @@
                 @endforeach
             </ul>
         </neo-dropdown>
-        <a aria-label="home_link" href="{{ route('views.guest.index') }}" class="block w-20">
+        <a aria-label="home_link" href="{{ route('views.guest.index') }}" class="block w-32">
             <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
-                class="block w-full" width="576" height="465" loading="lazy" />
+                class="block w-full" width="500" height="349" loading="lazy" />
         </a>
         <nav class="hidden w-max lg:flex items-center ms-auto">
             <ul class="flex w-max items-center gap-2">

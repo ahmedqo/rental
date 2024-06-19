@@ -13,7 +13,7 @@
 <body close>
     <section id="neo-page-cover">
         <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
-            class="block w-36" width="916" height="516" loading="lazy" />
+            class="block w-48" width="500" height="349" loading="lazy" />
     </section>
     <neo-wrapper class="bg-x-light isolate">
         <neo-topbar transparent align="end" class="fixed top-0 left-0 right-0 w-full pointer-events-none z-[1]">
