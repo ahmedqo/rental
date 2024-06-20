@@ -4,18 +4,62 @@
 @section('seo')
     <meta name="description" content="{{ Core::subString('') }}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
-    <meta property="og:title" content="{{ env('APP_NAME') }} {{ $data['title'] }} Page">
+    <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ $data['title'] }} Page">
     <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
-        <meta name="twitter:title" content="{{ env('APP_NAME') }} {{ $data['title'] }} Page">
+        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ $data['title'] }} Page">
         <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Article",
+            "headline": "{{ $data['title'] }}",
+            "author": {
+                "@type": "Organization",
+                "name": "{{ env('COMPANY_NAME') }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ env('COMPANY_NAME') }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}"
+                }
+            },
+            "datePublished": "2024-01-01",
+            "dateModified": "2024-01-01",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ url($data['link'], secure: true) }}"
+            },
+            "articleBody": "{{ Core::subString('') }}",
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    "@type": "ListItem", 
+                    "position": 1, 
+                    "item": { 
+                        "@id": "{{ url(route('views.guest.index'), secure: true) }}", 
+                        "name": "{{ __('Home') }}"
+                    }
+                }, {
+                    "@type": "ListItem", 
+                    "position": 2, 
+                    "item": { 
+                        "@id": "{{ url($data['link'], secure: true) }}", 
+                        "name": "{{ $data['title'] }}"
+                    }
+                }]
+            }
+        }
+    </script>
 @endsection
 
 @section('content')

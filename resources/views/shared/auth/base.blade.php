@@ -12,7 +12,7 @@
 
 <body close>
     <section id="neo-page-cover">
-        <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
+        <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('COMPANY_NAME') }} logo image"
             class="block w-48" width="500" height="349" loading="lazy" />
     </section>
     <neo-wrapper class="bg-x-light isolate">

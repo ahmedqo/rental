@@ -1,13 +1,14 @@
 <footer class="bg-x-black py-3 sm:py-6">
     <div class="w-full container mx-auto p-4 grid grid-rows-1 grid-cols-1 sm:grid-cols-12 gap-10 lg:gap-12">
         <div class="w-full sm:col-span-12 lg:col-span-5 flex flex-col gap-6">
-            <a href="{{ route('views.guest.index') }}" aria-label="{{ env('APP_NAME') }} home page" class="block w-28">
-                <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
-                    loading="lazy" class="block w-full" width="14rem" height="auto" />
+            <a href="{{ route('views.guest.index') }}" aria-label="{{ env('COMPANY_NAME') }} home page" class="block w-28">
+                <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}"
+                    alt="{{ env('COMPANY_NAME') }} logo image" loading="lazy" class="block w-full" width="14rem"
+                    height="auto" />
             </a>
             <div class="w-full flex flex-col gap-4">
                 <p class="text-base font-normal text-x-white text-justify">
-                    {{ __(':company, a top-tier car rental company, prides itself on offering unparalleled service and a diverse fleet, featuring the latest models to meet every traveler\'s needs.', ['company' => env('APP_NAME')]) }}
+                    {{ __(':company, a top-tier car rental company, prides itself on offering unparalleled service and a diverse fleet, featuring the latest models to meet every traveler\'s needs.', ['company' => env('COMPANY_NAME')]) }}
                 </p>
             </div>
         </div>
@@ -63,19 +64,20 @@
             </h3>
             <ul class="w-full flex flex-col gap-2 items-start">
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="{{ route('views.guest.terms') }}" aria-label="{{ env('APP_NAME') }} terms and conditions"
+                    <a href="{{ route('views.guest.terms') }}"
+                        aria-label="{{ env('COMPANY_NAME') }} terms and conditions"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('Terms And Conditions') }}
                     </a>
                 </li>
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="{{ route('views.guest.privacy') }}" aria-label="{{ env('APP_NAME') }} privacy policy"
+                    <a href="{{ route('views.guest.privacy') }}" aria-label="{{ env('COMPANY_NAME') }} privacy policy"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('Privacy Policy') }}
                     </a>
                 </li>
                 <li class="w-full flex flex-wrap gap-4 items-center">
-                    <a href="{{ route('views.guest.faqs') }}" aria-label="{{ env('APP_NAME') }} faqs"
+                    <a href="{{ route('views.guest.faqs') }}" aria-label="{{ env('COMPANY_NAME') }} faqs"
                         class="flex-1 text-x-white text-sm font-x-thin text-start">
                         {{ __('FAQ') }}
                     </a>

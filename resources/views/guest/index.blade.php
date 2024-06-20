@@ -4,18 +4,27 @@
 @section('seo')
     <meta name="description" content="{{ Core::subString('') }}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
-    <meta property="og:title" content="{{ env('APP_NAME') }} Home Page">
+    <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }} Home Page">
     <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
-        <meta name="twitter:title" content="{{ env('APP_NAME') }} Home Page">
+        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} Home Page">
         <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "{{ __('Home') }}",
+            "url": "{{ url(route('views.guest.index'), secure: true) }}",
+            "description": "{{ Core::subString('') }}"
+        }
+    </script>
 @endsection
 
 @section('content')

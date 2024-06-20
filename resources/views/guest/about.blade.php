@@ -1,21 +1,65 @@
 @extends('shared.guest.base')
-@section('title', __('About us'))
+@section('title', __('About Us'))
 
 @section('seo')
     <meta name="description" content="{{ Core::subString('') }}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
-    <meta property="og:title" content="{{ env('APP_NAME') }} {{ __('About us') }} Page">
+    <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ __('About Us') }} Page">
     <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
-        <meta name="twitter:title" content="{{ env('APP_NAME') }} {{ __('About us') }} Page">
+        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ __('About Us') }} Page">
         <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Article",
+            "headline": "{{ __('About Us') }}",
+            "author": {
+                "@type": "Organization",
+                "name": "{{ env('COMPANY_NAME') }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ env('COMPANY_NAME') }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}"
+                }
+            },
+            "datePublished": "2024-01-01",
+            "dateModified": "2024-01-01",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ url(route('views.guest.about'), secure: true) }}"
+            },
+            "articleBody": "{{ Core::subString('') }}",
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    "@type": "ListItem", 
+                    "position": 1, 
+                    "item": { 
+                        "@id": "{{ url(route('views.guest.index'), secure: true) }}", 
+                        "name": "{{ __('Home') }}"
+                    }
+                }, {
+                    "@type": "ListItem", 
+                    "position": 2, 
+                    "item": { 
+                        "@id": "{{ url(route('views.guest.about'), secure: true) }}", 
+                        "name": "{{ __('About Us') }}"
+                    }
+                }]
+            }
+        }
+    </script>
 @endsection
 
 @section('content')
@@ -25,7 +69,7 @@
             @include('shared.guest.crumbs', [
                 'items' => [
                     [__('Home'), route('views.guest.index')],
-                    [__('About us'), route('views.guest.about')],
+                    [__('About Us'), route('views.guest.about')],
                 ],
             ])
         </div>
@@ -45,7 +89,7 @@
                     </div>
                     <div class="flex flex-col gap-4">
                         <p class="text-base text-x-black font-medium">
-                            {{ __(':company makes renting a car hastle free, our goal is to provide you with a simple and efficient way to make your booking without going through a long process. You will have access 24/7 to personalized assistance to help you make the most out of your holiday, customer service is a greaet deal for us and we take it seriously, so whatever you need, we will try our best to make it happen.', ['company' => env('APP_NAME')]) }}
+                            {{ __(':company makes renting a car hastle free, our goal is to provide you with a simple and efficient way to make your booking without going through a long process. You will have access 24/7 to personalized assistance to help you make the most out of your holiday, customer service is a greaet deal for us and we take it seriously, so whatever you need, we will try our best to make it happen.', ['company' => env('COMPANY_NAME')]) }}
                         </p>
                         <p class="text-base text-x-black font-medium">
                             {{ __('Our word is our currency. We will guarantee your car is ready for you before you arrive or 15 minutes before the pickup time in the exact location where you need it.') }}
@@ -134,13 +178,13 @@
                 </div>
                 <div class="w-full aspect-[16/10] relative">
                     <img src="{{ asset('img/bg-about.webp') }}?v={{ env('APP_VERSION') }}"
-                        alt="{{ env('APP_NAME') }} logo image"
-                        class="block w-10/12 ms-auto aspect-[10/6] rounded-x-huge border-2 border-x-prime object-cover object-center"
-                        width="500" height="349" loading="lazy" />
+                        alt="{{ env('COMPANY_NAME') }} logo image"
+                        class="block w-10/12 ms-auto aspect-[10/6] rounded-x-thin border-2 border-x-prime object-cover object-center"
+                        width="503" height="300" loading="lazy" />
                     <img src="{{ asset('img/bg-cover.webp') }}?v={{ env('APP_VERSION') }}"
-                        alt="{{ env('APP_NAME') }} logo image"
-                        class="block w-4/12 aspect-[10/12] absolute left-0 bottom-0 border-2 border-x-prime rounded-x-huge object-cover object-center"
-                        width="500" height="349" loading="lazy" />
+                        alt="{{ env('COMPANY_NAME') }} logo image"
+                        class="block w-8/12 aspect-[10/6] absolute left-0 bottom-0 border-2 border-x-prime rounded-x-thin object-cover object-center"
+                        width="401" height="239" loading="lazy" />
                 </div>
             </div>
         </div>

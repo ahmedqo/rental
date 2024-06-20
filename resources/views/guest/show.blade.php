@@ -4,15 +4,15 @@
 @section('seo')
     <meta name="description" content="{{ Core::subString($car->details ?? '') }}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
-    <meta property="og:title" content="{{ env('APP_NAME') }} {{ $car->name }} Page">
+    <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ $car->name }} Page">
     <meta property="og:description" content="{{ Core::subString('') }}">
     <meta property="og:image" content="{{ $car->Images[0]->Link }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
-        <meta name="twitter:title" content="{{ env('APP_NAME') }} {{ $car->name }} Page">
+        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ $car->name }} Page">
         <meta name="twitter:description" content="{{ Core::subString($car->details ?? '') }}">
         <meta name="twitter:image" content="{{ $car->Images[0]->Link }}">
     @endif

@@ -12,7 +12,7 @@
 
 <body close>
     <section id="neo-page-cover">
-        <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('APP_NAME') }} logo image"
+        <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}" alt="{{ env('COMPANY_NAME') }} logo image"
             class="block w-48" width="500" height="349" loading="lazy" />
     </section>
     <neo-wrapper class="flex flex-wrap">
@@ -20,7 +20,7 @@
             <header class="w-full flex justify-center">
                 <a href="{{ url('/') }}" class="block w-36 mx-auto" aria-label="home_page_link">
                     <img src="{{ asset('img/logo.webp') }}?v={{ env('APP_VERSION') }}"
-                        alt="{{ env('APP_NAME') }} logo image" class="block w-full" width="500" height="349"
+                        alt="{{ env('COMPANY_NAME') }} logo image" class="block w-full" width="500" height="349"
                         loading="lazy" />
                 </a>
             </header>
