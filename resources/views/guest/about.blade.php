@@ -217,8 +217,8 @@
                         {{ __('GET IN TOUCH') }}
                     </h3>
                 </div>
-                <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center">
-                    <div class="w-full aspect-video min-h-[calc(100%+2rem)] rounded-x-thin bg-x-shade"></div>
+                <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
+                    <div class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"></div>
                     <div class="w-full flex flex-col gap-6 lg:gap-8">
                         <p class="text-lg lg:text-xl text-x-black text-opacity-70 font-normal">
                             {{ __('We\'re here for you and eager to help! Your satisfaction is our top priority. Contact us anytime, we can\'t wait to connect with you.') }}
