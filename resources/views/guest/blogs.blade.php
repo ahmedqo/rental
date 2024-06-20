@@ -46,7 +46,7 @@
                             {{ Core::subString($blog->details, 150) }}
                         </p>
                     @endif
-                    <div class="w-full flex flex-wrap items-center gap-2">
+                    <div class="w-full flex flex-wrap items-center gap-2 mt-auto">
                         <svg class="block w-3 h-3 pointer-events-none text-x-black text-opacity-50" fill="currentcolor"
                             viewBox="0 -960 960 960">
                             <path

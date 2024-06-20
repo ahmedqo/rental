@@ -28,12 +28,17 @@
         </div>
         <hr class="border-t border-t-x-shade">
     </section>
+    <section class="bg-x-acent bg-opacity-10 bg-repeat"
+        style="background-image: url({{ asset('img/pattern-2.png') }}?v={{ env('APP_VERSION') }})">
+        <div class="w-full mx-auto my-8 lg:my-16 lg:max-w-[50%] container p-4 flex flex-col items-center gap-6">
+            <h1 class="text-x-black font-x-huge text-2xl lg:text-5xl text-center">{{ $data['title'] }}</h1>
+            <neo-explorer label="{{ __('Search') }}" target=".tabs" class="bg-white w-full"></neo-explorer>
+        </div>
+    </section>
     <section class="my-4 lg:my-6">
         <div class="w-full mx-auto container p-4">
             <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
                 <div class="w-full lg:col-span-2 flex flex-col gap-6">
-                    <neo-explorer label="{{ __('Search') }}" target=".tabs"
-                        class="bg-transparent col-span-2"></neo-explorer>
                     @foreach ($data['tabs'] as $tab)
                         <div class="tabs w-full flex flex-col {{ $loop->index === 0 ? 'is-open' : '' }}">
                             <button
