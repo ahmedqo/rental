@@ -5,6 +5,7 @@ namespace App\Functions;
 use App\Mail\{
     Reset as ResetMail,
     Plain as PlainMail,
+    Reserve as ReserveMail,
 };
 use Illuminate\Support\{
     Facades\Mail as Mailer,
@@ -50,6 +51,12 @@ class Mail
     public static function plain($data)
     {
         $mail = new PlainMail($data);
+        Mailer::send($mail);
+    }
+
+    public static function reserve($data)
+    {
+        $mail = new ReserveMail($data);
         Mailer::send($mail);
     }
 }

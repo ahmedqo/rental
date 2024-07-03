@@ -14,10 +14,10 @@
                         {{ __('Your car is reserved at') }} {{ env('COMPANY_NAME') }}
                     </h1>
                     <h2 style="text-align: center; margin: 0; font-size: 16px; font-weight: 600; color: #9f9f9f">
-                        {{ strtoupper($data->Car->name) }}
+                        {{ strtoupper($data['resreve']->Car->name) }}
                     </h2>
                 </div>
-                <img src="{{ $data->Car->Images[0]->Link }}" alt="{{ $data->Car->name }} Image"
+                <img src="{{ $data['resreve']->Car->Images[0]->Link }}" alt="{{ $data['resreve']->Car->name }} Image"
                     style="display: block; width: 100%; aspect-ratio: 16/9; object-position: center; object-fit: contain;background: #f9f9f9;" />
                 <div style="padding: 20px;">
                     <h2
@@ -31,7 +31,7 @@
                                     {{ __('Per Day') }}
                                 </td>
                                 <td style="color:#1d1d1d;font-weight: 700;font-size: 18px;text-align: end">
-                                    <span>{{ number_format($data->Car->price / Core::rate(), 2) }}</span>
+                                    <span>{{ number_format($data['resreve']->Car->price / Core::rate(), 2) }}</span>
                                     <span>{{ Core::$CURRENCY }}</span>
                                 </td>
                             </tr>
@@ -40,7 +40,7 @@
                                     {{ __('Days Count') }}
                                 </td>
                                 <td style="color:#1d1d1d;font-weight: 700;font-size: 18px;text-align: end">
-                                    <span>{{ $data->period }}</span>
+                                    <span>{{ $data['resreve']->period }}</span>
                                     <span style="font-size: 14px">{{ __('Days') }}</span>
                                 </td>
                             </tr>
@@ -54,7 +54,7 @@
                                     {{ __('Total') }}
                                 </td>
                                 <td style="color:#1d1d1d;font-weight: 700;font-size: 18px;text-align: end">
-                                    <span>{{ number_format($data->total / Core::rate(), 2) }}</span>
+                                    <span>{{ number_format($data['resreve']->total / Core::rate(), 2) }}</span>
                                     <span>{{ Core::$CURRENCY }}</span>
                                 </td>
                             </tr>
@@ -72,7 +72,7 @@
                                 </span>
                                 <span
                                     style="text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
-                                    {{ Carbon::parse($data->from)->format('l F d, h:ia') }}
+                                    {{ Carbon::parse($data['resreve']->from)->format('l F d, h:ia') }}
                                 </span>
                             </td>
                         </tr>
@@ -88,7 +88,7 @@
                                 </span>
                                 <span
                                     style="text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
-                                    {{ Carbon::parse($data->to)->format('l F d, h:ia') }}
+                                    {{ Carbon::parse($data['resreve']->to)->format('l F d, h:ia') }}
                                 </span>
                             </td>
                         </tr>

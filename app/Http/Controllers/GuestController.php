@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Functions\Core;
+use App\Functions\Mail as Mailer;
 use App\Models\Blog;
 use App\Models\Car;
 use App\Models\Brand;
@@ -14,6 +15,7 @@ use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Mail\Mailables\Address;
 
 class GuestController extends Controller
 {
@@ -201,7 +203,7 @@ class GuestController extends Controller
         $period = (int) ceil($from->diffInHours($to) / 24);
         $total = $period * $Car->price;
 
-        Reservation::create($Request->merge([
+        $Reservation = Reservation::create($Request->merge([
             'from' => $from,
             'to' => $to,
             'period' => $period,
@@ -209,6 +211,19 @@ class GuestController extends Controller
             'status' => 'pendding',
             'charges' => json_encode(['total' => 0, 'items' => []])
         ])->all());
+
+        Mailer::plain([
+            'subject' => __('New Reservation Available'),
+            'from' => new Address(env('MAIL_NOREPLAY_ADDRESS'), env('COMPANY_NAME')),
+            'to' => [new Address(Core::getSetting('notify_email'), env('COMPANY_NAME'))],
+            'content' => __('New Reservation Available'),
+        ]);
+
+        Mailer::reserve([
+            'from' => new Address(Core::getSetting('contact_email'), env('COMPANY_NAME')),
+            'to' => [new Address($Request->email, $Request->name)],
+            'resreve' => $Reservation
+        ]);
 
         return Redirect::back()->with([
             'content' => __('Reservation completed successfully'),
