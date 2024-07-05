@@ -21,12 +21,12 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/terms_and_condition</loc>
+        <loc>http://localhost/terms-and-condition</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/privacy_policy</loc>
+        <loc>http://localhost/privacy-policy</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

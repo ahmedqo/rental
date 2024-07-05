@@ -16,6 +16,9 @@
         <meta name="twitter:description" content="{{ Core::subString('') }}">
         <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
+    <script type="application/ld+json">
+        {!! json_encode($json) !!}
+    </script>
 @endsection
 
 @section('content')

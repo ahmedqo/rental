@@ -17,13 +17,7 @@
         <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
     <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            "name": "{{ __('Home') }}",
-            "url": "{{ url(route('views.guest.index'), secure: true) }}",
-            "description": "{{ Core::subString('') }}"
-        }
+        {!! json_encode($json) !!}
     </script>
 @endsection
 
@@ -88,7 +82,7 @@
                             {{ __('Find Your Car') }}
                         </h2>
                         <neo-select label="{{ __('Location') }}" name="location"
-                            class="bg-transparent py-3 px-5 col-span-2 custom">
+                            class="bg-transparent py-3 px-5 col-span-2 custom sm-center">
                             @foreach (Core::locationList() as $location)
                                 <neo-select-item value="{{ $location }}">
                                     {{ ucwords(__($location)) }}
@@ -101,13 +95,17 @@
                             </svg>
                         </neo-select>
                         <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}" name="pick-up-date"
-                            class="bg-transparent py-3 px-5 custom start" value="#now" format="mmm dd"></neo-datepicker>
+                            class="bg-transparent py-3 px-5 custom start sm-center" value="#now"
+                            format="mmm dd"></neo-datepicker>
                         <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}" name="drop-off-date"
-                            class="bg-transparent py-3 px-5 custom end" value="#now+1" format="mmm dd"></neo-datepicker>
-                        <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent py-3 px-5 custom start"
-                            name="pick-up-time" value="#now" format="HH:MM AA"></neo-timepicker>
-                        <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent py-3 px-5 custom end"
-                            name="drop-off-time" value="#now" format="HH:MM AA"></neo-timepicker>
+                            class="bg-transparent py-3 px-5 custom end sm-center" value="#now+1"
+                            format="mmm dd"></neo-datepicker>
+                        <neo-timepicker label="{{ __('Pick-up Time') }}"
+                            class="bg-transparent py-3 px-5 custom start sm-center" name="pick-up-time" value="#now"
+                            format="HH:MM AA"></neo-timepicker>
+                        <neo-timepicker label="{{ __('Drop-off Time') }}"
+                            class="bg-transparent py-3 px-5 custom end sm-center" name="drop-off-time" value="#now"
+                            format="HH:MM AA"></neo-timepicker>
                         <div class="w-full flex col-span-2">
                             <neo-button
                                 class="w-full lg:w-max lg:px-20 py-[.95rem] px-5 text-lg font-x-huge text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">

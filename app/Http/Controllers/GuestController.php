@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Functions\Core;
 use App\Functions\Mail as Mailer;
 use App\Models\Blog;
@@ -34,7 +35,96 @@ class GuestController extends Controller
 
         $blogs = Blog::latest()->inRandomOrder()->limit(4)->get();
 
-        return view('guest.index', compact('cars', 'blogs'));
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'LocalBusiness',
+            'name' => env('COMPANY_NAME'),
+            'url' => url(route('views.guest.index'), secure: true),
+            'logo' => asset('img/logo.webp'),
+            'image' => asset('img/bg-cover.webp'),
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'telephone' => Core::getSetting('contact_phone'),
+                'contactType' => 'Customer Service',
+                'email' => Core::getSetting('contact_email'),
+                'areaServed' => 'MA',
+                'availableLanguage' => ['English', 'French', 'Italian', 'Spanish']
+            ],
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => env('MAP_CONTACT_ADDRESS'),
+                'addressLocality' => 'Marrakech',
+                'postalCode' => '40000',
+                'addressCountry' => 'MA'
+            ],
+            'openingHours' => [
+                'Mo-Fr 09:00-23:00',
+                'Sa-Su 11:00-18:00'
+            ],
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => url(route('views.guest.fleet') . '?location={location}&pick-up-date={pick_up_date}&drop-off-date={drop_off_date}&pick-up-time={pick_up_time}&drop-off-time={drop_off_time}', secure: true),
+                'query-input' => [
+                    'name=location',
+                    'name=pick_up_date',
+                    'name=drop_off_date',
+                    'name=pick_up_time',
+                    'name=drop_off_time'
+                ]
+            ],
+            'description' => Core::subString(''),
+        ];
+
+        if (Core::getSetting('social', 'group')) {
+            $json['sameAs'] = array_filter([
+                Core::getSetting('instagram'),
+                Core::getSetting('telegram'),
+                Core::getSetting('facebook'),
+                Core::getSetting('youtube'),
+                Core::getSetting('tiktok'),
+                Core::getSetting('x')
+            ]);
+        }
+
+        if ($cars->count()) {
+            $json['makesOffer'] = $cars->map(function ($car) {
+                return [
+                    '@type' => 'Offer',
+                    'itemOffered' => [
+                        '@type' => 'Car',
+                        'name' => ucwords($car->name) . ' (' . ucwords(__('or similar')) . ')',
+                        'vehicleConfiguration' => implode(', ', [
+                            $car->passengers . ' ' . __('Passengers'),
+                            $car->doors . ' ' . __('Doors'),
+                            $car->cargo . ' ' . __('sutecase'),
+                            __(ucwords($car->transmission)),
+                            __(ucwords($car->fuel))
+                        ]),
+                        'url' => route('views.guest.show', $car->slug),
+                        'image' => $car->Images[0]->Link,
+                        'aggregateRating' => [
+                            '@type' => 'AggregateRating',
+                            'ratingValue' => (string) $car->rating,
+                            'bestRating' => '5',
+                            'worstRating' => '1',
+                            'reviewCount' => (string) $car->Reviews->where('status', 'approved')->count()
+                        ]
+                    ],
+                    'priceCurrency' => Core::$CURRENCY,
+                    'price' => number_format($car->price / Core::rate(), 2),
+                    'priceValidUntil' => now(),
+                    'availability' => 'http://schema.org/InStock',
+                    'validFrom' => now(),
+                    'eligibleDuration' => [
+                        '@type' => 'QuantitativeValue',
+                        'value' => 1,
+                        'unitCode' => 'DAY'
+                    ]
+                ];
+            });
+        }
+
+        return view('guest.index', compact('json', 'cars', 'blogs'));
     }
 
     public function fleet_view(Request $Request)
@@ -73,33 +163,402 @@ class GuestController extends Controller
                 'name' => $item->{'name_' . Core::lang()},
             ];
         });
-        return view('guest.fleet', compact('cars', 'types', 'brands'));
+
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'ItemList',
+            'url' =>  url(route('views.guest.fleet'), secure: true),
+            'numberOfItems' => $cars->count(),
+            'potentialAction' => [
+                [
+                    '@type' => 'SearchAction',
+                    'target' => url(route('views.guest.fleet') . '?location={location}&pick-up-date={pick_up_date}&drop-off-date={drop_off_date}&pick-up-time={pick_up_time}&drop-off-time={drop_off_time}', secure: true),
+                    'query-input' => [
+                        'name=location',
+                        'name=pick_up_date',
+                        'name=drop_off_date',
+                        'name=pick_up_time',
+                        'name=drop_off_time'
+                    ]
+                ],
+                [
+                    '@type' => 'SearchAction',
+                    'target' => url(route('views.guest.fleet') . '?price={price}&passangers={passangers}&cargo={cargo}&fuel[]={fuel}&transmission[]={transmission}&type[]={transmission}&brand[]={brand}', secure: true),
+                    'query-input' => [
+                        'name=price',
+                        'name=passangers',
+                        'name=cargo',
+                        'name=fuel',
+                        'name=transmission',
+                        'name=type',
+                        'name=brand',
+                    ]
+                ],
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('Fleet'),
+                        'item' => url(route('views.guest.fleet'), secure: true)
+                    ]
+                ]
+            ]
+        ];
+
+        if ($cars->count()) {
+            $json['itemListElement'] = $cars->map(function ($car, $i) {
+                return [
+                    '@type' => 'ListItem',
+                    'position' => $i + 1,
+                    'item' => [
+                        '@type' => 'Car',
+                        'name' => ucwords($car->name) . ' (' . ucwords(__('or similar')) . ')',
+                        'offers' => [
+                            '@type' => 'Offer',
+                            'url' => route('views.guest.show', $car->slug),
+                            'priceCurrency' => Core::$CURRENCY,
+                            'price' => number_format($car->price / Core::rate(), 2),
+                            'priceValidUntil' => now(),
+                            'availability' => 'http://schema.org/InStock',
+                            'validFrom' => now(),
+                            'eligibleDuration' => [
+                                '@type' => 'QuantitativeValue',
+                                'value' => 1,
+                                'unitCode' => 'DAY'
+                            ]
+                        ],
+                        'vehicleConfiguration' => implode(', ', [
+                            $car->passengers . ' ' . __('Passengers'),
+                            $car->doors . ' ' . __('Doors'),
+                            $car->cargo . ' ' . __('sutecase'),
+                            __(ucwords($car->transmission)),
+                            __(ucwords($car->fuel))
+                        ]),
+                        'image' => $car->Images[0]->Link,
+                        'aggregateRating' => [
+                            '@type' => 'AggregateRating',
+                            'ratingValue' => (string) $car->rating,
+                            'bestRating' => '5',
+                            'worstRating' => '1',
+                            'reviewCount' => (string) $car->Reviews->where('status', 'approved')->count()
+                        ],
+                        'itemCondition' => 'https://schema.org/NewCondition',
+                        'vehicleModelDate' => '2024',
+                        'brand' => [
+                            '@type' => 'Brand',
+                            'name' => $car->Brand->name
+                        ],
+                        'model' => $car->Category->name,
+                        'numberOfDoors' => $car->doors,
+                        'driveWheelConfiguration' => 'Front-wheel drive',
+                        'vehicleSeatingCapacity' =>  $car->passengers,
+                        'vehicleTransmission' => ucwords($car->transmission),
+                        'vehicleIdentificationNumber' => Str::random(17),
+                        'vehicleEngine' => [
+                            '@type' => 'EngineSpecification',
+                            'fuelType' => ucwords($car->fuel)
+                        ]
+                    ]
+                ];
+            });
+        }
+
+        return view('guest.fleet', compact('json', 'cars', 'types', 'brands'));
     }
 
     public function blogs_view()
     {
         $blogs = Blog::with('Image')->cursorPaginate(50);
-        return view('guest.blogs', compact('blogs'));
+
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'ItemList',
+            'url' =>  url(route('views.guest.blogs'), secure: true),
+            'numberOfItems' => $blogs->count(),
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('Blogs'),
+                        'item' => url(route('views.guest.blogs'), secure: true)
+                    ]
+                ]
+            ]
+        ];
+
+        if ($blogs->count()) {
+            $json['itemListElement'] = $blogs->map(function ($blog, $i) {
+                return [
+                    '@type' => 'ListItem',
+                    'position' => $i + 1,
+                    'item' => [
+                        '@type' => 'BlogPosting',
+                        'headline' => $blog->title,
+                        'datePublished' => $blog->updated_at,
+                        'author' => [
+                            '@type' => 'Person',
+                            'name' => env('COMPANY_NAME')
+                        ],
+                        'url' => url(route('views.guest.blog', $blog->slug), secure: true),
+                        'image' => $blog->Image->Link,
+                        'description' => Core::subString($blog->details)
+                    ]
+                ];
+            });
+        }
+
+        return view('guest.blogs', compact('json', 'blogs'));
     }
 
     public function show_view($slug)
     {
         $car = Car::with('Category', 'Brand', 'Images', 'Reviews')->where('slug', $slug)->limit(1)->first();
         if (!$car) abort(404);
-        return view('guest.show', compact('car'));
+
+        $Reviews = $car->Reviews->where('status', 'approved');
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Car',
+            'name' => ucwords($car->name) . ' (' . ucwords(__('or similar')) . ')',
+            'offers' => [
+                '@type' => 'Offer',
+                'url' => route('views.guest.show', $car->slug),
+                'priceCurrency' => Core::$CURRENCY,
+                'price' => number_format($car->price / Core::rate(), 2),
+                'priceValidUntil' => now(),
+                'availability' => 'http://schema.org/InStock',
+                'validFrom' => now(),
+                'eligibleDuration' => [
+                    '@type' => 'QuantitativeValue',
+                    'value' => 1,
+                    'unitCode' => 'DAY'
+                ]
+            ],
+            'vehicleConfiguration' => implode(', ', [
+                $car->passengers . ' ' . __('Passengers'),
+                $car->doors . ' ' . __('Doors'),
+                $car->cargo . ' ' . __('sutecase'),
+                __(ucwords($car->transmission)),
+                __(ucwords($car->fuel))
+            ]),
+            'image' => $car->Images[0]->Link,
+            'url' => route('views.guest.show', $car->slug),
+            'description' => Core::subString($car->details ?? ''),
+            'aggregateRating' => [
+                '@type' => 'AggregateRating',
+                'ratingValue' => (string) $car->rating,
+                'bestRating' => '5',
+                'worstRating' => '1',
+                'reviewCount' => (string) $car->Reviews->where('status', 'approved')->count()
+            ],
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'vehicleModelDate' => '2024',
+            'brand' => [
+                '@type' => 'Brand',
+                'name' => $car->Brand->name
+            ],
+            'model' => $car->Category->name,
+            'numberOfDoors' => $car->doors,
+            'driveWheelConfiguration' => 'Front-wheel drive',
+            'vehicleSeatingCapacity' =>  $car->passengers,
+            'vehicleTransmission' => ucwords($car->transmission),
+            'vehicleIdentificationNumber' => Str::random(17),
+            'vehicleEngine' => [
+                '@type' => 'EngineSpecification',
+                'fuelType' => ucwords($car->fuel)
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('Fleet'),
+                        'item' => url(route('views.guest.fleet'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 3,
+                        'name' => ucwords($car->name),
+                        'item' => url(route('views.guest.show', $car->slug), secure: true)
+                    ]
+                ]
+            ],
+            'potentialAction' => [
+                [
+                    '@type' => 'ReserveAction',
+                    'target' => [
+                        '@type' => 'EntryPoint',
+                        'urlTemplate' => url(route('actions.guest.reserve'), secure: true),
+                        'httpMethod' => 'POST',
+                        'encodingType' => 'application/x-www-form-urlencoded'
+                    ]
+                ],
+                [
+                    '@type' => 'WriteAction',
+                    'target' => [
+                        '@type' => 'EntryPoint',
+                        'urlTemplate' => url(route('actions.guest.review', $car->id), secure: true),
+                        'httpMethod' => 'POST',
+                        'encodingType' => 'application/x-www-form-urlencoded'
+                    ]
+                ]
+            ]
+        ];
+
+        if ($Reviews->count()) {
+            $json['review'] = $Reviews->map(function ($review) {
+                return [
+                    '@type' => 'Review',
+                    'reviewRating' => [
+                        '@type' => 'Rating',
+                        'ratingValue' => (string) $review->rate,
+                        'bestRating' => '5',
+                        'worstRating' => '1'
+                    ],
+                    'author' => [
+                        '@type' => 'Person',
+                        'name' => ucwords($review->name)
+                    ],
+                    'datePublished' => $review->updated_at,
+                    'reviewBody' => $review->content
+                ];
+            });
+        }
+
+        return view('guest.show', compact('json', 'car'));
     }
 
     public function blog_view($slug)
     {
         $blog = Blog::with('Image')->where('slug', $slug)->limit(1)->first();
         if (!$blog) abort(404);
-        return view('guest.blog', compact('blog'));
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            'headline' => $blog->title,
+            'datePublished' => $blog->updated_at,
+            'author' => [
+                '@type' => 'Person',
+                'name' => env('COMPANY_NAME')
+            ],
+            'url' => url(route('views.guest.blog', $blog->slug), secure: true),
+            'image' => $blog->Image->Link,
+            'description' => Core::subString($blog->details),
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => url(route('views.guest.blog', $blog->slug), secure: true)
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('Blogs'),
+                        'item' => url(route('views.guest.blogs'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 3,
+                        'name' => ucwords($blog->title),
+                        'item' => url(route('views.guest.blog', $blog->slug), secure: true)
+                    ]
+                ]
+            ],
+        ];
+
+        return view('guest.blog', compact('json', 'blog'));
     }
 
     public function about_view()
     {
         $reviews = Review::inRandomOrder()->limit(10)->get();
-        return view('guest.about', compact('reviews'));
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'AboutPage',
+            'mainEntity' => [
+                '@type' => 'Organization',
+                'name' => env('COMPANY_NAME'),
+                'url' => url(route('views.guest.index'), secure: true),
+                'contactPoint' => [
+                    '@type' => 'ContactPoint',
+                    'telephone' => Core::getSetting('contact_phone'),
+                    'contactType' => 'Customer Service',
+                    'email' => Core::getSetting('contact_email'),
+                    'areaServed' => 'MA',
+                    'availableLanguage' => ['English', 'French', 'Italian', 'Spanish']
+                ],
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => env('MAP_CONTACT_ADDRESS'),
+                    'addressLocality' => 'Marrakech',
+                    'postalCode' => '40000',
+                    'addressCountry' => 'MA'
+                ],
+                'description' => Core::subString(''),
+                'image' => asset('img/logo.webp'),
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('About Us'),
+                        'item' => url(route('views.guest.about'), secure: true)
+                    ],
+                ]
+            ],
+        ];
+
+        if (Core::getSetting('social', 'group')) {
+            $json['mainEntity']['sameAs'] = array_filter([
+                Core::getSetting('instagram'),
+                Core::getSetting('telegram'),
+                Core::getSetting('facebook'),
+                Core::getSetting('youtube'),
+                Core::getSetting('tiktok'),
+                Core::getSetting('x')
+            ]);
+        }
+
+        return view('guest.about', compact('json', 'reviews'));
     }
 
     public function faqs_view()
@@ -141,12 +600,86 @@ class GuestController extends Controller
                 ],
             ]
         ];
+
+        $data['json'] = [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => collect($data['tabs'])->map(function ($tab) {
+                return [
+                    '@type' => 'Question',
+                    'name' => $tab['title'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => is_array($tab['content']) ? implode(' ', $tab['content']) : $tab['content']
+                    ]
+                ];
+            }),
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' => __('FAQ'),
+                        'item' => url(route('views.guest.faqs'), secure: true)
+                    ],
+                ]
+            ],
+        ];
         return view('guest.info', compact('data'));
     }
 
     public function terms_view()
     {
-        return view('guest.term');
+        $json = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => url(route('views.guest.terms'), secure: true),
+            ],
+            'headline' => __('Terms And Conditions'),
+            'description' => Core::subString(''),
+            'articleBody' =>  __('Obligations of the contract holder and authorised drivers with respect to the rented vehicleThe contract holder is directly and jointly responsible for ensuring that the main driver and any additional drivers authorised to drive the rented vehicle comply with the contractual obligations described below.', ['company' => env('COMPANY_NAME'), 'email' => Core::getSetting('contact_email')]),
+            'datePublished' => '2024-07-04',
+            'dateModified' => '2024-07-04',
+            'author' => [
+                '@type' => 'Organization',
+                'name' => env('COMPANY_NAME')
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => env('COMPANY_NAME'),
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => asset('img/logo.webp')
+                ]
+            ],
+            'breadcrumb' => [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 1,
+                        'name' => __('Home'),
+                        'item' => url(route('views.guest.index'), secure: true)
+                    ],
+                    [
+                        '@type' => 'ListItem',
+                        'position' => 2,
+                        'name' =>  __('Terms And Conditions'),
+                        'item' => url(route('views.guest.terms'), secure: true)
+                    ],
+                ]
+            ],
+        ];
+        return view('guest.term', compact('json'));
     }
 
     public function privacy_view()
@@ -170,6 +703,47 @@ class GuestController extends Controller
                 ], [
                     'title' => __('Updates to Privacy Policy'),
                     'content' => __('We reserve the right to update this Privacy Policy at any time to reflect changes in our practices or legal requirements. We encourage you to review this Privacy Policy periodically for any updates. Your continued use of our website or services after any changes indicates your acceptance of the updated Privacy Policy.')
+                ],
+            ],
+            'json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Article',
+                'mainEntityOfPage' => [
+                    '@type' => 'WebPage',
+                    '@id' => url(route('views.guest.privacy'), secure: true),
+                ],
+                'headline' => __('Privacy Policy'),
+                'description' => Core::subString(''),
+                'datePublished' => '2024-07-04',
+                'dateModified' => '2024-07-04',
+                'author' => [
+                    '@type' => 'Organization',
+                    'name' => env('COMPANY_NAME')
+                ],
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => env('COMPANY_NAME'),
+                    'logo' => [
+                        '@type' => 'ImageObject',
+                        'url' => asset('img/logo.webp')
+                    ]
+                ],
+                'breadcrumb' => [
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => __('Home'),
+                            'item' => url(route('views.guest.index'), secure: true)
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' =>  __('Privacy Policy'),
+                            'item' => url(route('views.guest.privacy'), secure: true)
+                        ],
+                    ]
                 ],
             ]
         ];

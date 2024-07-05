@@ -16,6 +16,9 @@
         <meta name="twitter:description" content="{{ Core::subString('') }}">
         <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
+    <script type="application/ld+json">
+        {!! json_encode($json) !!}
+    </script>
 @endsection
 
 @section('content')
@@ -40,7 +43,7 @@
                 <form id="se-form"
                     class="hidden peer-checked:grid grid-rows-1 grid-cols-2 gap-4 lg:!flex lg:flex-wrap items-start">
                     <neo-select label="{{ __('Location') }}" name="location"
-                        class="bg-transparent lg:flex-[2] col-span-2 custom">
+                        class="bg-transparent lg:flex-[2] col-span-2 custom sm-center">
                         @foreach (Core::locationList() as $location)
                             <neo-select-item
                                 value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
@@ -54,17 +57,17 @@
                         </svg>
                     </neo-select>
                     <neo-datepicker full-day="3" label="{{ __('Pick-up Date') }}"
-                        class="bg-transparent lg:flex-[1] custom center" name="pick-up-date"
+                        class="bg-transparent lg:flex-[1] custom center sm-center" name="pick-up-date"
                         value="{{ request('pick-up-date') ?? '#now' }}" format="mmm dd"></neo-datepicker>
                     <neo-datepicker full-day="3" label="{{ __('Drop-off Date') }}"
-                        class="bg-transparent lg:flex-[1] custom center" name="drop-off-date"
+                        class="bg-transparent lg:flex-[1] custom center sm-center" name="drop-off-date"
                         value="{{ request('drop-off-date') ?? '#now+1' }}" format="mmm dd"></neo-datepicker>
-                    <neo-timepicker label="{{ __('Pick-up Time') }}" class="bg-transparent lg:flex-[1] custom center"
-                        name="pick-up-time" value="{{ request('pick-up-time') ?? '#now' }}"
-                        format="HH:MM AA"></neo-timepicker>
-                    <neo-timepicker label="{{ __('Drop-off Time') }}" class="bg-transparent lg:flex-[1] custom center"
-                        name="drop-off-time" value="{{ request('drop-off-time') ?? '#now' }}"
-                        format="HH:MM AA"></neo-timepicker>
+                    <neo-timepicker label="{{ __('Pick-up Time') }}"
+                        class="bg-transparent lg:flex-[1] custom center sm-center" name="pick-up-time"
+                        value="{{ request('pick-up-time') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
+                    <neo-timepicker label="{{ __('Drop-off Time') }}"
+                        class="bg-transparent lg:flex-[1] custom center sm-center" name="drop-off-time"
+                        value="{{ request('drop-off-time') ?? '#now' }}" format="HH:MM AA"></neo-timepicker>
                     <neo-button
                         class="w-full col-span-2 lg:w-max px-10 text-x-white bg-x-core bg-gradient-to-br rtl:bg-gradient-to-bl">
                         <span>{{ __('Search') }}</span>

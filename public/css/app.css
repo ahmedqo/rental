@@ -192,7 +192,10 @@ neo-select.custom:focus-within>svg {
 }
 
 neo-overlay.sm-center,
-neo-dropdown.sm-center::part(modal) {
+neo-select.sm-center::part(modal),
+neo-dropdown.sm-center::part(modal),
+neo-datepicker.sm-center::part(modal),
+neo-timepicker.sm-center::part(modal) {
     align-items: center;
     padding: 1rem;
 }
@@ -458,7 +461,10 @@ input[type="range"]::-webkit-slider-runnable-track {
         left: 0;
     }
     neo-overlay.sm-center,
-    neo-dropdown.sm-center::part(modal) {
+    neo-select.sm-center::part(modal),
+    neo-dropdown.sm-center::part(modal),
+    neo-datepicker.sm-center::part(modal),
+    neo-timepicker.sm-center::part(modal) {
         padding: 0;
     }
 }

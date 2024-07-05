@@ -1,21 +1,24 @@
 @extends('shared.guest.base')
-@section('title', $car->name)
+@section('title', ucwords($car->name))
 
 @section('seo')
     <meta name="description" content="{{ Core::subString($car->details ?? '') }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
-    <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ $car->name }} Page">
+    <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ ucwords($car->name) }} Page">
     <meta property="og:description" content="{{ Core::subString('') }}">
     <meta property="og:image" content="{{ $car->Images[0]->Link }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
-        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ $car->name }} Page">
+        <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ ucwords($car->name) }} Page">
         <meta name="twitter:description" content="{{ Core::subString($car->details ?? '') }}">
         <meta name="twitter:image" content="{{ $car->Images[0]->Link }}">
     @endif
+    <script type="application/ld+json">
+        {!! json_encode($json) !!}
+    </script>
 @endsection
 
 @section('content')
@@ -27,7 +30,7 @@
                     'items' => [
                         [__('Home'), route('views.guest.index')],
                         [__('Fleet'), route('views.guest.fleet')],
-                        [$car->name, route('views.guest.show', $car->slug)],
+                        [ucwords($car->name), route('views.guest.show', $car->slug)],
                     ],
                 ])
             </div>
@@ -302,7 +305,7 @@
                                 </div>
                                 <div class="flex flex-col gap-1 col-span-2">
                                     <neo-select data-error=".error-3"label="{{ __('Location') . ' (*)' }}"
-                                        name="location" class="bg-transparent custom">
+                                        name="location" class="bg-transparent custom sm-center">
                                         @foreach (Core::locationList() as $location)
                                             <neo-select-item
                                                 value="{{ $location }}"{{ request('location') == $location ? 'active' : '' }}>
@@ -322,12 +325,12 @@
                                     <div class="flex gap-4">
                                         <neo-datepicker data-error=".error-4"full-day="3"
                                             label="{{ __('Pick-up Date') . ' (*)' }}"
-                                            class="bg-transparent flex-[1] custom start" name="from_date"
+                                            class="bg-transparent flex-[1] custom start sm-center" name="from_date"
                                             value="{{ request('pick-up-date') ?? '#now' }}"
                                             format="mmm dd"></neo-datepicker>
                                         <neo-datepicker data-error=".error-4"full-day="3"
                                             label="{{ __('Drop-off Date') . ' (*)' }}"
-                                            class="bg-transparent flex-[1] custom end" name="to_date"
+                                            class="bg-transparent flex-[1] custom end sm-center" name="to_date"
                                             value="{{ request('drop-off-date') ?? '#now+1' }}"
                                             format="mmm dd"></neo-datepicker>
                                     </div>
@@ -336,11 +339,11 @@
                                 <div class="flex flex-col gap-1 col-span-2">
                                     <div class="flex gap-4">
                                         <neo-timepicker data-error=".error-5"label="{{ __('Pick-up Time') . ' (*)' }}"
-                                            class="bg-transparent flex-[1] custom start" name="from_time"
+                                            class="bg-transparent flex-[1] custom start sm-center" name="from_time"
                                             value="{{ request('pick-up-time') ?? '#now' }}"
                                             format="HH:MM AA"></neo-timepicker>
                                         <neo-timepicker data-error=".error-5"label="{{ __('Drop-off Time') . ' (*)' }}"
-                                            class="bg-transparent flex-[1] custom end" name="to_time"
+                                            class="bg-transparent flex-[1] custom end sm-center" name="to_time"
                                             value="{{ request('drop-off-time') ?? '#now' }}"
                                             format="HH:MM AA"></neo-timepicker>
                                     </div>

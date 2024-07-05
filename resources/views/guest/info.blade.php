@@ -17,48 +17,7 @@
         <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
     @endif
     <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Article",
-            "headline": "{{ $data['title'] }}",
-            "author": {
-                "@type": "Organization",
-                "name": "{{ env('COMPANY_NAME') }}"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "{{ env('COMPANY_NAME') }}",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}"
-                }
-            },
-            "datePublished": "2024-01-01",
-            "dateModified": "2024-01-01",
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "{{ url($data['link'], secure: true) }}"
-            },
-            "articleBody": "{{ Core::subString('') }}",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [{
-                    "@type": "ListItem", 
-                    "position": 1, 
-                    "item": { 
-                        "@id": "{{ url(route('views.guest.index'), secure: true) }}", 
-                        "name": "{{ __('Home') }}"
-                    }
-                }, {
-                    "@type": "ListItem", 
-                    "position": 2, 
-                    "item": { 
-                        "@id": "{{ url($data['link'], secure: true) }}", 
-                        "name": "{{ $data['title'] }}"
-                    }
-                }]
-            }
-        }
+        {!! json_encode($data['json']) !!}
     </script>
 @endsection
 

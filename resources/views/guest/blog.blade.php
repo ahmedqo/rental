@@ -16,6 +16,9 @@
         <meta name="twitter:description" content="{{ Core::subString($blog->details ?? '') }}">
         <meta name="twitter:image" content="{{ $blog->Image->Link }}">
     @endif
+    <script type="application/ld+json">
+        {!! json_encode($json) !!}
+    </script>
 @endsection
 
 @section('content')
@@ -26,7 +29,7 @@
                 'items' => [
                     [__('Home'), route('views.guest.index')],
                     [__('Blogs'), route('views.guest.blogs')],
-                    [$blog->title, route('views.guest.blog', $blog->slug)],
+                    [ucwords($blog->title), route('views.guest.blog', $blog->slug)],
                 ],
             ])
         </div>
