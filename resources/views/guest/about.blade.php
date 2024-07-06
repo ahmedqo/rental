@@ -2,19 +2,22 @@
 @section('title', __('About Us'))
 
 @section('seo')
-    <meta name="description" content="{{ Core::subString('') }}">
+    <meta name="description"
+        content="{{ Core::subString(__('Learn more about :company, a leading car rental company in Morocco, committed to hassle-free bookings and exceptional customer service. With a diverse fleet of the latest models, :company guarantees your car will be ready before your arrival. Enjoy 24/7 personalized assistance to enhance your travel experience.', ['company' => env('COMPANY_NAME')])) }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
     <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ __('About Us') }} Page">
-    <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+    <meta property="og:description"
+        content="{{ Core::subString(__('Learn more about :company, a leading car rental company in Morocco, committed to hassle-free bookings and exceptional customer service. With a diverse fleet of the latest models, :company guarantees your car will be ready before your arrival. Enjoy 24/7 personalized assistance to enhance your travel experience.', ['company' => env('COMPANY_NAME')])) }}">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
         <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ __('About Us') }} Page">
-        <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+        <meta name="twitter:description"
+            content="{{ Core::subString(__('Learn more about :company, a leading car rental company in Morocco, committed to hassle-free bookings and exceptional customer service. With a diverse fleet of the latest models, :company guarantees your car will be ready before your arrival. Enjoy 24/7 personalized assistance to enhance your travel experience.', ['company' => env('COMPANY_NAME')])) }}">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     @endif
     <script type="application/ld+json">
         {!! json_encode($json) !!}

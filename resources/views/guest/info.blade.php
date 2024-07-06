@@ -2,19 +2,19 @@
 @section('title', $data['title'])
 
 @section('seo')
-    <meta name="description" content="{{ Core::subString('') }}">
+    <meta name="description" content="{{ $data['desc'] }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
     <meta property="og:title" content="{{ env('COMPANY_NAME') }} {{ $data['title'] }} Page">
-    <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+    <meta property="og:description" content="{{ $data['desc'] }}">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
         <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} {{ $data['title'] }} Page">
-        <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+        <meta name="twitter:description" content="{{ $data['desc'] }}">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     @endif
     <script type="application/ld+json">
         {!! json_encode($data['json']) !!}

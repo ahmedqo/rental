@@ -2,19 +2,22 @@
 @section('title', __('Home'))
 
 @section('seo')
-    <meta name="description" content="{{ Core::subString('') }}">
+    <meta name="description"
+        content="{{ Core::subString(__(':company offers fast and easy car rental services with features like free replacement, free cancellation, all-risk coverage, no hidden fees, and 24/7 support. Choose from a wide range of well-maintained vehicles at competitive prices, with convenient pick-up and drop-off locations. Ideal for travelers in Marrakech and beyond, ensuring reliable and affordable transportation for all your travel needs.', ['company' => env('COMPANY_NAME')])) }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
     <meta property="og:title" content="{{ env('COMPANY_NAME') }} Home Page">
-    <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+    <meta property="og:description"
+        content="{{ Core::subString(__(':company offers fast and easy car rental services with features like free replacement, free cancellation, all-risk coverage, no hidden fees, and 24/7 support. Choose from a wide range of well-maintained vehicles at competitive prices, with convenient pick-up and drop-off locations. Ideal for travelers in Marrakech and beyond, ensuring reliable and affordable transportation for all your travel needs.', ['company' => env('COMPANY_NAME')])) }}">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
         <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} Home Page">
-        <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+        <meta name="twitter:description"
+            content="{{ Core::subString(__(':company offers fast and easy car rental services with features like free replacement, free cancellation, all-risk coverage, no hidden fees, and 24/7 support. Choose from a wide range of well-maintained vehicles at competitive prices, with convenient pick-up and drop-off locations. Ideal for travelers in Marrakech and beyond, ensuring reliable and affordable transportation for all your travel needs.', ['company' => env('COMPANY_NAME')])) }}">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     @endif
     <script type="application/ld+json">
         {!! json_encode($json) !!}

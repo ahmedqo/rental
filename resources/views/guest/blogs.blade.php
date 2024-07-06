@@ -2,19 +2,22 @@
 @section('title', __('Blogs'))
 
 @section('seo')
-    <meta name="description" content="{{ Core::subString('') }}">
+    <meta name="description"
+        content="{{ Core::subString(__('Explore the :company blogs for insights and tips on car rental services, travel guides, and driving experiences in Morocco. Stay informed with articles on the best travel destinations, practical advice for road trips, and updates about the latest offers and fleet additions.', ['company' => env('COMPANY_NAME')])) }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ env('COMPANY_NAME') }}">
     <meta property="og:title" content="{{ env('COMPANY_NAME') }} Blogs Page">
-    <meta property="og:description" content="{{ Core::subString('') }}">
-    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+    <meta property="og:description"
+        content="{{ Core::subString(__('Explore the :company blogs for insights and tips on car rental services, travel guides, and driving experiences in Morocco. Stay informed with articles on the best travel destinations, practical advice for road trips, and updates about the latest offers and fleet additions.', ['company' => env('COMPANY_NAME')])) }}">
+    <meta property="og:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     <meta property="og:url" content="{{ url(url()->full(), secure: true) }}">
     @if (Core::getSetting('x'))
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ Core::getSetting('x') }}">
         <meta name="twitter:title" content="{{ env('COMPANY_NAME') }} Blogs Page">
-        <meta name="twitter:description" content="{{ Core::subString('') }}">
-        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}?v={{ env('APP_VERSION') }}">
+        <meta name="twitter:description"
+            content="{{ Core::subString(__('Explore the :company blogs for insights and tips on car rental services, travel guides, and driving experiences in Morocco. Stay informed with articles on the best travel destinations, practical advice for road trips, and updates about the latest offers and fleet additions.', ['company' => env('COMPANY_NAME')])) }}">
+        <meta name="twitter:image" content="{{ url(asset('img/logo.webp'), secure: true) }}">
     @endif
     <script type="application/ld+json">
         {!! json_encode($json) !!}

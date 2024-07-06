@@ -72,7 +72,7 @@ class GuestController extends Controller
                     'name=drop_off_time'
                 ]
             ],
-            'description' => Core::subString(''),
+            'description' => Core::subString(__(':company offers fast and easy car rental services with features like free replacement, free cancellation, all-risk coverage, no hidden fees, and 24/7 support. Choose from a wide range of well-maintained vehicles at competitive prices, with convenient pick-up and drop-off locations. Ideal for travelers in Marrakech and beyond, ensuring reliable and affordable transportation for all your travel needs.', ['company' => env('COMPANY_NAME')])),
         ];
 
         if (Core::getSetting('social', 'group')) {
@@ -310,7 +310,7 @@ class GuestController extends Controller
                     'position' => $i + 1,
                     'item' => [
                         '@type' => 'BlogPosting',
-                        'headline' => $blog->title,
+                        'headline' => ucwords($blog->title),
                         'datePublished' => $blog->updated_at,
                         'author' => [
                             '@type' => 'Person',
@@ -318,7 +318,7 @@ class GuestController extends Controller
                         ],
                         'url' => url(route('views.guest.blog', $blog->slug), secure: true),
                         'image' => $blog->Image->Link,
-                        'description' => Core::subString($blog->details)
+                        'description' => Core::subString($blog->details ?? __('Your gateway to expert insights and captivating stories on :blog. Explore, learn, and engage with our curated content designed to inform and inspire.', ['blog' => $blog->title]))
                     ]
                 ];
             });
@@ -360,7 +360,7 @@ class GuestController extends Controller
             ]),
             'image' => $car->Images[0]->Link,
             'url' => route('views.guest.show', $car->slug),
-            'description' => Core::subString($car->details ?? ''),
+            'description' => Core::subString($car->details ?? __('Introducing the :car, where elegance meets power. Experience unmatched performance, luxurious comfort, and state-of-the-art technology in every journey. Discover driving redefined with :brand.', ['car' => $car->name, 'brand' => $car->Brand->name])),
             'aggregateRating' => [
                 '@type' => 'AggregateRating',
                 'ratingValue' => (string) $car->rating,
@@ -459,7 +459,7 @@ class GuestController extends Controller
         $json = [
             '@context' => 'https://schema.org',
             '@type' => 'BlogPosting',
-            'headline' => $blog->title,
+            'headline' => ucwords($blog->title),
             'datePublished' => $blog->updated_at,
             'author' => [
                 '@type' => 'Person',
@@ -467,7 +467,7 @@ class GuestController extends Controller
             ],
             'url' => url(route('views.guest.blog', $blog->slug), secure: true),
             'image' => $blog->Image->Link,
-            'description' => Core::subString($blog->details),
+            'description' => Core::subString($blog->details ?? __('Your gateway to expert insights and captivating stories on :blog. Explore, learn, and engage with our curated content designed to inform and inspire.', ['blog' => $blog->title])),
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',
                 '@id' => url(route('views.guest.blog', $blog->slug), secure: true)
@@ -525,7 +525,7 @@ class GuestController extends Controller
                     'postalCode' => '40000',
                     'addressCountry' => 'MA'
                 ],
-                'description' => Core::subString(''),
+                'description' => Core::subString(__('Learn more about :company, a leading car rental company in Morocco, committed to hassle-free bookings and exceptional customer service. With a diverse fleet of the latest models, :company guarantees your car will be ready before your arrival. Enjoy 24/7 personalized assistance to enhance your travel experience.', ['company' => env('COMPANY_NAME')])),
                 'image' => asset('img/logo.webp'),
             ],
             'breadcrumb' => [
@@ -566,6 +566,7 @@ class GuestController extends Controller
         $data = [
             'title' => __('FAQ'),
             'link' => route('views.guest.faqs'),
+            'desc' => Core::subString(__('Find answers to common questions about booking, rental requirements, cancellation policies, delivery, drop-off, refueling, and special requests at :company. Get all the details you need for a smooth and hassle-free car rental experience.', ['company' => env('COMPANY_NAME')])),
             'tabs' => [
                 [
                     'title' => __('I need to rent a car, how can I book my vehicle?'),
@@ -645,7 +646,7 @@ class GuestController extends Controller
                 '@id' => url(route('views.guest.terms'), secure: true),
             ],
             'headline' => __('Terms And Conditions'),
-            'description' => Core::subString(''),
+            'description' => Core::subString(__('Understand :company terms and conditions for car rental services. Review our guidelines, policies, and customer responsibilities for a transparent and reliable rental experience.', ['company' => env('COMPANY_NAME')])),
             'articleBody' =>  __('Obligations of the contract holder and authorised drivers with respect to the rented vehicleThe contract holder is directly and jointly responsible for ensuring that the main driver and any additional drivers authorised to drive the rented vehicle comply with the contractual obligations described below.', ['company' => env('COMPANY_NAME'), 'email' => Core::getSetting('contact_email')]),
             'datePublished' => '2024-07-04',
             'dateModified' => '2024-07-04',
@@ -687,6 +688,7 @@ class GuestController extends Controller
         $data = [
             'title' => __('Privacy Policy'),
             'link' => route('views.guest.privacy'),
+            'desc' => Core::subString(__('Review :company Privacy Policy to understand how we collect, use, and protect your personal and payment information. Learn about data security measures and your rights regarding privacy updates.', ['company' => env('COMPANY_NAME')])),
             'tabs' => [
                 [
                     'title' => __('Personal Identification Information'),
@@ -713,7 +715,7 @@ class GuestController extends Controller
                     '@id' => url(route('views.guest.privacy'), secure: true),
                 ],
                 'headline' => __('Privacy Policy'),
-                'description' => Core::subString(''),
+                'description' => Core::subString(__('Review :company Privacy Policy to understand how we collect, use, and protect your personal and payment information. Learn about data security measures and your rights regarding privacy updates.', ['company' => env('COMPANY_NAME')])),
                 'datePublished' => '2024-07-04',
                 'dateModified' => '2024-07-04',
                 'author' => [
