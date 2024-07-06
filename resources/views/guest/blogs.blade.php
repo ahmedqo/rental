@@ -47,11 +47,9 @@
                             {{ $blog->title }}
                         </h4>
                     </a>
-                    @if ($blog->details)
-                        <p class="text-sm text-x-black text-opacity-80">
-                            {{ Core::subString($blog->details, 150) }}
-                        </p>
-                    @endif
+                    <p class="text-sm text-x-black text-opacity-80">
+                        {{ Core::subString($blog->details ?? __('Your gateway to expert insights and captivating stories on :blog. Explore, learn, and engage with our curated content designed to inform and inspire.', ['blog' => $blog->title]), 150) }}
+                    </p>
                     <div class="w-full flex flex-wrap items-center gap-2 mt-auto">
                         <svg class="block w-3 h-3 pointer-events-none text-x-black text-opacity-50" fill="currentcolor"
                             viewBox="0 -960 960 960">
