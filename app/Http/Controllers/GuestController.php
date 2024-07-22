@@ -22,16 +22,7 @@ class GuestController extends Controller
 {
     public function index_view()
     {
-        $cars = Car::with('Category', 'Images')->joinSub(
-            Car::select(DB::raw('MAX(id) as id'))->whereIn(
-                'category',
-                Category::inRandomOrder()->limit(10)->pluck('id')
-            )->where('status', Core::statusList()[0])->where('promote', true)->groupBy('category'),
-            'sub',
-            function ($join) {
-                $join->on('cars.id', '=', 'sub.id');
-            }
-        )->get();
+        $cars = Car::with('Category', 'Images')->where('status', Core::statusList()[0])->where('promote', true)->get();
 
         $blogs = Blog::latest()->inRandomOrder()->limit(4)->get();
 
@@ -142,9 +133,9 @@ class GuestController extends Controller
         })->when($Request->brand, function ($query, $brand) {
             return $query->whereIn('brand', $brand);
         })->when($Request->min, function ($query, $min) {
-            return $query->where('price', '>=', $min);
+            return $query->where('price', '>=', (float) $min * Core::rate());
         })->when($Request->max, function ($query, $max) {
-            return $query->where('price', '<=', $max);
+            return $query->where('price', '<=', (float) $max * Core::rate());
         })->when($Request->fuel, function ($query, $fuel) {
             return $query->whereIn('fuel', $fuel);
         });

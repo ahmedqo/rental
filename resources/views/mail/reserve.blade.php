@@ -67,11 +67,11 @@
                             <td
                                 style="padding: 20px; max-width: 100%; width:max-content; background: #ffffff; border-radius: 8px;">
                                 <span
-                                    style="foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
+                                    style="display: block; foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
                                     {{ __('Pick-up Date') }}
                                 </span>
                                 <span
-                                    style="text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
+                                    style="display: block; text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
                                     {{ Carbon::parse($data['resreve']->from)->format('l F d, h:ia') }}
                                 </span>
                             </td>
@@ -83,11 +83,11 @@
                             <td
                                 style="padding: 20px; max-width: 100%; width:max-content; background: #ffffff; border-radius: 8px;">
                                 <span
-                                    style="foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
+                                    style="display: block; foxt-size: 16px; font-weight:600; color: #5fbee6; display: block; margin: auto; width: max-content; max-width: 100%;">
                                     {{ __('Drop-off Date') }}
                                 </span>
                                 <span
-                                    style="text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
+                                    style="display: block; text-align: center; margin: auto; font-size: 20px; font-weight: 700; margin-top: 4px; color: #1d1d1d; width: max-content; max-width: 100%;">
                                     {{ Carbon::parse($data['resreve']->to)->format('l F d, h:ia') }}
                                 </span>
                             </td>
@@ -114,7 +114,7 @@
                                 </a>
                             </td>
                             <td style="padding: 0 0 0 8px">
-                                <a href="{{ Core::getSetting('contact_phone') }}"
+                                <a href="https://wa.me/{{ Core::getSetting('contact_phone') }}?text=Hello+i+need+some+help+please"
                                     style="display: block; border: 2px solid #5fbee6; color: #5fbee6; padding: 10px; font-size: 18px; font-weight:700;text-decoration: none; text-align: center; border-radius: 8px;">
                                     {{ __('Message us') }}
                                 </a>

@@ -1,6 +1,6 @@
 <section class="fixed left-0 right-0 bottom-0 z-50 pointer-events-none">
     <div class="w-full container mx-auto p-4 flex justify-end">
-        <a href="{{ env('WATHSAPP_CONTACT_LINK') }}"
+        <a href="https://wa.me/{{ Core::getSetting('contact_phone') }}?text=Hello+i+like+to+rent+a+car"
             class="pointer-events-auto w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-green-400 flex items-center justify-center text-x-white shadow-x-core">
             <svg class="block h-8 w-8 lg:w-10 lg:h-10 pointer-events-none" fill="currentcolor" viewBox="0 0 308 308">
                 <path
