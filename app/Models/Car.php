@@ -24,7 +24,6 @@ class Car extends Model implements Sitemapable
     protected $fillable = [
         'category',
         'brand',
-        'price',
         'passengers',
         'doors',
         'cargo',
@@ -32,6 +31,19 @@ class Car extends Model implements Sitemapable
         'fuel',
         'status',
         'promote',
+
+        'price_january',
+        'price_february',
+        'price_march',
+        'price_april',
+        'price_may',
+        'price_june',
+        'price_july',
+        'price_august',
+        'price_september',
+        'price_october',
+        'price_november',
+        'price_december',
 
         'slug',
         'name_en',
@@ -49,12 +61,24 @@ class Car extends Model implements Sitemapable
     ];
 
     protected $searchable = [
-        'price',
         'passengers',
         'doors',
         'cargo',
         'transmission',
         'fuel',
+
+        'price_january',
+        'price_february',
+        'price_march',
+        'price_april',
+        'price_may',
+        'price_june',
+        'price_july',
+        'price_august',
+        'price_september',
+        'price_october',
+        'price_november',
+        'price_december',
 
         'name_en',
         'name_fr',
@@ -107,6 +131,11 @@ class Car extends Model implements Sitemapable
             ->setPriority(0.1);
     }
 
+    public function getPriceAttribute()
+    {
+        return $this->{'price_' . strtolower(Carbon::now()->format('F'))};
+    }
+   
     public function getNameAttribute()
     {
         return $this->{'name_' . Core::lang()};

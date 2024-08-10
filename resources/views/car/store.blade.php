@@ -13,9 +13,19 @@
             <form action="{{ route('actions.cars.store') }}" method="POST" enctype="multipart/form-data"
                 class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
                 @csrf
-                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name_en" value="{{ old('name_en') }}"></neo-textbox>
-                <neo-textbox type="number" label="{{ __('Price') . ' (*)' }}" name="price"
-                    value="{{ old('price') }}"></neo-textbox>
+                <neo-textbox label="{{ __('Name') . ' (*)' }}" name="name_en"
+                    value="{{ old('name_en') }}"class="lg:col-span-2"></neo-textbox>
+                <div class="flex flex-col lg:col-span-2">
+                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                        {{ __('Price') . ' (*)' }}
+                    </label>
+                    <div class="grid grid-rows-1 grid-cols-2 lg:grid-cols-4 gap-6">
+                        @foreach (['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'] as $price)
+                            <neo-textbox type="number" label="{{ ucwords(__($price)) . ' (*)' }}"
+                                name="price_{{ $price }}" value="{{ old('price_' . $price) }}"></neo-textbox>
+                        @endforeach
+                    </div>
+                </div>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (en)' }}" name="details_en"
                     value="{{ old('details_en') }}" rows="4"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (fr)' }}" name="details_fr"

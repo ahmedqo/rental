@@ -62,7 +62,10 @@ class CarController extends Controller
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }
-        $data = $data->cursorPaginate(50);
+        $data = $data->cursorPaginate(50)->through(function ($car) {
+            $car->price = $car->price;
+            return $car;
+        });
         return response()->json($data);
     }
 
@@ -108,7 +111,18 @@ class CarController extends Controller
             'doors' => ['required', 'integer'],
             'cargo' => ['required', 'integer'],
             'brand' => ['required', 'integer'],
-            'price' => ['required', 'numeric'],
+            'price_january' => ['required', 'numeric'],
+            'price_february' => ['required', 'numeric'],
+            'price_march' => ['required', 'numeric'],
+            'price_april' => ['required', 'numeric'],
+            'price_may' => ['required', 'numeric'],
+            'price_june' => ['required', 'numeric'],
+            'price_july' => ['required', 'numeric'],
+            'price_august' => ['required', 'numeric'],
+            'price_september' => ['required', 'numeric'],
+            'price_october' => ['required', 'numeric'],
+            'price_november' => ['required', 'numeric'],
+            'price_december' => ['required', 'numeric'],
             'fuel' => ['required', 'string'],
             'images' => ['required', 'array'],
             'images.*' => ['required', 'image'],
@@ -147,7 +161,18 @@ class CarController extends Controller
             'doors' => ['required', 'integer'],
             'cargo' => ['required', 'integer'],
             'brand' => ['required', 'integer'],
-            'price' => ['required', 'numeric'],
+            'price_january' => ['required', 'numeric'],
+            'price_february' => ['required', 'numeric'],
+            'price_march' => ['required', 'numeric'],
+            'price_april' => ['required', 'numeric'],
+            'price_may' => ['required', 'numeric'],
+            'price_june' => ['required', 'numeric'],
+            'price_july' => ['required', 'numeric'],
+            'price_august' => ['required', 'numeric'],
+            'price_september' => ['required', 'numeric'],
+            'price_october' => ['required', 'numeric'],
+            'price_november' => ['required', 'numeric'],
+            'price_december' => ['required', 'numeric'],
             'fuel' => ['required', 'string'],
         ]);
 
