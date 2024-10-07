@@ -4,6 +4,8 @@ const
     tabs = document.querySelectorAll(".tabs"),
     blocks = document.querySelectorAll("[block]"),
     price = +document.querySelector("#price").textContent,
+    extra = +document.querySelector("[name=extra]").value,
+    selectLocation = document.querySelector("[name=location]"),
     days = document.querySelector("#days"),
     total = document.querySelector("#total"),
     smtotal = document.querySelector("#sm-total"),
@@ -72,10 +74,10 @@ function calcPrice() {
         sourceElements["from_date"].value + " " + sourceElements["from_time"].value,
         sourceElements["to_date"].value + " " + sourceElements["to_time"].value,
     ));
-
+    const _extra = selectLocation.value ? (['airport marrakech', 'marrakech city center'].includes(selectLocation.value) ? 0 : extra) : 0;
     days.innerHTML = nbrDays;
-    total.innerHTML = (nbrDays * price).toFixed(2);
-    smtotal.innerHTML = (nbrDays * price).toFixed(2);
+    total.innerHTML = ((nbrDays * price) + _extra).toFixed(2);
+    smtotal.innerHTML = ((nbrDays * price) + _extra).toFixed(2);
     smdays.innerHTML = Neo.Helper.trans("Per") + " " + nbrDays + " " + Neo.Helper.trans("Days");
 }
 

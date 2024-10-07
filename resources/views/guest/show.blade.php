@@ -288,6 +288,7 @@
                                 class="grid grid-rows-1 grid-cols-1 gap-4">
                                 @csrf
                                 <input type="hidden" name="car" value="{{ $car->id }}" />
+                                <input type="hidden" name="extra" value="{{ 450 / Core::rate() }}">
                                 <div class="flex flex-col gap-1 col-span-2">
                                     <neo-textbox data-error=".error-0" label="{{ __('Name') . ' (*)' }}"
                                         value="{{ old('name') ?? '' }}" name="name"

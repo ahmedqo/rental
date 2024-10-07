@@ -67,7 +67,7 @@ class Core
 
     public static function locationList()
     {
-        return ['airport marrakech', 'marrakech city center'];
+        return ['airport marrakech', 'marrakech city center', 'airport casablanca', 'airport rabat', 'airport agadir'];
     }
 
     public static function orderList()

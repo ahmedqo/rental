@@ -114,6 +114,9 @@ Neo.Locales.fr = {
 
     "airport marrakech": "aéroporte Marrakech",
     "marrakech city center": "centre-ville Marrakech",
+    "airport casablanca": "aéroporte casablanca",
+    "airport rabat": "aéroporte rabat",
+    "airport agadir": "aéroporte agadir",
 }
 
 Neo.Locales.it = {
@@ -205,6 +208,9 @@ Neo.Locales.it = {
 
     "airport marrakech": "aeroporto Marrakech",
     "marrakech city center": "centro città Marrakech",
+    "airport casablanca": "aeroporto casablanca",
+    "airport rabat": "aeroporto rabat",
+    "airport agadir": "aeroporto agadir",
 }
 
 Neo.Locales.sp = {
@@ -296,6 +302,9 @@ Neo.Locales.sp = {
 
     "airport marrakech": "aeropuerto Marrakech",
     "marrakech city center": "centro de la ciudad Marrakech",
+    "airport casablanca": "aeropuerto casablanca",
+    "airport rabat": "aeropuerto rabat",
+    "airport agadir": "aeropuerto agadir",
 }
 
 const Locale = document.documentElement.lang,

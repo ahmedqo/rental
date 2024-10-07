@@ -768,7 +768,8 @@ class GuestController extends Controller
         $from = Carbon::parse($Request->from_date . ' ' . $Request->from_time);
         $to = Carbon::parse($Request->to_date . ' ' . $Request->to_time);
         $period = (int) ceil($from->diffInHours($to) / 24);
-        $total = $period * $Car->price;
+        $extra = in_array($Request->location, ['airport marrakech', 'marrakech city center']) ? 0 : 450;
+        $total = ($period * $Car->price) + $extra;
 
         $Reservation = Reservation::create($Request->merge([
             'from' => $from,
