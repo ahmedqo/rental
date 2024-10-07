@@ -268,6 +268,16 @@
                                     <span class="text-sm">{{ __('Days') }}</span>
                                 </li>
                             </ul>
+                            <ul id="extra" style="display: none"
+                                class="w-full flex items-end justify-between col-span-2">
+                                <li class="text-x-black font-x-thin text-sm">
+                                    {{ __('Delivery') }}
+                                </li>
+                                <li class="text-x-black font-x-huge text-base">
+                                    <span id="delivery">{{ number_format(450 / Core::rate(), 2) }}</span>
+                                    <span>{{ Core::$CURRENCY }}</span>
+                                </li>
+                            </ul>
                             <hr class="border-t border-t-x-shade my-2">
                             <ul class="w-full flex items-end justify-between col-span-2">
                                 <li class="text-x-black font-x-huge text-base">
@@ -288,7 +298,6 @@
                                 class="grid grid-rows-1 grid-cols-1 gap-4">
                                 @csrf
                                 <input type="hidden" name="car" value="{{ $car->id }}" />
-                                <input type="hidden" name="extra" value="{{ 450 / Core::rate() }}">
                                 <div class="flex flex-col gap-1 col-span-2">
                                     <neo-textbox data-error=".error-0" label="{{ __('Name') . ' (*)' }}"
                                         value="{{ old('name') ?? '' }}" name="name"

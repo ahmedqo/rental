@@ -4,7 +4,8 @@ const
     tabs = document.querySelectorAll(".tabs"),
     blocks = document.querySelectorAll("[block]"),
     price = +document.querySelector("#price").textContent,
-    extra = +document.querySelector("[name=extra]").value,
+    delivery = +document.querySelector("#delivery").textContent,
+    extra = document.querySelector("#extra"),
     selectLocation = document.querySelector("[name=location]"),
     days = document.querySelector("#days"),
     total = document.querySelector("#total"),
@@ -74,11 +75,12 @@ function calcPrice() {
         sourceElements["from_date"].value + " " + sourceElements["from_time"].value,
         sourceElements["to_date"].value + " " + sourceElements["to_time"].value,
     ));
-    const _extra = selectLocation.value ? (['airport marrakech', 'marrakech city center'].includes(selectLocation.value) ? 0 : extra) : 0;
+    extra.style.display = selectLocation.value ? (['airport marrakech', 'marrakech city center'].includes(selectLocation.value) ? "none" : "") : "none";
+    const _extra = selectLocation.value ? (['airport marrakech', 'marrakech city center'].includes(selectLocation.value) ? 0 : delivery) : 0;
     days.innerHTML = nbrDays;
     total.innerHTML = ((nbrDays * price) + _extra).toFixed(2);
     smtotal.innerHTML = ((nbrDays * price) + _extra).toFixed(2);
-    smdays.innerHTML = Neo.Helper.trans("Per") + " " + nbrDays + " " + Neo.Helper.trans("Days");
+    smdays.innerHTML = Neo.Helper.trans("Per") + " " + nbrDays + " " + Neo.Helper.trans("Days") + (selectLocation.value ? (['airport marrakech', 'marrakech city center'].includes(selectLocation.value) ? "" : " + " + Neo.Helper.trans("Delivery")) : "");
 }
 
 function intersect() {

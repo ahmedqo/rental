@@ -15,6 +15,7 @@ Neo.Locales.fr = {
     "Drop-off Time Must Be After Pick-up Date": "L'Heure De Restitution Doit Être Après La Date De Prise",
     "Per": "Par",
     "Days": "Jours",
+    "Delivery": "Livraison",
 }
 
 Neo.Locales.it = {
@@ -61,6 +62,7 @@ Neo.Locales.it = {
     "Drop-off Time Must Be After Pick-up Date": "L'Ora Di Riconsegna Deve Essere Dopo La Data Di Ritiro",
     "Per": "Al",
     "Days": "Giorni",
+    "Delivery": "Consegna",
 }
 
 Neo.Locales.sp = {
@@ -107,4 +109,5 @@ Neo.Locales.sp = {
     "Drop-off Time Must Be After Pick-up Date": "La Hora De Devolución Debe Ser Después De La Fecha De Recogida",
     "Per": "Por",
     "Days": "Días",
+    "Delivery": "Entrega",
 }
