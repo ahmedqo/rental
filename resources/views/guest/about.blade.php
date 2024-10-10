@@ -228,7 +228,7 @@
                         class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"></iframe>
                     <div class="w-full flex flex-col gap-6 lg:gap-8">
                         <p class="text-lg lg:text-xl text-x-black text-opacity-70 font-normal">
-                            {{ __('We\'re here for you and eager to help! Your satisfaction is our top priority. Contact us anytime, we can\'t wait to connect with you.') }}
+                            {{ __('Have questions or need assistance? Get in touch with our friendly team for support regarding your car rental needs. We’re here to help you every step of the way!') }}
                         </p>
                         <ul class="w-full flex flex-col gap-4 lg:gap-6">
                             <li class="w-full">
