@@ -31,6 +31,10 @@
                     value="{{ $data->email }}"></neo-textbox>
                 <neo-textarea auto="false" label="{{ __('Content') . ' (*)' }}" name="content"
                     value="{{ $data->content }}" rows="5" class="lg:col-span-2"></neo-textarea>
+                <neo-datepicker full-day="3" label="{{ __('Date') }}" name="date"
+                    value="{{ $data->updated_at->format('Y-m-d') }}" format="mmm dd"></neo-datepicker>
+                <neo-timepicker label="{{ __('Time') }}" name="time"
+                    value="{{ $data->updated_at->format('h:i') }}"></neo-timepicker>
                 <div class="flex flex-col lg:col-span-2">
                     <label class="text-xs text-x-black text-opacity-80 font-x-thin">
                         {{ __('Rate') . ' (*)' }}

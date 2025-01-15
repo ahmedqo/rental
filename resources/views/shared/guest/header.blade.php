@@ -59,7 +59,7 @@
                     <a href="{{ route('actions.language.index', 'en') }}"
                         class="w-full flex flex-wrap gap-2 px-2 py-1 text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::lang('en') ? '!bg-x-black' : '' }}">
                         <img src="{{ asset('lang/en.png') }}?v={{ env('APP_VERSION') }}" alt="english flag"
-                            class="block w-6 h-4 object-contain" />
+                            loading="lazy" class="block w-6 h-4 object-contain" />
                         <span class="block flex-1 text-base text-start">{{ __('English') }}</span>
                     </a>
                 </li>
@@ -67,7 +67,7 @@
                     <a href="{{ route('actions.language.index', 'fr') }}"
                         class="w-full flex flex-wrap gap-2 px-2 py-1 text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::lang('fr') ? '!bg-x-black' : '' }}">
                         <img src="{{ asset('lang/fr.png') }}?v={{ env('APP_VERSION') }}" alt="french flag"
-                            class="block w-6 h-4 object-contain" />
+                            loading="lazy" class="block w-6 h-4 object-contain" />
                         <span class="block flex-1 text-base text-start">{{ __('French') }}</span>
                     </a>
                 </li>
@@ -75,7 +75,7 @@
                     <a href="{{ route('actions.language.index', 'it') }}"
                         class="w-full flex flex-wrap gap-2 px-2 py-1 text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::lang('it') ? '!bg-x-black' : '' }}">
                         <img src="{{ asset('lang/it.png') }}?v={{ env('APP_VERSION') }}" alt="arabic flag"
-                            class="block w-6 h-4 object-contain" />
+                            loading="lazy" class="block w-6 h-4 object-contain" />
                         <span class="block flex-1 text-base text-start">{{ __('Italian') }}</span>
                     </a>
                 </li>
@@ -83,7 +83,7 @@
                     <a href="{{ route('actions.language.index', 'sp') }}"
                         class="w-full flex flex-wrap gap-2 px-2 py-1 text-x-black items-center outline-none !bg-opacity-10 hover:bg-x-black focus:bg-x-black focus-within:bg-x-black {{ Core::lang('sp') ? '!bg-x-black' : '' }}">
                         <img src="{{ asset('lang/sp.png') }}?v={{ env('APP_VERSION') }}" alt="arabic flag"
-                            class="block w-6 h-4 object-contain" />
+                            loading="lazy" class="block w-6 h-4 object-contain" />
                         <span class="block flex-1 text-base text-start">{{ __('Spanish') }}</span>
                     </a>
                 </li>

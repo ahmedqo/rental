@@ -12,4 +12,5 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::get('/blogs/search', [BlogController::class, 'search_action'])->name('actions.blogs.search');
     Route::patch('/blogs/{id}/patch', [BlogController::class, 'patch_action'])->name('actions.blogs.patch');
     Route::delete('/blogs/{id}/clear', [BlogController::class, 'clear_action'])->name('actions.blogs.clear');
+    Route::get('/blogs/{id}/content', [BlogController::class, 'content_action'])->name('actions.blogs.content');
 });

@@ -96,29 +96,34 @@
                     </label>
                     <neo-imagetransfer name="images[]" multiple></neo-imagetransfer>
                 </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Description') }} (en)
-                    </label>
-                    <textarea id="description_en" name="description_en" placeholder="{{ __('Description') }}  (en)" rows="3">{{ trim($data->description_en) }}</textarea>
+                <div id="loader" class="lg:col-span-2 flex items-center justify-center">
+                    <neo-loader></neo-loader>
                 </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Description') }} (fr)
-                    </label>
-                    <textarea id="description_fr" name="description_fr" placeholder="{{ __('Description') }}  (fr)" rows="3">{{ trim($data->description_fr) }}</textarea>
-                </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Description') }} (it)
-                    </label>
-                    <textarea id="description_it" name="description_it" placeholder="{{ __('Description') }}  (it)" rows="3">{{ trim($data->description_it) }}</textarea>
-                </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Description') }} (sp)
-                    </label>
-                    <textarea id="description_sp" name="description_sp" placeholder="{{ __('Description') }}  (sp)" rows="3">{{ trim($data->description_sp) }}</textarea>
+                <div id="description" class="hidden lg:col-span-2 w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Description') }} (en)
+                        </label>
+                        <textarea id="description_en" name="description_en" placeholder="{{ __('Description') }}  (en)" rows="3">{{ trim($data->description_en) }}</textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Description') }} (fr)
+                        </label>
+                        <textarea id="description_fr" name="description_fr" placeholder="{{ __('Description') }}  (fr)" rows="3">{{ trim($data->description_fr) }}</textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Description') }} (it)
+                        </label>
+                        <textarea id="description_it" name="description_it" placeholder="{{ __('Description') }}  (it)" rows="3">{{ trim($data->description_it) }}</textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Description') }} (sp)
+                        </label>
+                        <textarea id="description_sp" name="description_sp" placeholder="{{ __('Description') }}  (sp)" rows="3">{{ trim($data->description_sp) }}</textarea>
+                    </div>
                 </div>
                 <div class="w-full flex lg:col-span-2">
                     <neo-button
@@ -148,6 +153,6 @@
         }, {
             Auto: document.querySelector("neo-autocomplete[name=category]"),
             Link: "{{ route('actions.categories.search') }}"
-        }], imageTransfer);
+        }], imageTransfer, "{{ route('actions.cars.description', $data->id) }}");
     </script>
 @endsection

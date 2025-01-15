@@ -55,7 +55,13 @@ class ReviewController extends Controller
             ]);
         }
 
-        Review::create($Request->all());
+        $date = now();
+        if ($Request->date) $date = $date->setDateFrom($Request->date);
+        if ($Request->time) $date = $date->setTimeFrom($Request->time);
+
+        $Review = Review::create($Request->all());
+        $Review->updated_at = $date;
+        $Review->save();
 
         return Redirect::back()->with([
             'message' => __('Created successfully'),
@@ -81,7 +87,14 @@ class ReviewController extends Controller
             ]);
         }
 
-        Review::findorfail($id)->update($Request->all());
+        $date = now();
+        if ($Request->date) $date = $date->setDateFrom($Request->date);
+        if ($Request->time) $date = $date->setTimeFrom($Request->time);
+
+        $Review = Review::findorfail($id);
+        $Review->update($Request->all());
+        $Review->updated_at = $date;
+        $Review->save();
 
         return Redirect::back()->with([
             'message' => __('Updated successfully'),

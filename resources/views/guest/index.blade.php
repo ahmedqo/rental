@@ -29,7 +29,7 @@
         style="background-image: linear-gradient(180deg, rgb(var(--black)/.3), rgb(var(--black)/.2)), url({{ asset('img/bg-cover.webp') }}?v={{ env('APP_VERSION') }})">
         <div class="w-full mx-auto container p-4">
             <div class="flex flex-col lg:flex-row lg:items-center gap-10 my-6 lg:my-20">
-                <div class="w-full flex flex-col">
+                <div class="w-full flex flex-col lg:flex-[1.3]">
                     <span class="text-xl lg:text-2xl text-x-white font-x-huge">{{ __('Plan your trip now') }}</span>
                     <h1 class="font-x-huge text-x-prime text-4xl lg:text-6xl !leading-[2.6rem] lg:!leading-[4.3rem]"
                         style="text-shadow: .5px .5px rgb(var(--light));">
@@ -78,7 +78,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full -order-1 lg:order-1">
+                <div class="w-full -order-1 lg:order-1 lg:flex-1">
                     <form action="{{ route('views.guest.fleet') }}"
                         class="grid grid-rows-1 grid-cols-2 gap-6 p-6 rounded-x-huge bg-x-white">
                         <h2 class="font-x-thin text-x-black text-3xl lg:text-4xl col-span-2">
@@ -434,8 +434,8 @@
                     </h3>
                 </div>
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
-                    <iframe src="{{ env('MAP_CONTACT_FRAME') }}" loading="lazy"
-                        class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"></iframe>
+                    <iframe loading="lazy" class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"
+                        onload="this.src='{{ env('MAP_CONTACT_FRAME') }}';this.onload=null;"></iframe>
                     <div class="w-full flex flex-col gap-6 lg:gap-8">
                         <p class="text-lg lg:text-xl text-x-black text-opacity-70 font-normal">
                             {{ __('We\'re here for you and eager to help! Your satisfaction is our top priority. Contact us anytime, we can\'t wait to connect with you.') }}

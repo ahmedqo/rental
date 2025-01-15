@@ -36,29 +36,34 @@
                     value="{{ $data->details_it }}" rows="5"></neo-textarea>
                 <neo-textarea auto="false" label="{{ __('Details') . ' (sp)' }}" name="details_sp"
                     value="{{ $data->details_sp }}" rows="5"></neo-textarea>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Content') }} (en) (*)
-                    </label>
-                    <textarea id="content_en" name="content_en" placeholder="{{ __('Content') }}  (en)" rows="3">{{ $data->content_en }}</textarea>
+                <div id="loader" class="lg:col-span-2 flex items-center justify-center">
+                    <neo-loader></neo-loader>
                 </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Content') }} (fr) (*)
-                    </label>
-                    <textarea id="content_fr" name="content_fr" placeholder="{{ __('Content') }}  (fr)" rows="3">{{ $data->content_fr }}</textarea>
-                </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Content') }} (it) (*)
-                    </label>
-                    <textarea id="content_it" name="content_it" placeholder="{{ __('Content') }}  (it)" rows="3">{{ $data->content_it }}</textarea>
-                </div>
-                <div class="flex flex-col">
-                    <label class="text-xs text-x-black text-opacity-80 font-x-thin">
-                        {{ __('Content') }} (sp) (*)
-                    </label>
-                    <textarea id="content_sp" name="content_sp" placeholder="{{ __('Content') }}  (sp)" rows="3">{{ $data->content_sp }}</textarea>
+                <div id="content" class="hidden lg:col-span-2 w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Content') }} (en) (*)
+                        </label>
+                        <textarea id="content_en" name="content_en" placeholder="{{ __('Content') }}  (en)" rows="3"></textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Content') }} (fr) (*)
+                        </label>
+                        <textarea id="content_fr" name="content_fr" placeholder="{{ __('Content') }}  (fr)" rows="3"></textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Content') }} (it) (*)
+                        </label>
+                        <textarea id="content_it" name="content_it" placeholder="{{ __('Content') }}  (it)" rows="3"></textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-x-black text-opacity-80 font-x-thin">
+                            {{ __('Content') }} (sp) (*)
+                        </label>
+                        <textarea id="content_sp" name="content_sp" placeholder="{{ __('Content') }}  (sp)" rows="3"></textarea>
+                    </div>
                 </div>
                 <div class="w-full flex lg:col-span-2">
                     <neo-button
@@ -78,6 +83,6 @@
     <script src="{{ asset('js/editor/lang/rte-lang-' . app()->getLocale() . '.js') }}?v={{ env('APP_VERSION') }}">
     </script>
     <script>
-        BlogInitializer("{{ $data->Image->Link }}");
+        BlogInitializer("{{ $data->Image->Link }}", "{{ route('actions.blogs.content', $data->id) }}");
     </script>
 @endsection

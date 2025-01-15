@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Image;
 use App\Models\Reservation;
 use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -26,13 +27,63 @@ class CarController extends Controller
 
     public function patch_view($id)
     {
-        $data = Car::with('Images')->with('Brand')->with('Category')->findorfail($id);
+        $data = Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images')->select(
+            'id',
+            'category',
+            'brand',
+            'passengers',
+            'doors',
+            'cargo',
+            'transmission',
+            'fuel',
+            'status',
+            'promote',
+
+            'price_january',
+            'price_february',
+            'price_march',
+            'price_april',
+            'price_may',
+            'price_june',
+            'price_july',
+            'price_august',
+            'price_september',
+            'price_october',
+            'price_november',
+            'price_december',
+
+            'slug',
+            'name_en',
+            'name_fr',
+            'name_it',
+            'name_sp',
+            'details_en',
+            'details_fr',
+            'details_it',
+            'details_sp',
+        )->findorfail($id);
         return view('car.patch', compact('data'));
     }
 
     public function scene_view($id)
     {
-        $data = Car::with('Images')->with('Brand')->with('Category')->findorfail($id);
+        $data = Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images', 'Reviews')->select(
+            'id',
+            'category',
+            'brand',
+            'slug',
+            'status',
+            'promote',
+            'passengers',
+            'doors',
+            'cargo',
+            'transmission',
+            'fuel',
+            'price_' . strtolower(Carbon::now()->format('F')),
+            'name_' . Core::lang(),
+            'details_' . Core::lang(),
+            'description_' . Core::lang(),
+        )->findorfail($id);
 
         [$startDate, $endDate, $columns] = Core::getDates();
 
@@ -58,7 +109,39 @@ class CarController extends Controller
 
     public function search_action(Request $Request)
     {
-        $data = Car::with('Images')->with('Brand')->with('Category')->orderBy('id', 'DESC');
+        $data = Car::with('Category:id,name_en', 'Brand:id,name_en', 'Images')->select(
+            'id',
+            'category',
+            'brand',
+            'passengers',
+            'doors',
+            'cargo',
+            'transmission',
+            'fuel',
+            'status',
+            'promote',
+
+            'price_january',
+            'price_february',
+            'price_march',
+            'price_april',
+            'price_may',
+            'price_june',
+            'price_july',
+            'price_august',
+            'price_september',
+            'price_october',
+            'price_november',
+            'price_december',
+
+            'slug',
+            'name_en',
+            'details_en',
+            'details_fr',
+            'details_it',
+            'details_sp',
+            'price_' . strtolower(Carbon::now()->format('F')),
+        )->orderBy('id', 'DESC');
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }
@@ -67,6 +150,18 @@ class CarController extends Controller
             return $car;
         });
         return response()->json($data);
+    }
+
+    public function description_action($id)
+    {
+        $data = Car::select(
+            'id',
+            'description_en',
+            'description_fr',
+            'description_it',
+            'description_sp',
+        )->findorfail($id);
+        return response()->json(['data' => $data]);
     }
 
     public function reservations_action(Request $Request, $id)

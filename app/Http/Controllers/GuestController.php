@@ -22,9 +22,29 @@ class GuestController extends Controller
 {
     public function index_view()
     {
-        $cars = Car::with('Category', 'Images')->where('status', Core::statusList()[0])->where('promote', true)->get();
+        $cars = Car::with('Category:id,name_' . Core::lang(), 'Images')
+            ->where('status', Core::statusList()[0])
+            ->where('promote', true)->select(
+                'id',
+                'category',
+                'slug',
+                'status',
+                'promote',
+                'passengers',
+                'doors',
+                'cargo',
+                'transmission',
+                'fuel',
+                'price_' . strtolower(Carbon::now()->format('F')),
+                'name_' . Core::lang()
+            )->get();
 
-        $blogs = Blog::latest()->inRandomOrder()->limit(4)->get();
+        $blogs = Blog::with('Image')->select(
+            'id',
+            'slug',
+            'title_' . Core::lang(),
+            'updated_at'
+        )->latest()->inRandomOrder()->limit(4)->get();
 
         $json = [
             '@context' => 'https://schema.org',
@@ -120,7 +140,21 @@ class GuestController extends Controller
 
     public function fleet_view(Request $Request)
     {
-        $cars = Car::with('Category', 'Images');
+        $cars = Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images')->select(
+            'id',
+            'category',
+            'brand',
+            'slug',
+            'status',
+            'promote',
+            'passengers',
+            'doors',
+            'cargo',
+            'transmission',
+            'fuel',
+            'price_' . strtolower(Carbon::now()->format('F')),
+            'name_' . Core::lang()
+        );
 
         $cars->when($Request->transmission, function ($query, $transmission) {
             return $query->whereIn('transmission', $transmission);
@@ -268,7 +302,13 @@ class GuestController extends Controller
 
     public function blogs_view()
     {
-        $blogs = Blog::with('Image')->cursorPaginate(50);
+        $blogs =  Blog::with('Image')->select(
+            'id',
+            'slug',
+            'title_' . Core::lang(),
+            'details_' . Core::lang(),
+            'updated_at'
+        )->cursorPaginate(50);
 
         $json = [
             '@context' => 'https://schema.org',
@@ -320,7 +360,23 @@ class GuestController extends Controller
 
     public function show_view($slug)
     {
-        $car = Car::with('Category', 'Brand', 'Images', 'Reviews')->where('slug', $slug)->limit(1)->first();
+        $car = Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images', 'Reviews')->where('slug', $slug)->select(
+            'id',
+            'category',
+            'brand',
+            'slug',
+            'status',
+            'promote',
+            'passengers',
+            'doors',
+            'cargo',
+            'transmission',
+            'fuel',
+            'price_' . strtolower(Carbon::now()->format('F')),
+            'name_' . Core::lang(),
+            'details_' . Core::lang(),
+            'description_' . Core::lang(),
+        )->limit(1)->first();
         if (!$car) abort(404);
 
         $Reviews = $car->Reviews->where('status', 'approved');
@@ -445,7 +501,15 @@ class GuestController extends Controller
 
     public function blog_view($slug)
     {
-        $blog = Blog::with('Image')->where('slug', $slug)->limit(1)->first();
+        $blog = Blog::with('Image')->where('slug', $slug)->select(
+            'id',
+            'slug',
+            'title_' . Core::lang(),
+            'details_' . Core::lang(),
+            'content_' . Core::lang(),
+            'updated_at'
+        )->limit(1)->first();
+
         if (!$blog) abort(404);
         $json = [
             '@context' => 'https://schema.org',
@@ -493,7 +557,7 @@ class GuestController extends Controller
 
     public function about_view()
     {
-        $reviews = Review::inRandomOrder()->limit(10)->get();
+        $reviews = Review::where('status', 'approved')->orderBy('rate', 'DESC')->limit(10)->inRandomOrder()->get();
         $json = [
             '@context' => 'https://schema.org',
             '@type' => 'AboutPage',

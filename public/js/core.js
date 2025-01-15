@@ -1911,7 +1911,21 @@ function TableVisualizer(dataVisualizer, Type, Data) {
     });
 }
 
-function CarInitializer(List = [], imageTransfer) {
+async function CarInitializer(List = [], imageTransfer, desc) {
+    if (imageTransfer) imageTransfer.addEventListener("delete", ({ detail: { data } }) => {
+        if (data instanceof File) return;
+        imageTransfer.insertAdjacentHTML("afterend", `<input type="hidden" name="deleted[]" value="${data.id}" />`);
+    });
+
+    if (desc) {
+        const _desc = await getData(desc);
+        ["description_en", "description_fr", "description_it", "description_sp"].forEach(editor => {
+            document.querySelector("#" + editor).innerHTML = _desc[editor];
+        });
+        document.querySelector("#loader").remove();
+        document.querySelector("#description").classList.remove('hidden');
+    }
+
     ["#description_en", "#description_fr", "#description_it", "#description_sp"].forEach(editor => {
         new RichTextEditor(editor);
     });
@@ -1926,11 +1940,6 @@ function CarInitializer(List = [], imageTransfer) {
         el.addEventListener("click", e => {
             Neo.Wrapper.rules.opened();
         })
-    });
-
-    if (imageTransfer) imageTransfer.addEventListener("delete", ({ detail: { data } }) => {
-        if (data instanceof File) return;
-        imageTransfer.insertAdjacentHTML("afterend", `<input type="hidden" name="deleted[]" value="${data.id}" />`);
     });
 
     List.forEach(Item => {
@@ -1951,7 +1960,23 @@ function CarInitializer(List = [], imageTransfer) {
     });
 }
 
-function BlogInitializer(data) {
+async function BlogInitializer(data, content) {
+    if (data) {
+        const imageTransfer = document.querySelector("neo-imagetransfer");
+        imageTransfer.default = [{
+            src: data
+        }];
+    }
+
+    if (content) {
+        const _content = await getData(content);
+        ["content_en", "content_fr", "content_it", "content_sp"].forEach(editor => {
+            document.querySelector("#" + editor).innerHTML = _content[editor];
+        });
+        document.querySelector("#loader").remove();
+        document.querySelector("#content").classList.remove('hidden');
+    }
+
     ["#content_en", "#content_fr", "#content_it", "#content_sp"].forEach(editor => {
         new RichTextEditor(editor);
     });
@@ -1967,13 +1992,6 @@ function BlogInitializer(data) {
             Neo.Wrapper.rules.opened();
         })
     });
-
-    if (data) {
-        const imageTransfer = document.querySelector("neo-imagetransfer");
-        imageTransfer.default = [{
-            src: data
-        }];
-    }
 }
 
 function ReservationInitializer({ Search }, data) {

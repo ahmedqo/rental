@@ -23,13 +23,45 @@ class BlogController extends Controller
 
     public function patch_view($id)
     {
-        $data = Blog::findorfail($id);
+        $data = Blog::with('Image')->select(
+            'id',
+            'title_en',
+            'title_fr',
+            'title_it',
+            'title_sp',
+            'details_en',
+            'details_fr',
+            'details_it',
+            'details_sp',
+        )->findorfail($id);
         return view('blog.patch', compact('data'));
+    }
+
+    public function content_action($id)
+    {
+        $data = Blog::select(
+            'id',
+            'content_en',
+            'content_fr',
+            'content_it',
+            'content_sp',
+        )->findorfail($id);
+        return response()->json(['data' => $data]);
     }
 
     public function search_action(Request $Request)
     {
-        $data = Blog::with('Image')->orderBy('id', 'DESC');
+        $data = Blog::with('Image')->select(
+            'id',
+            'title_en',
+            'title_fr',
+            'title_it',
+            'title_sp',
+            'details_en',
+            'details_fr',
+            'details_it',
+            'details_sp',
+        )->orderBy('id', 'DESC');
         if ($Request->search) {
             $data = $data->search(urldecode($Request->search));
         }

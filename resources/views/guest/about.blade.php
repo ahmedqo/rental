@@ -224,8 +224,8 @@
                     </h3>
                 </div>
                 <div class="w-full grid grid-rows-1 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
-                    <iframe src="{{ env('MAP_CONTACT_FRAME') }}" loading="lazy"
-                        class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"></iframe>
+                    <iframe loading="lazy" class="w-full aspect-video min-h-full rounded-x-thin bg-x-shade"
+                        onload="this.src='{{ env('MAP_CONTACT_FRAME') }}';this.onload=null;"></iframe>
                     <div class="w-full flex flex-col gap-6 lg:gap-8">
                         <p class="text-lg lg:text-xl text-x-black text-opacity-70 font-normal">
                             {{ __('Have questions or need assistance? Get in touch with our friendly team for support regarding your car rental needs. We’re here to help you every step of the way!') }}
