@@ -17,34 +17,58 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Support\Facades\Cache;
 
 class GuestController extends Controller
 {
     public function index_view()
     {
-        $cars = Car::with('Category:id,name_' . Core::lang(), 'Images')
-            ->where('status', Core::statusList()[0])
-            ->where('promote', true)->select(
-                'id',
-                'category',
-                'slug',
-                'status',
-                'promote',
-                'passengers',
-                'doors',
-                'cargo',
-                'transmission',
-                'fuel',
-                'price_' . strtolower(Carbon::now()->format('F')),
-                'name_' . Core::lang()
-            )->get();
+        $cars = Cache::remember(
+            'cars_' . Core::lang() .  '_list',
+            now()->addHours(24),
+            function () {
+                return Car::with('Category:id,name_' . Core::lang(), 'Images')
+                    ->where('status', Core::statusList()[0])
+                    ->where('promote', true)->select(
+                        'id',
+                        'category',
+                        'slug',
+                        'status',
+                        'promote',
+                        'passengers',
+                        'doors',
+                        'cargo',
+                        'transmission',
+                        'fuel',
+                        'name_' . Core::lang(),
+                        'price_january',
+                        'price_february',
+                        'price_march',
+                        'price_april',
+                        'price_may',
+                        'price_june',
+                        'price_july',
+                        'price_august',
+                        'price_september',
+                        'price_october',
+                        'price_november',
+                        'price_december',
+                    )->get();
+            }
+        );
 
-        $blogs = Blog::with('Image')->select(
-            'id',
-            'slug',
-            'title_' . Core::lang(),
-            'updated_at'
-        )->latest()->inRandomOrder()->limit(4)->get();
+        $blogs = Cache::remember(
+            'blogs_' . Core::lang() . '_list',
+            now()->addHours(24),
+            function () {
+                return Blog::with('Image')->select(
+                    'id',
+                    'slug',
+                    'title_' . Core::lang(),
+                    'updated_at'
+                )->latest()->inRandomOrder()->limit(4)->get();
+            }
+        );
 
         $json = [
             '@context' => 'https://schema.org',
@@ -302,13 +326,19 @@ class GuestController extends Controller
 
     public function blogs_view()
     {
-        $blogs =  Blog::with('Image')->select(
-            'id',
-            'slug',
-            'title_' . Core::lang(),
-            'details_' . Core::lang(),
-            'updated_at'
-        )->cursorPaginate(50);
+        $blogs = Cache::remember(
+            'blogs_page_' . Core::lang() .  '_list',
+            now()->addHours(24),
+            function () {
+                return Blog::with('Image')->select(
+                    'id',
+                    'slug',
+                    'title_' . Core::lang(),
+                    'details_' . Core::lang(),
+                    'updated_at'
+                )->cursorPaginate(50);
+            }
+        );
 
         $json = [
             '@context' => 'https://schema.org',
@@ -360,23 +390,40 @@ class GuestController extends Controller
 
     public function show_view($slug)
     {
-        $car = Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images', 'Reviews')->where('slug', $slug)->select(
-            'id',
-            'category',
-            'brand',
-            'slug',
-            'status',
-            'promote',
-            'passengers',
-            'doors',
-            'cargo',
-            'transmission',
-            'fuel',
-            'price_' . strtolower(Carbon::now()->format('F')),
-            'name_' . Core::lang(),
-            'details_' . Core::lang(),
-            'description_' . Core::lang(),
-        )->limit(1)->first();
+        $car = Cache::remember(
+            'car_' . $slug . '_' . Core::lang(),
+            now()->addHours(24),
+            function () use ($slug) {
+                return Car::with('Category:id,name_' . Core::lang(), 'Brand:id,name_' . Core::lang(), 'Images', 'Reviews')->where('slug', $slug)->select(
+                    'id',
+                    'category',
+                    'brand',
+                    'slug',
+                    'status',
+                    'promote',
+                    'passengers',
+                    'doors',
+                    'cargo',
+                    'transmission',
+                    'fuel',
+                    'name_' . Core::lang(),
+                    'details_' . Core::lang(),
+                    'description_' . Core::lang(),
+                    'price_january',
+                    'price_february',
+                    'price_march',
+                    'price_april',
+                    'price_may',
+                    'price_june',
+                    'price_july',
+                    'price_august',
+                    'price_september',
+                    'price_october',
+                    'price_november',
+                    'price_december',
+                )->limit(1)->first();
+            }
+        );
         if (!$car) abort(404);
 
         $Reviews = $car->Reviews->where('status', 'approved');
@@ -501,14 +548,20 @@ class GuestController extends Controller
 
     public function blog_view($slug)
     {
-        $blog = Blog::with('Image')->where('slug', $slug)->select(
-            'id',
-            'slug',
-            'title_' . Core::lang(),
-            'details_' . Core::lang(),
-            'content_' . Core::lang(),
-            'updated_at'
-        )->limit(1)->first();
+        $blog = Cache::remember(
+            'blog_' . $slug . '_' . Core::lang(),
+            now()->addHours(24),
+            function () use ($slug) {
+                return Blog::with('Image')->where('slug', $slug)->select(
+                    'id',
+                    'slug',
+                    'title_' . Core::lang(),
+                    'details_' . Core::lang(),
+                    'content_' . Core::lang(),
+                    'updated_at'
+                )->limit(1)->first();
+            }
+        );
 
         if (!$blog) abort(404);
         $json = [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -94,6 +95,19 @@ class BlogController extends Controller
             'slug' =>  Str::slug($Request->title_en)
         ])->all());
 
+        foreach ([
+            'blogs_en_list',
+            'blogs_fr_list',
+            'blogs_it_list',
+            'blogs_sp_list',
+            'blogs_page_en_list',
+            'blogs_page_fr_list',
+            'blogs_page_it_list',
+            'blogs_page_sp_list',
+        ] as $key) {
+            Cache::forget($key);
+        }
+
         return Redirect::back()->with([
             'message' => __('Created successfully'),
             'type' => 'success'
@@ -121,6 +135,24 @@ class BlogController extends Controller
         }
 
         $Blog = Blog::findorfail($id);
+
+        foreach ([
+            'blogs_en_list',
+            'blogs_fr_list',
+            'blogs_it_list',
+            'blogs_sp_list',
+            'blogs_page_en_list',
+            'blogs_page_fr_list',
+            'blogs_page_it_list',
+            'blogs_page_sp_list',
+            'blog_' . $Blog->slug . '_en',
+            'blog_' . $Blog->slug . '_fr',
+            'blog_' . $Blog->slug . '_it',
+            'blog_' . $Blog->slug . '_sp',
+        ] as $key) {
+            Cache::forget($key);
+        }
+
         $Blog->update($Request->merge([
             'slug' =>  Str::slug($Request->title_en)
         ])->all());
@@ -140,6 +172,19 @@ class BlogController extends Controller
     public function clear_action($id)
     {
         Blog::findorfail($id)->delete();
+
+        foreach ([
+            'blogs_en_list',
+            'blogs_fr_list',
+            'blogs_it_list',
+            'blogs_sp_list',
+            'blogs_page_en_list',
+            'blogs_page_fr_list',
+            'blogs_page_it_list',
+            'blogs_page_sp_list',
+        ] as $key) {
+            Cache::forget($key);
+        }
 
         return Redirect::route('views.blogs.index')->with([
             'message' => __('Deleted successfully'),

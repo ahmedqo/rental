@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -238,6 +239,15 @@ class CarController extends Controller
             'promote' => $Request->promote == '1'
         ])->all());
 
+        foreach ([
+            'cars_en_list',
+            'cars_fr_list',
+            'cars_it_list',
+            'cars_sp_list',
+        ] as $key) {
+            Cache::forget($key);
+        }
+
         return Redirect::back()->with([
             'message' => __('Created successfully'),
             'type' => 'success'
@@ -287,6 +297,19 @@ class CarController extends Controller
             ]);
         }
 
+        foreach ([
+            'cars_en_list',
+            'cars_fr_list',
+            'cars_it_list',
+            'cars_sp_list',
+            'car_' . $Car->slug . '_en',
+            'car_' . $Car->slug . '_fr',
+            'car_' . $Car->slug . '_it',
+            'car_' . $Car->slug . '_sp',
+        ] as $key) {
+            Cache::forget($key);
+        }
+
         $Car->update($Request->merge([
             'slug' =>  Str::slug($Request->name_en),
             'name_fr' => $Request->name_en,
@@ -317,6 +340,15 @@ class CarController extends Controller
     public function clear_action($id)
     {
         Car::findorfail($id)->delete();
+
+        foreach ([
+            'cars_en_list',
+            'cars_fr_list',
+            'cars_it_list',
+            'cars_sp_list',
+        ] as $key) {
+            Cache::forget($key);
+        }
 
         return Redirect::route('views.cars.index')->with([
             'message' => __('Deleted successfully'),
